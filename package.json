@@ -9,7 +9,6 @@
     "test": "ts-mocha --recursive test/**/*",
     "prepare": "npm run build",
     "prepublishOnly": "npm run test",
-    "version": "git add -A",
     "postversion": "git push && git push --tags"
   },
   "repository": {
