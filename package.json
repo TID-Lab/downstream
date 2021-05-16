@@ -2,9 +2,15 @@
   "name": "downstream",
   "version": "0.0.2",
   "description": "",
-  "main": "index.js",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc --project .",
+    "test": "ts-mocha --recursive test/**/*",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run test",
+    "version": "git add -A",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
@@ -16,5 +22,27 @@
   "bugs": {
     "url": "https://github.com/TID-Lab/downstream/issues"
   },
-  "homepage": "https://github.com/TID-Lab/downstream"
+  "homepage": "https://github.com/TID-Lab/downstream",
+  "devDependencies": {
+    "@tsconfig/node10": "^1.0.7",
+    "@types/mocha": "^8.2.2",
+    "@types/node": "^15.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "chai": "^4.3.4",
+    "eslint": "^7.25.0",
+    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-mocha": "^8.1.0",
+    "eslint-plugin-react": "^7.23.2",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "mocha": "^8.3.2",
+    "ts-mocha": "^8.0.0",
+    "typescript": "^4.2.4"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "koa-compose": "^4.1.0"
+  }
 }

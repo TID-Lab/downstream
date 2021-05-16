@@ -1,0 +1,16 @@
+{
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "parserOptions": {
+      "project": "./tsconfig.eslint.json"
+    },
+    "extends": [
+      "airbnb-typescript"
+    ],
+    "rules": {
+      "class-methods-use-this": "off"
+    }
+  }
