@@ -9,7 +9,7 @@ interface Report {
   platformID: string;
   content?: string;
   raw: { [key: string]: any };
-  from: string;
+  from?: string;
 }
 
 export default Report;
