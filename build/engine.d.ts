@@ -1,6 +1,6 @@
 /// <reference types="node" />
 import EventEmitter from 'events';
-import Service from './services/service';
+import Channel from './channels/channel';
 import type Report from './report';
 export declare type NextFunction = {
     (): Promise<any>;
@@ -12,8 +12,8 @@ export declare type ComposedMiddlewareFunction = {
     (report: Report): Promise<any>;
 };
 declare class Engine extends EventEmitter {
-    protected services: {
-        [key: string]: Service;
+    protected channels: {
+        [key: string]: Channel;
     };
     protected middlewareList: MiddlewareFunction[];
     protected middleware?: ComposedMiddlewareFunction;
@@ -21,21 +21,21 @@ declare class Engine extends EventEmitter {
     protected counter: number;
     protected empty: boolean;
     protected pointer: number;
-    protected serviceErrorListeners: {
+    protected channelErrorListeners: {
         [key: string]: any;
     };
-    protected serviceEmptyListener?: any;
-    protected serviceNotEmptyListener?: any;
+    protected channelEmptyListener?: any;
+    protected channelNotEmptyListener?: any;
     constructor();
     start(): Promise<void>;
     stop(): Promise<void>;
-    register(service: Service): string;
+    register(channel: Channel): string;
     unregister(identifier: any): void;
-    service(id: string): Service;
+    channel(id: string): Channel;
     use(middleware: MiddlewareFunction): Engine;
-    protected onServiceError(serviceId: string, err: any): void;
-    protected onServiceEmpty(): void;
-    protected onServiceNotEmpty(): void;
+    protected onChannelError(channelId: string, err: any): void;
+    protected onChannelEmpty(): void;
+    protected onChannelNotEmpty(): void;
     protected nextReport(): Promise<void>;
 }
 export default Engine;

@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const events_1 = __importDefault(require("events"));
 const queue_1 = __importDefault(require("../queue"));
-class Service extends events_1.default {
+class Channel extends events_1.default {
     constructor() {
         super();
         this.started = false;
@@ -38,4 +38,4 @@ class Service extends events_1.default {
         return this.queue.isEmpty();
     }
 }
-exports.default = Service;
+exports.default = Channel;

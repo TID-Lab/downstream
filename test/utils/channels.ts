@@ -1,6 +1,6 @@
-import Service from '../../src/services/service';
+import Channel from '../../src/channels/channel';
 
-class TestService extends Service {
+class TestChannel extends Channel {
   public throwError:boolean;
 
   constructor() {
@@ -23,4 +23,4 @@ class TestService extends Service {
   }
 }
 
-export default TestService;
+export default TestChannel;

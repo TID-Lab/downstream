@@ -1,10 +1,10 @@
 import Report from '../report';
-import PollService from './poll';
+import PollChannel from './poll';
 
 /**
  * TODO documentation
  */
-abstract class PaginationService extends PollService {
+abstract class PaginationChannel extends PollChannel {
   /**
    * Fetch the next page of Reports.
    */
@@ -41,4 +41,4 @@ abstract class PaginationService extends PollService {
   }
 }
 
-export default PaginationService;
+export default PaginationChannel;

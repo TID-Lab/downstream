@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const poll_1 = __importDefault(require("./poll"));
-class PaginationService extends poll_1.default {
+class PaginationChannel extends poll_1.default {
     constructor(lastReportDate) {
         super();
         this.lastReportDate = lastReportDate;
@@ -21,4 +21,4 @@ class PaginationService extends poll_1.default {
         }
     }
 }
-exports.default = PaginationService;
+exports.default = PaginationChannel;

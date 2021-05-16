@@ -5,7 +5,7 @@ import Report from '../report';
 /**
  * TODO documentation
  */
-class Service extends EventEmitter {
+class Channel extends EventEmitter {
   started: boolean;
 
   private queue: CircularQueue<Report>;
@@ -18,14 +18,14 @@ class Service extends EventEmitter {
   }
 
   /**
-   * Start the Service.
+   * Start the Channel.
    */
   async start(): Promise<void> {
     this.started = true;
   }
 
   /**
-   * Stop the Service.
+   * Stop the Channel.
    */
   async stop(): Promise<void> {
     this.started = false;
@@ -64,4 +64,4 @@ class Service extends EventEmitter {
   }
 }
 
-export default Service;
+export default Channel;

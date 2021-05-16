@@ -1,10 +1,10 @@
 import { expect } from 'chai';
 import Engine from '../src/engine';
-import TestService from './utils/services';
+import TestChannel from './utils/channels';
 import assembleTestReport from './utils/reports';
 
 class TestEngine extends Engine {
-  services;
+  channels;
 
   middlewareList;
 
@@ -18,11 +18,11 @@ class TestEngine extends Engine {
 
   pointer;
 
-  serviceErrorListeners;
+  channelErrorListeners;
 
-  serviceEmptyListener;
+  channelEmptyListener;
 
-  serviceNotEmptyListener;
+  channelNotEmptyListener;
 
   disableListeners: boolean;
 
@@ -35,23 +35,23 @@ class TestEngine extends Engine {
     this.callbackCounter = 0;
   }
 
-  onServiceError(id, err) {
+  onChannelError(id, err) {
     if (!this.disableListeners) {
-      super.onServiceError(id, err);
+      super.onChannelError(id, err);
     }
     this.callbackCounter += 1;
   }
 
-  onServiceEmpty() {
+  onChannelEmpty() {
     if (!this.disableListeners) {
-      super.onServiceEmpty();
+      super.onChannelEmpty();
     }
     this.callbackCounter += 1;
   }
 
-  onServiceNotEmpty() {
+  onChannelNotEmpty() {
     if (!this.disableListeners) {
-      super.onServiceNotEmpty();
+      super.onChannelNotEmpty();
     }
     this.callbackCounter += 1;
   }
@@ -59,22 +59,22 @@ class TestEngine extends Engine {
 
 describe('Engine', () => {
   let engine:TestEngine;
-  let service1:TestService;
-  let service2:TestService;
+  let channel1:TestChannel;
+  let channel2:TestChannel;
   let id1:string;
   let id2:string;
 
   before((done) => {
     engine = new TestEngine();
-    service1 = new TestService();
-    service2 = new TestService();
+    channel1 = new TestChannel();
+    channel2 = new TestChannel();
     done();
   });
 
   it('should instantiate a new Engine', (done) => {
-    expect(engine.services).to.be.a('object');
-    expect(engine.services).to.be.empty;
-    expect(engine.serviceErrorListeners).to.be.a('object');
+    expect(engine.channels).to.be.a('object');
+    expect(engine.channels).to.be.empty;
+    expect(engine.channelErrorListeners).to.be.a('object');
     expect(Array.isArray(engine.middlewareList)).to.be.true;
     expect(engine.middlewareList).to.be.empty;
     expect(engine.started).to.be.false;
@@ -84,18 +84,18 @@ describe('Engine', () => {
     done();
   });
 
-  it('should register a Service', (done) => {
-    id1 = engine.register(service1);
+  it('should register a Channel', (done) => {
+    id1 = engine.register(channel1);
     expect(engine.counter).to.equal(1);
-    expect(engine.services[id1]).to.equal(service1);
-    expect(engine.serviceErrorListeners[id1]).to.be.a('function');
-    expect(engine.serviceEmptyListener).to.be.a('function');
-    expect(engine.serviceNotEmptyListener).to.be.a('function');
+    expect(engine.channels[id1]).to.equal(channel1);
+    expect(engine.channelErrorListeners[id1]).to.be.a('function');
+    expect(engine.channelEmptyListener).to.be.a('function');
+    expect(engine.channelNotEmptyListener).to.be.a('function');
 
     engine.disableListeners = true;
-    service1.emit('error');
-    service1.emit('empty');
-    service1.emit('notEmpty');
+    channel1.emit('error');
+    channel1.emit('empty');
+    channel1.emit('notEmpty');
 
     // process all 3 events
     process.nextTick(
@@ -111,29 +111,29 @@ describe('Engine', () => {
     );
   });
 
-  it('should not register a Service twice', (done) => {
-    expect(engine.register.bind(engine, service1)).to.throw();
+  it('should not register a Channel twice', (done) => {
+    expect(engine.register.bind(engine, channel1)).to.throw();
     expect(engine.counter).to.equal(1);
     done();
   });
 
-  it('should return registered Services', (done) => {
-    expect(engine.service(id1)).to.equal(service1);
+  it('should return registered Channels', (done) => {
+    expect(engine.channel(id1)).to.equal(channel1);
     done();
   });
 
-  it('should unregister a Service', (done) => {
+  it('should unregister a Channel', (done) => {
     engine.unregister(id1);
 
-    expect(engine.services[id1]).to.be.undefined;
-    expect(engine.serviceErrorListeners[id1]).to.be.undefined;
-    expect(engine.serviceEmptyListener).to.be.a('function');
-    expect(engine.serviceNotEmptyListener).to.be.a('function');
+    expect(engine.channels[id1]).to.be.undefined;
+    expect(engine.channelErrorListeners[id1]).to.be.undefined;
+    expect(engine.channelEmptyListener).to.be.a('function');
+    expect(engine.channelNotEmptyListener).to.be.a('function');
 
     // emitting the `error` throws an Error with no listeners.
-    expect(service1.emit.bind(service1, 'error')).to.throw();
-    service1.emit('empty');
-    service1.emit('notEmpty');
+    expect(channel1.emit.bind(channel1, 'error')).to.throw();
+    channel1.emit('empty');
+    channel1.emit('notEmpty');
 
     // process all 3 events
     process.nextTick(
@@ -155,22 +155,22 @@ describe('Engine', () => {
     done();
   });
 
-  it('should start registered Services on start', (done) => {
-    id1 = engine.register(service1);
-    id2 = engine.register(service2);
+  it('should start registered Channels on start', (done) => {
+    id1 = engine.register(channel1);
+    id2 = engine.register(channel2);
     engine.start().then(() => {
       expect(engine.started).to.be.true;
-      expect(service1.started).to.be.true;
-      expect(service2.started).to.be.true;
+      expect(channel1.started).to.be.true;
+      expect(channel2.started).to.be.true;
       done();
     });
   });
 
-  it('should stop registered Services on stop', (done) => {
+  it('should stop registered Channels on stop', (done) => {
     engine.stop().then(() => {
       expect(engine.started).to.be.false;
-      expect(service1.started).to.be.false;
-      expect(service2.started).to.be.false;
+      expect(channel1.started).to.be.false;
+      expect(channel2.started).to.be.false;
       done();
     });
   });
@@ -186,29 +186,29 @@ describe('Engine', () => {
     });
   });
 
-  it('should handle Service start errors gracefully', (done) => {
-    service2.throwError = true;
+  it('should handle Channel start errors gracefully', (done) => {
+    channel2.throwError = true;
 
     function callback(err, id) {
       expect(err instanceof Error).to.be.true;
       expect(id.toString()).to.equal(id2.toString());
       engine.removeListener('error', callback);
-      service2.throwError = false;
+      channel2.throwError = false;
       engine.stop().then(done);
     }
     engine.on('error', callback);
     engine.start();
   });
 
-  it('should handle Service stop errors gracefully', (done) => {
+  it('should handle Channel stop errors gracefully', (done) => {
     engine.start().then(() => {
-      service2.throwError = true;
+      channel2.throwError = true;
 
       function callback(err, id) {
         expect(err instanceof Error).to.be.true;
         expect(id.toString()).to.equal(id2.toString());
         engine.removeListener('error', callback);
-        service2.throwError = false;
+        channel2.throwError = false;
         done();
       }
       engine.on('error', callback);
@@ -228,11 +228,11 @@ describe('Engine', () => {
     }
     engine.use(middleware);
     engine.start().then(() => {
-      service1.enqueue(report);
+      channel1.enqueue(report);
     });
   });
 
-  it('should tag outgoing Reports with a Service ID', (done) => {
+  it('should tag outgoing Reports with a Channel ID', (done) => {
     const report = assembleTestReport();
     let firstReport = true;
     async function middleware(r, next) {
@@ -250,12 +250,12 @@ describe('Engine', () => {
     }
     engine.use(middleware);
     engine.start().then(() => {
-      service1.enqueue({ ...report });
-      service2.enqueue({ ...report });
+      channel1.enqueue({ ...report });
+      channel2.enqueue({ ...report });
     });
   });
 
-  it('should grab Reports from each Service one at a time', (done) => {
+  it('should grab Reports from each Channel one at a time', (done) => {
     const reports = [];
     let string = '';
     let i = 0;
@@ -280,10 +280,10 @@ describe('Engine', () => {
     }
     engine.use(middleware);
     engine.start().then(() => {
-      service1.enqueue(reports.shift());
-      service1.enqueue(reports.shift());
-      service2.enqueue(reports.shift());
-      service2.enqueue(reports.shift());
+      channel1.enqueue(reports.shift());
+      channel1.enqueue(reports.shift());
+      channel2.enqueue(reports.shift());
+      channel2.enqueue(reports.shift());
     });
   });
 
@@ -305,7 +305,7 @@ describe('Engine', () => {
     engine.use(middleware1);
     engine.use(middleware2);
     engine.start().then(() => {
-      service1.enqueue({ ...report });
+      channel1.enqueue({ ...report });
     });
   });
 });

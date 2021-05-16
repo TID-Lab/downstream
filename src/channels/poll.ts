@@ -1,9 +1,9 @@
-import Service from './service';
+import Channel from './channel';
 
 /**
  * TODO documentation
  */
-abstract class PollService extends Service {
+abstract class PollChannel extends Channel {
   /**
    * Fetch Reports.
    */
@@ -18,14 +18,14 @@ abstract class PollService extends Service {
   constructor() {
     super();
 
-    this.interval = PollService.DEFAULT_INTERVAL;
+    this.interval = PollChannel.DEFAULT_INTERVAL;
   }
 
   /**
-   * Start the PollService.
+   * Start the PollChannel.
    */
   async start(): Promise<void> {
-    // return if the PollService already started
+    // return if the PollChannel already started
     if (this.started) return;
 
     await super.start();
@@ -44,7 +44,7 @@ abstract class PollService extends Service {
    * Poll
    */
   async poll(): Promise<void> {
-    // return if the PollService is not started
+    // return if the PollChannel is not started
     if (!this.started) return;
 
     // try to call `fetch`
@@ -62,4 +62,4 @@ abstract class PollService extends Service {
   }
 }
 
-export default PollService;
+export default PollChannel;

@@ -1,6 +1,6 @@
 /// <reference types="node" />
-import Service from './service';
-declare abstract class PollService extends Service {
+import Channel from './channel';
+declare abstract class PollChannel extends Channel {
     abstract fetch(): Promise<void>;
     protected interval: number;
     protected timeout?: ReturnType<typeof setTimeout>;
@@ -10,4 +10,4 @@ declare abstract class PollService extends Service {
     stop(): Promise<void>;
     poll(): Promise<void>;
 }
-export default PollService;
+export default PollChannel;

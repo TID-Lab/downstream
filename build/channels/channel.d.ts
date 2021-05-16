@@ -1,7 +1,7 @@
 /// <reference types="node" />
 import EventEmitter from 'events';
 import Report from '../report';
-declare class Service extends EventEmitter {
+declare class Channel extends EventEmitter {
     started: boolean;
     private queue;
     constructor();
@@ -11,4 +11,4 @@ declare class Service extends EventEmitter {
     dequeue(): Report | null;
     isEmpty(): boolean;
 }
-export default Service;
+export default Channel;

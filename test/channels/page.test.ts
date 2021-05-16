@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import Service from '../../src/services/service';
-import PageService from '../../src/services/page';
+import Channel from '../../src/channels/channel';
+import PageChannel from '../../src/channels/page';
 import assembleTestReport from '../utils/reports';
 import Report from '../../src/report';
 
@@ -15,7 +15,7 @@ date2.setHours(date2.getHours() - 1);
 report1.authoredAt = date1;
 report2.authoredAt = date2;
 
-class TestPageService extends PageService {
+class TestPageChannel extends PageChannel {
   lastReportDate?: Date;
 
   timeout!: ReturnType<typeof setTimeout>;
@@ -34,32 +34,32 @@ class TestPageService extends PageService {
   }
 }
 
-describe('PageService', () => {
-  let pageService:TestPageService;
+describe('PageChannel', () => {
+  let pageChannel:TestPageChannel;
 
   before((done) => {
-    pageService = new TestPageService();
+    pageChannel = new TestPageChannel();
     done();
   });
 
-  it('should extend Service', (done) => {
-    expect(pageService instanceof Service).to.be.true;
+  it('should extend Channel', (done) => {
+    expect(pageChannel instanceof Channel).to.be.true;
     done();
   });
 
-  it('should instantiate a new PageService', (done) => {
-    expect(pageService.lastReportDate).to.equal(now);
+  it('should instantiate a new PageChannel', (done) => {
+    expect(pageChannel.lastReportDate).to.equal(now);
     done();
   });
 
   it('should fetch and an enqueue a page of Reports', (done) => {
-    pageService.fetch().then(() => {
+    pageChannel.fetch().then(() => {
       // test for ascending order of page by authoredDate
-      expect(pageService.dequeue()).to.equal(report2);
-      expect(pageService.dequeue()).to.equal(report1);
+      expect(pageChannel.dequeue()).to.equal(report2);
+      expect(pageChannel.dequeue()).to.equal(report1);
 
       // test for updated lastReportDate field
-      expect(pageService.lastReportDate).to.equal(report1.authoredAt);
+      expect(pageChannel.lastReportDate).to.equal(report1.authoredAt);
       done();
     });
   });

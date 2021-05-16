@@ -3,11 +3,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const service_1 = __importDefault(require("./service"));
-class PollService extends service_1.default {
+const channel_1 = __importDefault(require("./channel"));
+class PollChannel extends channel_1.default {
     constructor() {
         super();
-        this.interval = PollService.DEFAULT_INTERVAL;
+        this.interval = PollChannel.DEFAULT_INTERVAL;
     }
     async start() {
         if (this.started)
@@ -33,5 +33,5 @@ class PollService extends service_1.default {
         this.timeout = setTimeout(this.poll.bind(this), this.interval);
     }
 }
-PollService.DEFAULT_INTERVAL = 10000;
-exports.default = PollService;
+PollChannel.DEFAULT_INTERVAL = 10000;
+exports.default = PollChannel;
