@@ -1,11 +1,9 @@
 import { expect } from 'chai';
 import { env } from 'process';
-import PageChannel from '../../../src/channels/page';
-import CrowdTangleChannel, { CrowdTangleOptions } from '../../../src/builtins/channels/crowdtangle/crowdtangle';
+import PageChannel from '../../src/channels/page';
+import CrowdTangleChannel, { CrowdTangleOptions } from '../../src/builtins/channels/crowdtangle/crowdtangle';
 
 class TestCrowdTangleChannel extends CrowdTangleChannel {
-  static INTERVAL: number;
-
   isCrossPlatform: boolean;
 
   queryParams: { [key: string]: any };
