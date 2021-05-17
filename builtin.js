@@ -1,4 +1,14 @@
-// Allows `downstream/builtin` to work as an import path.
+// Sets up the `downstream/builtin` import path.
 
-const exports = require('./build/builtin/channels');
-module.exports = exports;
+const {
+  CrowdTangleChannel,
+  CrowdTangleFacebookChannel,
+  CrowdTangleInstagramChannel,
+  TwitterPageChannel,
+  TwitterStreamChannel,
+} = require('./build/builtin/channels');
+
+export {
+  CrowdTangleChannel, CrowdTangleFacebookChannel, CrowdTangleInstagramChannel,
+  TwitterPageChannel, TwitterStreamChannel,
+};
