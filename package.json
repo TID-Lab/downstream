@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "koa-compose": "^4.1.0"
+    "koa-compose": "^4.1.0",
+    "twitter-v2": "^1.1.0"
   }
 }
