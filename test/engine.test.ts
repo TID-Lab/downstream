@@ -188,30 +188,24 @@ describe('Engine', () => {
 
   it('should handle Channel start errors gracefully', (done) => {
     channel2.throwError = true;
-
-    function callback(err, id) {
+    engine.once('error', (err, id) => {
       expect(err instanceof Error).to.be.true;
       expect(id.toString()).to.equal(id2.toString());
-      engine.removeListener('error', callback);
       channel2.throwError = false;
       engine.stop().then(done);
-    }
-    engine.on('error', callback);
+    });
     engine.start();
   });
 
   it('should handle Channel stop errors gracefully', (done) => {
     engine.start().then(() => {
       channel2.throwError = true;
-
-      function callback(err, id) {
+      engine.once('error', (err, id) => {
         expect(err instanceof Error).to.be.true;
         expect(id.toString()).to.equal(id2.toString());
-        engine.removeListener('error', callback);
         channel2.throwError = false;
         done();
-      }
-      engine.on('error', callback);
+      });
       engine.stop();
     });
   });

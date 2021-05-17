@@ -82,13 +82,10 @@ describe('PollChannel', () => {
 
   it('should catch and emit fetch errors', (done) => {
     pollChannel.throwError = true;
-
-    function callback(err) {
+    pollChannel.once('error', (err) => {
       expect(err instanceof Error).to.be.true;
-      pollChannel.removeListener('error', callback);
       pollChannel.stop().then(done);
-    }
-    pollChannel.on('error', callback);
+    });
     pollChannel.start();
   });
 });

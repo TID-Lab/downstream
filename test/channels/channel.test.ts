@@ -31,24 +31,18 @@ describe('Channel', () => {
   });
 
   it('should enqueue a Report', (done) => {
-    function callback() {
+    channel.once('notEmpty', () => {
       expect(channel.isEmpty()).to.be.false;
-
-      channel.removeListener('notEmpty', callback);
       done();
-    }
-    channel.on('notEmpty', callback);
+    });
     channel.enqueue({ foo: 'bar' });
   });
 
   it('should dequeue a Report', (done) => {
-    function callback() {
+    channel.once('empty', () => {
       expect(channel.isEmpty()).to.be.true;
-
-      channel.removeListener('empty', callback);
       done();
-    }
-    channel.on('empty', callback);
+    });
 
     const report = channel.dequeue();
     expect(report.foo).to.equal('bar');
