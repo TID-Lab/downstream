@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { env } from 'process';
 import Twitter from 'twitter-v2';
 import PageChannel from '../../../src/channels/page';
-import TwitterPageChannel, { TwitterPageOptions } from '../../../src/builtins/channels/twitter/page';
+import TwitterPageChannel, { TwitterPageOptions } from '../../../src/builtin/channels/twitter/page';
 
 class TestTwitterPageChannel extends TwitterPageChannel {
   twitter: Twitter;
@@ -53,7 +53,7 @@ describe('TwitterPageChannel', () => {
 
   it('should fetch a page of Reports from the Twitter API', function (done) {
     // increase timeout as needed with a poor Internet connection
-    this.timeout(5000);
+    this.timeout(10000);
 
     twChannel.fetchPage().then((reports) => {
       expect(Array.isArray(reports)).to.be.true;

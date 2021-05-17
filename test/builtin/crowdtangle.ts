@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { env } from 'process';
 import PageChannel from '../../src/channels/page';
-import CrowdTangleChannel, { CrowdTangleOptions } from '../../src/builtins/channels/crowdtangle/crowdtangle';
+import CrowdTangleChannel, { CrowdTangleOptions } from '../../src/builtin/channels/crowdtangle/crowdtangle';
 
 class TestCrowdTangleChannel extends CrowdTangleChannel {
   isCrossPlatform: boolean;
@@ -44,7 +44,7 @@ describe('CrowdTangleChannel', () => {
 
   it('should fetch a page of Reports from the CrowdTangle API', function (done) {
     // increase timeout as needed with a poor Internet connection
-    this.timeout(5000);
+    this.timeout(10000);
 
     ctChannel.fetchPage().then((reports) => {
       expect(Array.isArray(reports)).to.be.true;
