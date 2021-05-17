@@ -7,8 +7,8 @@
   "scripts": {
     "build": "tsc --project .",
     "test": "ts-mocha --recursive test/**/*",
+    "prepare": "npm run build",
     "prepublishOnly": "npm run test",
-    "version": "npm run build && git add -A src",
     "postversion": "git push && git push --tags"
   },
   "repository": {
