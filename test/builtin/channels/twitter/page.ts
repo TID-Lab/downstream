@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 import { env } from 'process';
 import Twitter from 'twitter-v2';
-import PageChannel from '../../../src/channels/page';
-import TwitterPageChannel, { TwitterPageOptions } from '../../../src/builtin/channels/twitter/page';
+import PageChannel from '../../../../src/channels/page';
+import TwitterPageChannel, { TwitterPageOptions } from '../../../../src/builtin/channels/twitter/page';
 
 class TestTwitterPageChannel extends TwitterPageChannel {
   twitter: Twitter;
