@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import Report from '../../../report';
-import PaginationChannel from '../../page';
+import PaginationChannel from '../../../channels/page';
 
 /**
  * TODO documentation

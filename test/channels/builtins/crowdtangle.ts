@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { env } from 'process';
 import PaginationChannel from '../../../src/channels/page';
-import CrowdTangleChannel, { CrowdTangleOptions } from '../../../src/channels/builtins/crowdtangle/crowdtangle';
+import CrowdTangleChannel, { CrowdTangleOptions } from '../../../src/builtins/channels/crowdtangle/crowdtangle';
 
 class TestCrowdTangleChannel extends CrowdTangleChannel {
   static INTERVAL: number;
