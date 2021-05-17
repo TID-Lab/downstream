@@ -3,7 +3,11 @@
     "mocha"
   ],
   "rules": {
+    "no-console": "off",
     "no-undef": "off",
-    "@typescript-eslint/no-unused-expressions": "off"
+    "func-names": "off",
+    "prefer-arrow-callback": "off",
+    "@typescript-eslint/no-unused-expressions": "off",
+    "@typescript-eslint/dot-notation": "off"
   }
 }
