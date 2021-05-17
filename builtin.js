@@ -8,7 +8,7 @@ const {
   TwitterStreamChannel,
 } = require('./build/builtin/channels');
 
-export {
+module.exports = {
   CrowdTangleChannel, CrowdTangleFacebookChannel, CrowdTangleInstagramChannel,
   TwitterPageChannel, TwitterStreamChannel,
 };
