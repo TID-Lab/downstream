@@ -5,7 +5,7 @@
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
-    "build": "tsc --project .",
+    "build": "tsc --project --clean .",
     "test": "ts-mocha --recursive test/**/*",
     "prepare": "npm run build",
     "prepublishOnly": "npm run test",
