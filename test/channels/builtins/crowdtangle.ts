@@ -50,7 +50,7 @@ describe('CrowdTangleChannel', () => {
 
     ctChannel.fetchPage().then((reports) => {
       expect(Array.isArray(reports)).to.be.true;
-      setTimeout(done, TestCrowdTangleChannel.INTERVAL);
+      done();
     });
   });
 });
