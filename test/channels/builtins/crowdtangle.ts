@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { env } from 'process';
-import PaginationChannel from '../../../src/channels/page';
+import PageChannel from '../../../src/channels/page';
 import CrowdTangleChannel, { CrowdTangleOptions } from '../../../src/builtins/channels/crowdtangle/crowdtangle';
 
 class TestCrowdTangleChannel extends CrowdTangleChannel {
@@ -32,8 +32,8 @@ describe('CrowdTangleChannel', () => {
     done();
   });
 
-  it('should extend PaginationChannel', (done) => {
-    expect(ctChannel instanceof PaginationChannel).to.be.true;
+  it('should extend PageChannel', (done) => {
+    expect(ctChannel instanceof PageChannel).to.be.true;
     done();
   });
 

@@ -4,7 +4,7 @@ import PollChannel from './poll';
 /**
  * TODO documentation
  */
-abstract class PaginationChannel extends PollChannel {
+abstract class PageChannel extends PollChannel {
   /**
    * Fetch the next page of Reports.
    */
@@ -41,4 +41,4 @@ abstract class PaginationChannel extends PollChannel {
   }
 }
 
-export default PaginationChannel;
+export default PageChannel;

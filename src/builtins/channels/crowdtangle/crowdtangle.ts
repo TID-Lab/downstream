@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import Report from '../../../report';
-import PaginationChannel from '../../../channels/page';
+import PageChannel from '../../../channels/page';
 
 /**
  * TODO documentation
@@ -14,7 +14,7 @@ export interface CrowdTangleOptions {
   interval?: number;
 }
 
-class CrowdTangleChannel extends PaginationChannel {
+class CrowdTangleChannel extends PageChannel {
   private static BASE_URL:string = 'https://api.crowdtangle.com/';
 
   private static SORT_BY:string = 'date';
