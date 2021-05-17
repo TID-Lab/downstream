@@ -4,8 +4,6 @@ import PaginationChannel from './channels/page';
 import PollChannel from './channels/poll';
 import Report from './report';
 
-export default Engine;
-
 export {
-  Channel, PaginationChannel, PollChannel, Report,
+  Engine, Channel, PaginationChannel, PollChannel, Report,
 };
