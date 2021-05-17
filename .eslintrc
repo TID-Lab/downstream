@@ -13,5 +13,6 @@
     "rules": {
       "class-methods-use-this": "off",
       "no-restricted-syntax": "off"
-    }
+    },
+    "ignorePatterns": [ "builtin.js" ]
   }
