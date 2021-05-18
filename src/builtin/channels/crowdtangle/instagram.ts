@@ -7,7 +7,7 @@ class CrowdTangleInstagramChannel extends CrowdTangleChannel {
   constructor(options: Options) {
     super(options);
 
-    // set the CrowdTangle platform parameter to Facebook
+    // set the CrowdTangle platform parameter to Instagram
     this.queryParams.platforms = 'instagram';
   }
 }
