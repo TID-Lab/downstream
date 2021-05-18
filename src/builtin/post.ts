@@ -1,4 +1,4 @@
-import { TimestampedItem } from '../../channels/page';
+import { TimestampedItem } from '../channels/page';
 
 interface Options {
   authoredAt: Date;

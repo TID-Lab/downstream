@@ -1,5 +1,5 @@
 import Twitter from 'twitter-v2';
-import SocialMediaPost from '../../objects/post';
+import SocialMediaPost from '../../post';
 import PageChannel from '../../../channels/page';
 import TwitterCredentials from './shared/credentials';
 import { TWEET_FIELDS, USER_FIELDS, EXPANSIONS } from './shared/params';

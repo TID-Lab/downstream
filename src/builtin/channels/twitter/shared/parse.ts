@@ -1,4 +1,4 @@
-import SocialMediaPost from '../../../objects/post';
+import SocialMediaPost from '../../../post';
 
 /**
  * Parse a raw Twitter post into a SocialMediaPost.

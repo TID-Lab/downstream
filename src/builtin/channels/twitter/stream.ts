@@ -1,6 +1,6 @@
 import Twitter from 'twitter-v2';
 import type TwitterStream from 'twitter-v2/build/TwitterStream';
-import SocialMediaPost from '../../objects/post';
+import SocialMediaPost from '../../post';
 import Channel from '../../../channels/channel';
 import TwitterCredentials from './shared/credentials';
 import { TWEET_FIELDS, USER_FIELDS, EXPANSIONS } from './shared/params';

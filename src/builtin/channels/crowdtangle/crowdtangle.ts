@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import SocialMediaPost from '../../objects/post';
+import SocialMediaPost from '../../post';
 import PageChannel from '../../../channels/page';
 
 export interface Options {
