@@ -1,7 +1,8 @@
 import { expect } from 'chai';
 import { env } from 'process';
 import PageChannel from '../../../src/channels/page';
-import CrowdTangleChannel, { CrowdTangleOptions } from '../../../src/builtin/channels/crowdtangle/crowdtangle';
+import CrowdTangleChannel, { Options } from '../../../src/builtin/channels/crowdtangle/crowdtangle';
+import SocialMediaPost from '../../../src/builtin/objects/post';
 
 class TestCrowdTangleChannel extends CrowdTangleChannel {
   isCrossPlatform: boolean;
@@ -18,7 +19,7 @@ if (!dashboardToken) {
   throw new Error('You must set the `DASHBOARD_TOKEN` environment variable.');
 }
 
-const crowdtangleOptions:CrowdTangleOptions = {
+const options:Options = {
   dashboardToken,
 };
 
@@ -26,7 +27,7 @@ describe('CrowdTangleChannel', () => {
   let ctChannel:TestCrowdTangleChannel;
 
   before((done) => {
-    ctChannel = new TestCrowdTangleChannel(crowdtangleOptions);
+    ctChannel = new TestCrowdTangleChannel(options);
     done();
   });
 
@@ -42,12 +43,15 @@ describe('CrowdTangleChannel', () => {
     done();
   });
 
-  it('should fetch a page of Reports from the CrowdTangle API', function (done) {
+  it('should fetch a page of posts from the CrowdTangle API', function (done) {
     // increase timeout as needed with a poor Internet connection
     this.timeout(10000);
 
-    ctChannel.fetchPage().then((reports) => {
-      expect(Array.isArray(reports)).to.be.true;
+    ctChannel.fetchPage().then((posts) => {
+      expect(Array.isArray(posts)).to.be.true;
+      if (posts.length > 0) {
+        expect(posts[0] instanceof SocialMediaPost).to.be.true;
+      }
       done();
     });
   });

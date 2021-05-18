@@ -1,7 +1,11 @@
 import { expect } from 'chai';
 import Engine from '../src/engine';
-import TestChannel from './utils/channels';
-import assembleTestReport from './utils/reports';
+import Item from '../src/item';
+import TestChannel from './utils/channel';
+
+function newItem(from?:string): Item {
+  return { from };
+}
 
 class TestEngine extends Engine {
   channels;
@@ -211,7 +215,7 @@ describe('Engine', () => {
   });
 
   it('should use middleware', (done) => {
-    const report = assembleTestReport();
+    const item = newItem();
     async function middleware(_, next) {
       engine.middlewareList = [];
       await engine.stop();
@@ -222,21 +226,21 @@ describe('Engine', () => {
     }
     engine.use(middleware);
     engine.start().then(() => {
-      channel1.enqueue(report);
+      channel1.enqueue(item);
     });
   });
 
-  it('should tag outgoing Reports with a Channel ID', (done) => {
-    const report = assembleTestReport();
-    let firstReport = true;
-    async function middleware(r, next) {
-      if (firstReport) {
-        expect(r.from).to.equal(id1.toString());
-        firstReport = false;
+  it('should tag outgoing items with a Channel ID', (done) => {
+    const item = newItem();
+    let firstItem = true;
+    async function middleware(i, next) {
+      if (firstItem) {
+        expect(i.from).to.equal(id1.toString());
+        firstItem = false;
         await next();
         return;
       }
-      expect(r.from).to.equal(id2.toString());
+      expect(i.from).to.equal(id2.toString());
       engine.middlewareList = [];
       await engine.stop();
       await next();
@@ -244,13 +248,13 @@ describe('Engine', () => {
     }
     engine.use(middleware);
     engine.start().then(() => {
-      channel1.enqueue({ ...report });
-      channel2.enqueue({ ...report });
+      channel1.enqueue({ ...item });
+      channel2.enqueue({ ...item });
     });
   });
 
-  it('should grab Reports from each Channel one at a time', (done) => {
-    const reports = [];
+  it('should grab items from each Channel one at a time', (done) => {
+    const items = [];
     let string = '';
     let i = 0;
     async function middleware(r, next) {
@@ -267,22 +271,22 @@ describe('Engine', () => {
       done();
     }
     for (let j = 0; j < 4; j += 1) {
-      reports.push({
-        ...assembleTestReport(),
+      items.push({
+        ...newItem(),
         content: (j + 1).toString(),
       });
     }
     engine.use(middleware);
     engine.start().then(() => {
-      channel1.enqueue(reports.shift());
-      channel1.enqueue(reports.shift());
-      channel2.enqueue(reports.shift());
-      channel2.enqueue(reports.shift());
+      channel1.enqueue(items.shift());
+      channel1.enqueue(items.shift());
+      channel2.enqueue(items.shift());
+      channel2.enqueue(items.shift());
     });
   });
 
   it('should run middleware in the order used', (done) => {
-    const report = assembleTestReport();
+    const item = newItem();
     let string = '';
     async function middleware1(r, next) {
       string += '1';
@@ -299,7 +303,7 @@ describe('Engine', () => {
     engine.use(middleware1);
     engine.use(middleware2);
     engine.start().then(() => {
-      channel1.enqueue({ ...report });
+      channel1.enqueue({ ...item });
     });
   });
 });

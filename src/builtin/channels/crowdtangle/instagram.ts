@@ -1,10 +1,10 @@
-import CrowdTangleChannel, { CrowdTangleOptions } from './crowdtangle';
+import CrowdTangleChannel, { Options } from './crowdtangle';
 
 /**
  * TODO documentation
  */
 class CrowdTangleInstagramChannel extends CrowdTangleChannel {
-  constructor(options: CrowdTangleOptions) {
+  constructor(options: Options) {
     super(options);
 
     // set the CrowdTangle platform parameter to Facebook

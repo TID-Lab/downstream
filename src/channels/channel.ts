@@ -1,6 +1,6 @@
 import EventEmitter from 'events';
+import type Item from '../item';
 import CircularQueue from '../queue';
-import Report from '../report';
 
 /**
  * TODO documentation
@@ -8,13 +8,13 @@ import Report from '../report';
 class Channel extends EventEmitter {
   started: boolean;
 
-  private queue: CircularQueue<Report>;
+  private queue: CircularQueue<Item>;
 
   constructor() {
     super();
 
     this.started = false;
-    this.queue = new CircularQueue<Report>();
+    this.queue = new CircularQueue<Item>();
   }
 
   /**
@@ -32,32 +32,32 @@ class Channel extends EventEmitter {
   }
 
   /**
-   * Enqueue the given Report.
+   * Enqueue the given item.
    */
-  enqueue(report:Report): void {
+  enqueue(item:Item): void {
     const wasEmpty:boolean = this.queue.isEmpty();
-    this.queue.add(report);
+    this.queue.add(item);
     if (wasEmpty) {
       this.emit('notEmpty');
     }
   }
 
   /**
-   * Dequeue the next Report, if available
+   * Dequeue the next item, if available
    */
-  dequeue():Report|null {
+  dequeue():Item|null {
     if (!this.queue.isEmpty()) {
-      const report:Report = this.queue.fetch();
+      const item:Item = this.queue.fetch();
       if (this.queue.isEmpty()) {
         this.emit('empty');
       }
-      return report;
+      return item;
     }
     return null;
   }
 
   /**
-   * Return whether the Report queue is empty.
+   * Return whether the item queue is empty.
    */
   isEmpty(): boolean {
     return this.queue.isEmpty();

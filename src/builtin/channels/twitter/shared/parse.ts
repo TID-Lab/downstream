@@ -1,12 +1,12 @@
-import Report from '../../../../report';
+import SocialMediaPost from '../../../objects/post';
 
 /**
- * Parse a raw Twitter post into a Report.
+ * Parse a raw Twitter post into a SocialMediaPost.
  */
 export default function parse(
   rawPost: { [key: string]: any },
   includes: { [key: string]: any },
-): Report {
+): SocialMediaPost {
   const { users = [] } = includes;
   const user:{ [key: string]: any } = users.find(
     (u) => u.id.toString() === rawPost.author_id.toString(),
@@ -16,7 +16,7 @@ export default function parse(
   const author:string = user ? user.username : null;
   const authoredAt:Date = new Date(rawPost.created_at);
   const url = `https://twitter.com/${author}/status/${rawPost.id}`;
-  return {
+  return new SocialMediaPost({
     authoredAt,
     fetchedAt: now,
     author,
@@ -27,5 +27,5 @@ export default function parse(
       post: rawPost,
       user,
     },
-  };
+  });
 }

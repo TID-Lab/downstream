@@ -1,7 +1,7 @@
 import compose from 'koa-compose';
 import EventEmitter from 'events';
 import Channel from './channels/channel';
-import type Report from './report';
+import type Item from './item';
 
 /**
  * TODO documentation
@@ -14,14 +14,14 @@ export type NextFunction = {
  * TODO documentation
  */
 export type MiddlewareFunction = {
-  (report: Report, next: NextFunction): Promise<any>
+  (item: Item, next: NextFunction): Promise<any>
 };
 
 /**
  * TODO documentation
  */
 export type ComposedMiddlewareFunction = {
-  (report: Report): Promise<any>
+  (item: Item): Promise<any>
 };
 
 /**
@@ -78,7 +78,7 @@ class Engine extends EventEmitter {
     this.empty = Object.values(this.channels)
       .reduce<boolean>((empty, s) => (empty && s.isEmpty()), true);
 
-    // compose Report middleware
+    // compose item middleware
     this.middleware = compose(this.middlewareList);
 
     // wait until all Channels have tried to start
@@ -192,7 +192,7 @@ class Engine extends EventEmitter {
   }
 
   /**
-   * Use a Report middleware function.
+   * Use an item middleware function.
    */
   use(middleware:MiddlewareFunction): Engine {
     this.middlewareList.push(middleware);
@@ -228,41 +228,41 @@ class Engine extends EventEmitter {
 
     this.empty = false;
 
-    // if the `empty` flag switched to false on the next tick, start processing Reports
+    // if the `empty` flag switched to false on the next tick, start processing items
     process.nextTick(() => {
       if (wasEmpty && !this.empty) {
-        this.nextReport();
+        this.nextItem();
       }
     });
   }
 
   /**
-   * Process the next Report.
+   * Process the next item.
    */
-  protected async nextReport(): Promise<void> {
+  protected async nextItem(): Promise<void> {
     const nonEmptyChannels:Channel[] = Object.values(this.channels).filter(
       (channel) => !channel.isEmpty(),
     );
 
-    // if no Channels have Reports, return
+    // if no Channels have items, return
     if (nonEmptyChannels.length === 0) return;
 
     // if the pointer is out of bounds, reset it
     if (this.pointer >= nonEmptyChannels.length) this.pointer = 0;
 
-    // dequeue the next available Report
+    // dequeue the next available item
     let id:string|undefined;
     const channel:Channel = nonEmptyChannels[this.pointer];
-    const report:Report|null = channel.dequeue();
+    const item:Item|null = channel.dequeue();
 
-    if (report) {
-      // tag the outgoing Report with a Channel ID
+    if (item) {
+      // tag the outgoing item with a Channel ID
       id = Object.keys(this.channels).find((key) => this.channels[key] === channel);
-      if (id) report.from = id.toString();
+      if (id) item.from = id.toString();
 
-      // try to call Report middleware on the new Report
+      // try to call item middleware on the new item
       try {
-        if (this.middleware) await this.middleware(report);
+        if (this.middleware) await this.middleware(item);
       } catch (err) {
         this.emit('error', err);
       }
@@ -271,8 +271,8 @@ class Engine extends EventEmitter {
     // increment the pointer
     this.pointer += 1;
 
-    // schedule the next Report to be processed on next tick
-    process.nextTick(this.nextReport.bind(this));
+    // schedule the next item to be processed on next tick
+    process.nextTick(this.nextItem.bind(this));
   }
 }
 export default Engine;

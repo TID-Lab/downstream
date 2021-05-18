@@ -1,6 +1,6 @@
 import Twitter from 'twitter-v2';
 import type TwitterStream from 'twitter-v2/build/TwitterStream';
-import Report from '../../../report';
+import SocialMediaPost from '../../objects/post';
 import Channel from '../../../channels/channel';
 import TwitterCredentials from './shared/credentials';
 import { TWEET_FIELDS, USER_FIELDS, EXPANSIONS } from './shared/params';
@@ -9,8 +9,7 @@ import parse from './shared/parse';
 /**
  * TODO documentation
  */
-export interface TwitterStreamOptions {
-  lastReportDate?: Date;
+export interface Options {
   queryParams?: { [key: string]: any };
   credentials: TwitterCredentials;
   isRecent?: boolean;
@@ -34,7 +33,7 @@ class TwitterStreamChannel extends Channel {
 
   protected consecutiveErrorCount: number;
 
-  constructor(options:TwitterStreamOptions) {
+  constructor(options:Options) {
     super();
 
     const {
@@ -85,8 +84,8 @@ class TwitterStreamChannel extends Channel {
         // reset the consecutive error count
         this.consecutiveErrorCount = 0;
 
-        const report:Report = parse(data, includes);
-        this.enqueue(report);
+        const post:SocialMediaPost = parse(data, includes);
+        this.enqueue(post);
       }
       // If the stream closed gracefully, reconnect.
       if (this.started) {

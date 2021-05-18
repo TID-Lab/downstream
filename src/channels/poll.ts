@@ -5,7 +5,7 @@ import Channel from './channel';
  */
 abstract class PollChannel extends Channel {
   /**
-   * Fetch Reports.
+   * Fetch items.
    */
   abstract fetch(): Promise<void>;
 

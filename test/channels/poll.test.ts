@@ -1,7 +1,6 @@
 import { expect } from 'chai';
 import Channel from '../../src/channels/channel';
 import PollChannel from '../../src/channels/poll';
-import assembleTestReport from '../utils/reports';
 
 class TestPollChannel extends PollChannel {
   interval: number;
@@ -24,11 +23,8 @@ class TestPollChannel extends PollChannel {
     if (this.throwError) {
       throw new Error('Foo bar');
     }
-
-    const report = assembleTestReport();
-    report.raw.i = this.i;
     this.i += 1;
-    this.enqueue(report);
+    this.enqueue({});
   }
 }
 

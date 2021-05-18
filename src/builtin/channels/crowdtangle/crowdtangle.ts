@@ -1,12 +1,9 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import Report from '../../../report';
+import SocialMediaPost from '../../objects/post';
 import PageChannel from '../../../channels/page';
 
-/**
- * TODO documentation
- */
-export interface CrowdTangleOptions {
-  lastReportDate?: Date;
+export interface Options {
+  lastTimestamp?: Date;
   queryParams?: { [key: string]: any };
   dashboardToken: string;
   isCrossPlatform?: boolean;
@@ -33,8 +30,8 @@ class CrowdTangleChannel extends PageChannel {
 
   protected queryParams: { [key: string]: any };
 
-  constructor(options:CrowdTangleOptions) {
-    super(options.lastReportDate);
+  constructor(options:Options) {
+    super(options.lastTimestamp);
 
     const queryParams:{ [key: string]: any } = options.queryParams || {};
 
@@ -55,12 +52,12 @@ class CrowdTangleChannel extends PageChannel {
     this.interval = options.interval || CrowdTangleChannel.INTERVAL;
   }
 
-  async fetchPage(): Promise<Report[]> {
+  async fetchPage(): Promise<SocialMediaPost[]> {
     // compute the startDate for pagination
     let startDate:Date;
-    if (this.lastReportDate) {
-      // if lastReportDate is available, use that
-      startDate = new Date(this.lastReportDate.getTime() + 1000);
+    if (this.lastTimestamp) {
+      // if lastTimestamp is available, use that
+      startDate = new Date(this.lastTimestamp.getTime() + 1000);
     } else {
       // otherwise, set start date to 3 hours ago
       startDate = new Date();
@@ -101,27 +98,27 @@ class CrowdTangleChannel extends PageChannel {
 
     const response:AxiosResponse = await axios(config);
 
-    // parse raw post data from the HTTP response into Reports
+    // parse raw post data from the HTTP response into SocialMediaPosts
     const { data: { result } } = response;
     const { posts: rawPosts } = result;
-    const reports:Report[] = [];
+    const posts:SocialMediaPost[] = [];
     for (let i:number = 0; i < rawPosts.length; i += 1) {
       const rawPost = rawPosts[i];
-      const report:Report = this.parse(rawPost);
-      reports.push(report);
+      const post:SocialMediaPost = this.parse(rawPost);
+      posts.push(post);
     }
 
     // update nextPageURL with the new value from CrowdTangle
     const { pagination } = result;
     this.nextPageURL = pagination.nextPage;
 
-    return reports;
+    return posts;
   }
 
   /**
-   * Parse the given raw post into a Report.
+   * Parse the given raw post into a SocialMediaPost.
    */
-  parse(rawPost: { [key: string]: any }): Report {
+  parse(rawPost: { [key: string]: any }): SocialMediaPost {
     const now:Date = new Date();
     const author:string = rawPost.account ? rawPost.account.name || rawPost.account.handle : null;
     const authoredAt:Date = new Date(`${rawPost.date} UTC`) || now;
@@ -138,7 +135,7 @@ class CrowdTangleChannel extends PageChannel {
       default:
     }
 
-    return {
+    return new SocialMediaPost({
       authoredAt,
       fetchedAt: now,
       author,
@@ -146,7 +143,7 @@ class CrowdTangleChannel extends PageChannel {
       url: rawPost.postUrl,
       platformID: rawPost.id,
       raw: rawPost,
-    };
+    });
   }
 }
 

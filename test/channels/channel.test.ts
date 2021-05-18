@@ -30,7 +30,7 @@ describe('Channel', () => {
     });
   });
 
-  it('should enqueue a Report', (done) => {
+  it('should enqueue an item', (done) => {
     channel.once('notEmpty', () => {
       expect(channel.isEmpty()).to.be.false;
       done();
@@ -38,14 +38,14 @@ describe('Channel', () => {
     channel.enqueue({ foo: 'bar' });
   });
 
-  it('should dequeue a Report', (done) => {
+  it('should dequeue an item', (done) => {
     channel.once('empty', () => {
       expect(channel.isEmpty()).to.be.true;
       done();
     });
 
-    const report = channel.dequeue();
-    expect(report.foo).to.equal('bar');
+    const item = channel.dequeue();
+    expect(item.foo).to.equal('bar');
     expect(channel.dequeue()).to.be.null;
   });
 });

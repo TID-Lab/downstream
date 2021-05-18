@@ -2,7 +2,8 @@ import { expect } from 'chai';
 import { env } from 'process';
 import Twitter from 'twitter-v2';
 import PageChannel from '../../../../src/channels/page';
-import TwitterPageChannel, { TwitterPageOptions } from '../../../../src/builtin/channels/twitter/page';
+import TwitterPageChannel, { Options } from '../../../../src/builtin/channels/twitter/page';
+import SocialMediaPost from '../../../../src/builtin/objects/post';
 
 class TestTwitterPageChannel extends TwitterPageChannel {
   twitter: Twitter;
@@ -22,7 +23,7 @@ if (!consumerKey || !consumerSecret) {
   throw new Error('You must set the `CONSUMER_KEY` and `CONSUMER_SECRET` environment variables.');
 }
 
-const twitterPageOptions:TwitterPageOptions = {
+const options:Options = {
   credentials: { consumerKey, consumerSecret },
   queryParams: {
     query: 'from:jack',
@@ -34,7 +35,7 @@ describe('TwitterPageChannel', () => {
   let twChannel:TestTwitterPageChannel;
 
   before((done) => {
-    twChannel = new TestTwitterPageChannel(twitterPageOptions);
+    twChannel = new TestTwitterPageChannel(options);
     done();
   });
 
@@ -51,12 +52,15 @@ describe('TwitterPageChannel', () => {
     done();
   });
 
-  it('should fetch a page of Reports from the Twitter API', function (done) {
+  it('should fetch a page of posts from the Twitter API', function (done) {
     // increase timeout as needed with a poor Internet connection
     this.timeout(10000);
 
-    twChannel.fetchPage().then((reports) => {
-      expect(Array.isArray(reports)).to.be.true;
+    twChannel.fetchPage().then((posts) => {
+      expect(Array.isArray(posts)).to.be.true;
+      if (posts.length > 0) {
+        expect(posts[0] instanceof SocialMediaPost).to.be.true;
+      }
       done();
     });
   });

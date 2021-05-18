@@ -3,7 +3,8 @@ import { env } from 'process';
 import Twitter from 'twitter-v2';
 import type TwitterStream from 'twitter-v2/build/TwitterStream';
 import Channel from '../../../../src/channels/channel';
-import TwitterStreamChannel, { TwitterStreamOptions } from '../../../../src/builtin/channels/twitter/stream';
+import TwitterStreamChannel, { Options } from '../../../../src/builtin/channels/twitter/stream';
+import SocialMediaPost from '../../../../src/builtin/objects/post';
 
 class TestTwitterStreamChannel extends TwitterStreamChannel {
   twitter: Twitter;
@@ -23,7 +24,7 @@ if (!consumerKey || !consumerSecret) {
   throw new Error('You must set the `CONSUMER_KEY` and `CONSUMER_SECRET` environment variables.');
 }
 
-const twitterStreamOptions:TwitterStreamOptions = {
+const options:Options = {
   credentials: { consumerKey, consumerSecret },
 };
 
@@ -31,7 +32,7 @@ describe('TwitterStreamChannel', () => {
   let twChannel:TestTwitterStreamChannel;
 
   before((done) => {
-    twChannel = new TestTwitterStreamChannel(twitterStreamOptions);
+    twChannel = new TestTwitterStreamChannel(options);
     done();
   });
 
@@ -47,13 +48,13 @@ describe('TwitterStreamChannel', () => {
     done();
   });
 
-  it('should stream Reports from the Twitter API', function (done) {
+  it('should stream posts from the Twitter API', function (done) {
     // increase timeout as needed with a poor Internet connection
     this.timeout(10000);
 
     twChannel.once('notEmpty', async () => {
-      const report = twChannel.dequeue();
-      expect(report).to.be.a('object');
+      const post = twChannel.dequeue();
+      expect(post instanceof SocialMediaPost).to.be.true;
 
       await twChannel.stop();
       done();

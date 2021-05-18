@@ -1,42 +1,49 @@
-import Report from '../report';
+import type Item from '../item';
 import PollChannel from './poll';
+
+/**
+ * TODO documentation
+ */
+export interface TimestampedItem extends Item {
+  getTimestamp(): Date;
+}
 
 /**
  * TODO documentation
  */
 abstract class PageChannel extends PollChannel {
   /**
-   * Fetch the next page of Reports.
+   * Fetch the next page.
    */
-  abstract fetchPage(): Promise<Report[]>;
+  abstract fetchPage(): Promise<TimestampedItem[]>;
 
-  protected lastReportDate?: Date;
+  protected lastTimestamp?: Date;
 
-  constructor(lastReportDate?: Date) {
+  constructor(lastTimestamp?: Date) {
     super();
 
-    this.lastReportDate = lastReportDate;
+    this.lastTimestamp = lastTimestamp;
   }
 
   async fetch(): Promise<void> {
-    // fetch a page of Reports
-    const reports:Report[] = [...await this.fetchPage()];
+    // fetch the next page
+    const page:TimestampedItem[] = [...await this.fetchPage()];
 
-    // sort the Reports by authoredAt in ascending order
-    reports.sort(
-      (a, b) => a.authoredAt.getTime() - b.authoredAt.getTime(),
+    // sort the objects by their timestamp in ascending order
+    page.sort(
+      (a, b) => a.getTimestamp().getTime() - b.getTimestamp().getTime(),
     );
 
-    for (let i:number = 0; i < reports.length; i += 1) {
-      const report:Report = reports[i];
+    for (let i:number = 0; i < page.length; i += 1) {
+      const item:TimestampedItem = page[i];
 
-      // update the lastReportDate
-      if (!this.lastReportDate || this.lastReportDate <= report.authoredAt) {
-        this.lastReportDate = report.authoredAt;
+      // update the timestamp
+      if (!this.lastTimestamp || this.lastTimestamp <= item.getTimestamp()) {
+        this.lastTimestamp = item.getTimestamp();
       }
 
-      // enqueue each Report in the page
-      this.enqueue(report);
+      // enqueue each item in the page
+      this.enqueue(item);
     }
   }
 }

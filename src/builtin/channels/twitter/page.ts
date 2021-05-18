@@ -1,5 +1,5 @@
 import Twitter from 'twitter-v2';
-import Report from '../../../report';
+import SocialMediaPost from '../../objects/post';
 import PageChannel from '../../../channels/page';
 import TwitterCredentials from './shared/credentials';
 import { TWEET_FIELDS, USER_FIELDS, EXPANSIONS } from './shared/params';
@@ -8,8 +8,8 @@ import parse from './shared/parse';
 /**
  * TODO documentation
  */
-export interface TwitterPageOptions {
-  lastReportDate?: Date;
+export interface Options {
+  lastTimestamp?: Date;
   queryParams?: { [key: string]: any };
   credentials: TwitterCredentials;
   isRecent?: boolean;
@@ -34,8 +34,8 @@ class TwitterPageChannel extends PageChannel {
 
   protected cachedQueryParams?: { [key: string]: any };
 
-  constructor(options: TwitterPageOptions) {
-    super(options.lastReportDate);
+  constructor(options: Options) {
+    super(options.lastTimestamp);
 
     const {
       credentials,
@@ -77,9 +77,9 @@ class TwitterPageChannel extends PageChannel {
   protected assembleQueryParams(): { [key: string]: any } {
     // compute the startDate for pagination
     let startDate:Date;
-    if (this.lastReportDate) {
-      // if lastReportDate is available, use that
-      startDate = new Date(this.lastReportDate.getTime() + 1000);
+    if (this.lastTimestamp) {
+      // if lastTimestamp is available, use that
+      startDate = new Date(this.lastTimestamp.getTime() + 1000);
     } else {
       // otherwise, set start date to 3 hours ago
       startDate = new Date();
@@ -103,7 +103,7 @@ class TwitterPageChannel extends PageChannel {
     return queryParams;
   }
 
-  async fetchPage(): Promise<Report[]> {
+  async fetchPage(): Promise<SocialMediaPost[]> {
     // assemble the query parameters
     const queryParams:{ [key: string]: any } = this.assembleQueryParams();
 
@@ -112,16 +112,16 @@ class TwitterPageChannel extends PageChannel {
 
     const body = await this.twitter.get(`tweets/search/${routeSuffix}`, queryParams);
 
-    // parse raw post data from the HTTP response into Reports
-    const reports:Report[] = [];
+    // parse raw post data from the HTTP response into SocialMediaPosts
+    const posts:SocialMediaPost[] = [];
     if (body && typeof body === 'object') {
       const responseBody:any = body;
 
       const { data: rawPosts, includes, meta } = responseBody;
       for (let i = 0; i < meta.result_count; i += 1) {
         const rawPost = rawPosts[i];
-        const report:Report = parse(rawPost, includes);
-        reports.push(report);
+        const post:SocialMediaPost = parse(rawPost, includes);
+        posts.push(post);
       }
 
       // update nextToken with the new value from Twitter
@@ -130,7 +130,7 @@ class TwitterPageChannel extends PageChannel {
       // if nextToken is defined, cache query params for the next call
       if (this.nextPageToken) this.cachedQueryParams = queryParams;
     }
-    return reports;
+    return posts;
   }
 }
 
