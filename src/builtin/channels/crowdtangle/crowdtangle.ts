@@ -126,9 +126,10 @@ class CrowdTangleChannel extends PageChannel {
     const now:Date = new Date();
     const author:string = rawPost.account ? rawPost.account.name || rawPost.account.handle : null;
     const authoredAt:Date = new Date(`${rawPost.date} UTC`) || now;
+    const platform = rawPost.platform.toLowerCase();
     let content;
 
-    switch (rawPost.platform) {
+    switch (platform) {
       case 'facebook':
         content = rawPost.message;
         break;
@@ -145,6 +146,7 @@ class CrowdTangleChannel extends PageChannel {
       author,
       content,
       url: rawPost.postUrl,
+      platform,
       platformID: rawPost.id,
       raw: rawPost,
     });

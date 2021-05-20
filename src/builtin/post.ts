@@ -1,10 +1,17 @@
 import { TimestampedItem } from '../channels/page';
 
+export const enum Platform {
+  Facebook = 'facebook',
+  Instagram = 'instagram',
+  Twitter = 'twitter',
+}
+
 interface Options {
   authoredAt: Date;
   fetchedAt: Date;
   author: string;
   url: string;
+  platform: Platform;
   platformID: string;
   content?: string;
   raw: { [key: string]: any };
@@ -24,6 +31,8 @@ class SocialMediaPost implements TimestampedItem {
 
   url: string;
 
+  platform: Platform;
+
   platformID: string;
 
   content?: string;
@@ -39,6 +48,7 @@ class SocialMediaPost implements TimestampedItem {
     this.fetchedAt = options.fetchedAt;
     this.author = options.author;
     this.url = options.url;
+    this.platform = options.platform;
     this.platformID = options.platformID;
     this.raw = options.raw;
     this.from = options.from;

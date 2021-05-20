@@ -1,4 +1,4 @@
-import SocialMediaPost from '../../../post';
+import SocialMediaPost, { Platform } from '../../../post';
 
 /**
  * Parse a raw Twitter post into a SocialMediaPost.
@@ -30,6 +30,7 @@ export default function parse(
     author,
     content: rawPost.text,
     url,
+    platform: Platform.Twitter,
     platformID: rawPost.id,
     tags,
     raw: {
