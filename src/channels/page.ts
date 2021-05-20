@@ -8,6 +8,11 @@ export interface TimestampedItem extends Item {
   getTimestamp(): Date;
 }
 
+interface Options {
+  lastTimestamp?: Date;
+  delay?: number;
+}
+
 /**
  * TODO documentation
  */
@@ -19,10 +24,10 @@ abstract class PageChannel extends PollChannel {
 
   protected lastTimestamp?: Date;
 
-  constructor(lastTimestamp?: Date) {
-    super();
+  constructor(options: Options = {}) {
+    super(options.delay);
 
-    this.lastTimestamp = lastTimestamp;
+    this.lastTimestamp = options.lastTimestamp;
   }
 
   async fetch(): Promise<void> {

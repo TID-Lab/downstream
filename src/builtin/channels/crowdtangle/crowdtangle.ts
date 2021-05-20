@@ -4,6 +4,7 @@ import PageChannel from '../../../channels/page';
 
 export interface Options {
   lastTimestamp?: Date;
+  delay?: number;
   queryParams?: { [key: string]: any };
   dashboardToken: string;
   isCrossPlatform?: boolean;
@@ -31,7 +32,10 @@ class CrowdTangleChannel extends PageChannel {
   protected queryParams: { [key: string]: any };
 
   constructor(options:Options) {
-    super(options.lastTimestamp);
+    super({
+      lastTimestamp: options.lastTimestamp,
+      delay: options.delay,
+    });
 
     const queryParams:{ [key: string]: any } = options.queryParams || {};
 

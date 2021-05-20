@@ -3,6 +3,8 @@ import Channel from '../../src/channels/channel';
 import PollChannel from '../../src/channels/poll';
 
 class TestPollChannel extends PollChannel {
+  delay: number;
+
   interval: number;
 
   timeout!: ReturnType<typeof setTimeout>;
@@ -43,6 +45,7 @@ describe('PollChannel', () => {
 
   it('should instantiate a new PollChannel', (done) => {
     expect(pollChannel.interval).to.equal(10);
+    expect(pollChannel.delay).to.equal(0);
     done();
   });
 
@@ -74,6 +77,19 @@ describe('PollChannel', () => {
     });
     expect(pollChannel.i).to.be.gte(2);
     done();
+  });
+
+  it('should delay the first poll when asked', (done) => {
+    pollChannel.i = 0;
+    pollChannel.delay = 20;
+    pollChannel.start();
+    setTimeout(() => {
+      expect(pollChannel.i).to.equal(0);
+    }, 10);
+    setTimeout(() => {
+      expect(pollChannel.i).to.be.lte(2);
+      done();
+    }, 35);
   });
 
   it('should catch and emit fetch errors', (done) => {

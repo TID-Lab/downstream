@@ -10,6 +10,7 @@ import parse from './shared/parse';
  */
 export interface Options {
   lastTimestamp?: Date;
+  delay?: number;
   queryParams?: { [key: string]: any };
   credentials: TwitterCredentials;
   isRecent?: boolean;
@@ -35,7 +36,10 @@ class TwitterPageChannel extends PageChannel {
   protected cachedQueryParams?: { [key: string]: any };
 
   constructor(options: Options) {
-    super(options.lastTimestamp);
+    super({
+      lastTimestamp: options.lastTimestamp,
+      delay: options.delay,
+    });
 
     const {
       credentials,

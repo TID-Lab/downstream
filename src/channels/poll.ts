@@ -9,15 +9,18 @@ abstract class PollChannel extends Channel {
    */
   abstract fetch(): Promise<void>;
 
+  protected delay: number;
+
   protected interval: number;
 
   protected timeout?:ReturnType<typeof setTimeout>;
 
   private static DEFAULT_INTERVAL: number = 10000;
 
-  constructor() {
+  constructor(delay?) {
     super();
 
+    this.delay = delay || 0;
     this.interval = PollChannel.DEFAULT_INTERVAL;
   }
 
@@ -31,7 +34,11 @@ abstract class PollChannel extends Channel {
     await super.start();
 
     // run the first poll
-    this.poll();
+    if (this.delay) {
+      setTimeout(this.poll.bind(this), this.delay);
+    } else {
+      this.poll();
+    }
   }
 
   async stop(): Promise<void> {
