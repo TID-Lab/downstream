@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { env } from 'process';
 import PageChannel from '../../../src/channels/page';
 import CrowdTangleChannel, { Options } from '../../../src/builtin/channels/crowdtangle/crowdtangle';
-import SocialMediaPost from '../../../src/builtin/objects/post';
+import SocialMediaPost from '../../../src/builtin/post';
 
 class TestCrowdTangleChannel extends CrowdTangleChannel {
   isCrossPlatform: boolean;

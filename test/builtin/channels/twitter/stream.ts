@@ -4,7 +4,7 @@ import Twitter from 'twitter-v2';
 import type TwitterStream from 'twitter-v2/build/TwitterStream';
 import Channel from '../../../../src/channels/channel';
 import TwitterStreamChannel, { Options } from '../../../../src/builtin/channels/twitter/stream';
-import SocialMediaPost from '../../../../src/builtin/objects/post';
+import SocialMediaPost from '../../../../src/builtin/post';
 
 class TestTwitterStreamChannel extends TwitterStreamChannel {
   twitter: Twitter;

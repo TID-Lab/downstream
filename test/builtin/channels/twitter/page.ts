@@ -3,7 +3,7 @@ import { env } from 'process';
 import Twitter from 'twitter-v2';
 import PageChannel from '../../../../src/channels/page';
 import TwitterPageChannel, { Options } from '../../../../src/builtin/channels/twitter/page';
-import SocialMediaPost from '../../../../src/builtin/objects/post';
+import SocialMediaPost from '../../../../src/builtin/post';
 
 class TestTwitterPageChannel extends TwitterPageChannel {
   twitter: Twitter;
