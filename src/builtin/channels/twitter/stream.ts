@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import Twitter from 'twitter-v2';
 import type TwitterStream from 'twitter-v2/build/TwitterStream';
 import SocialMediaPost from '../../post';
@@ -80,11 +81,11 @@ class TwitterStreamChannel extends Channel {
   protected async listenToStream() {
     this.stream = this.twitter.stream('tweets/search/stream', this.queryParams);
     try {
-      for await (const { data, includes } of this.stream) {
+      for await (const { data, includes, matching_rules } of this.stream) {
         // reset the consecutive error count
         this.consecutiveErrorCount = 0;
 
-        const post:SocialMediaPost = parse(data, includes);
+        const post:SocialMediaPost = parse(data, includes, matching_rules);
         this.enqueue(post);
       }
       // If the stream closed gracefully, reconnect.

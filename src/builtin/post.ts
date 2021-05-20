@@ -9,6 +9,7 @@ interface Options {
   content?: string;
   raw: { [key: string]: any };
   from?: string;
+  tags?: string[];
 }
 
 /**
@@ -31,6 +32,8 @@ class SocialMediaPost implements TimestampedItem {
 
   from?: string;
 
+  tags?: string[];
+
   constructor(options: Options) {
     this.authoredAt = options.authoredAt;
     this.fetchedAt = options.fetchedAt;
@@ -39,6 +42,7 @@ class SocialMediaPost implements TimestampedItem {
     this.platformID = options.platformID;
     this.raw = options.raw;
     this.from = options.from;
+    this.tags = options.tags;
   }
 
   getTimestamp(): Date {
