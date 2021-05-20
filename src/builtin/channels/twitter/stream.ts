@@ -82,11 +82,14 @@ class TwitterStreamChannel extends Channel {
     this.stream = this.twitter.stream('tweets/search/stream', this.queryParams);
     try {
       for await (const { data, includes, matching_rules } of this.stream) {
-        // reset the consecutive error count
-        this.consecutiveErrorCount = 0;
+        // empty objects are sometimes emitted; just ignore them
+        if (data && includes && matching_rules) {
+          // reset the consecutive error count
+          this.consecutiveErrorCount = 0;
 
-        const post:SocialMediaPost = parse(data, includes, matching_rules);
-        this.enqueue(post);
+          const post:SocialMediaPost = parse(data, includes, matching_rules);
+          this.enqueue(post);
+        }
       }
       // If the stream closed gracefully, reconnect.
       if (this.started) {
