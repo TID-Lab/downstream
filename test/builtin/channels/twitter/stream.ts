@@ -48,6 +48,8 @@ describe('TwitterStreamChannel', () => {
     done();
   });
 
+  // Skip this test if the stream rules are such that posts rarely come in
+  // it.skip('should stream posts from the Twitter API', function (done) {
   it('should stream posts from the Twitter API', function (done) {
     // increase timeout as needed with a poor Internet connection
     this.timeout(10000);
