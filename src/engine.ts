@@ -92,6 +92,12 @@ class Engine extends EventEmitter {
           .catch(
             (err) => {
               // emit Channel startup errors
+
+              /*
+               * @event Engine#error
+               * @param {Error} err - The error.
+               * @param {any} [id] - The ID of the Channel that threw the error.
+               */
               this.emit('error', err, id);
             },
           ),
@@ -116,6 +122,12 @@ class Engine extends EventEmitter {
           .catch(
             (err) => {
               // emit Channel startup errors
+
+              /*
+               * @event Engine#error
+               * @param {Error} err - The error.
+               * @param {any} [id] - The ID of the Channel that threw the error.
+               */
               this.emit('error', err, id);
             },
           ),
@@ -203,6 +215,11 @@ class Engine extends EventEmitter {
    * An event listener for Channel `error` events.
    */
   protected onChannelError(channelId:string, err:any): void {
+    /*
+     * @event Engine#error
+     * @param {Error} err - The error.
+     * @param {any} [id] - The ID of the Channel that threw the error.
+     */
     this.emit('error', err, channelId);
   }
 
@@ -264,6 +281,11 @@ class Engine extends EventEmitter {
       try {
         if (this.middleware) await this.middleware(item);
       } catch (err) {
+        /*
+         * @event Engine#error
+         * @param {Error} err - The error.
+         * @param {any} [id] - The ID of the Channel that threw the error.
+         */
         this.emit('error', err);
       }
     }
