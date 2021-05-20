@@ -72,7 +72,7 @@ class TwitterPageChannel extends PageChannel {
     } else {
       interval = TwitterPageChannel.ALL_INTERVAL;
     }
-    this.interval = interval;
+    this.interval = options.interval || interval;
   }
 
   /**
