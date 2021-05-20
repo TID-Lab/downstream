@@ -50,6 +50,7 @@ class SocialMediaPost implements TimestampedItem {
     this.url = options.url;
     this.platform = options.platform;
     this.platformID = options.platformID;
+    this.content = options.content;
     this.raw = options.raw;
     this.from = options.from;
     this.tags = options.tags;
