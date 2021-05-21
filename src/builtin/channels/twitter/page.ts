@@ -31,10 +31,7 @@ class TwitterPageChannel extends PageChannel {
   protected cachedQueryParams?: { [key: string]: any };
 
   constructor(options: TwitterPageOptions) {
-    super({
-      lastTimestamp: options.lastTimestamp,
-      delay: options.delay,
-    });
+    super(options);
 
     const {
       credentials,

@@ -29,10 +29,7 @@ class CrowdTangleChannel extends PageChannel {
   protected queryParams: { [key: string]: any };
 
   constructor(options:CrowdTangleOptions) {
-    super({
-      lastTimestamp: options.lastTimestamp,
-      delay: options.delay,
-    });
+    super(options);
 
     const queryParams:{ [key: string]: any } = options.queryParams || {};
 
