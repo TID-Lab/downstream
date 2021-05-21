@@ -3,20 +3,9 @@ import Twitter from 'twitter-v2';
 import type TwitterStream from 'twitter-v2/build/TwitterStream';
 import SocialMediaPost from '../../post';
 import Channel from '../../../channels/channel';
-import TwitterCredentials from './shared/credentials';
 import { TWEET_FIELDS, USER_FIELDS, EXPANSIONS } from './shared/params';
 import parse from './shared/parse';
-
-/**
- * TODO documentation
- */
-export interface Options {
-  queryParams?: { [key: string]: any };
-  credentials: TwitterCredentials;
-  isRecent?: boolean;
-  nextPageToken?: string;
-  interval?: number;
-}
+import TwitterOptions from './shared/options';
 
 /**
  * TODO documentation
@@ -34,7 +23,7 @@ class TwitterStreamChannel extends Channel {
 
   protected consecutiveErrorCount: number;
 
-  constructor(options:Options) {
+  constructor(options:TwitterOptions) {
     super();
 
     const {

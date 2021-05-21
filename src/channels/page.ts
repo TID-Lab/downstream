@@ -1,5 +1,5 @@
 import type Item from '../item';
-import PollChannel from './poll';
+import PollChannel, { PollOptions } from './poll';
 
 /**
  * TODO documentation
@@ -12,10 +12,9 @@ export type FetchCallback = {
   (lastTimestamp?: Date): Promise<any>
 };
 
-interface Options {
-  delay?: number;
+export interface PageOptions extends PollOptions {
   lastTimestamp?: Date;
-  onFetch?: FetchCallback,
+  onFetch?: FetchCallback;
 }
 
 /**
@@ -31,8 +30,8 @@ abstract class PageChannel extends PollChannel {
 
   protected onFetch?: FetchCallback;
 
-  constructor(options: Options = {}) {
-    super(options.delay);
+  constructor(options: PageOptions = {}) {
+    super(options);
 
     this.lastTimestamp = options.lastTimestamp;
     this.onFetch = options.onFetch;

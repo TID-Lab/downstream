@@ -1,21 +1,16 @@
 import Twitter from 'twitter-v2';
 import SocialMediaPost from '../../post';
-import PageChannel from '../../../channels/page';
-import TwitterCredentials from './shared/credentials';
+import PageChannel, { PageOptions } from '../../../channels/page';
 import { TWEET_FIELDS, USER_FIELDS, EXPANSIONS } from './shared/params';
 import parse from './shared/parse';
+import TwitterOptions from './shared/options';
 
 /**
  * TODO documentation
  */
-export interface Options {
-  lastTimestamp?: Date;
-  delay?: number;
-  queryParams?: { [key: string]: any };
-  credentials: TwitterCredentials;
+export interface TwitterPageOptions extends TwitterOptions, PageOptions {
   isRecent?: boolean;
   nextPageToken?: string;
-  interval?: number;
 }
 
 class TwitterPageChannel extends PageChannel {
@@ -35,7 +30,7 @@ class TwitterPageChannel extends PageChannel {
 
   protected cachedQueryParams?: { [key: string]: any };
 
-  constructor(options: Options) {
+  constructor(options: TwitterPageOptions) {
     super({
       lastTimestamp: options.lastTimestamp,
       delay: options.delay,

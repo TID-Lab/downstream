@@ -3,6 +3,14 @@ import Channel from './channel';
 /**
  * TODO documentation
  */
+export interface PollOptions {
+  delay?: number;
+  interval?: number;
+}
+
+/**
+ * TODO documentation
+ */
 abstract class PollChannel extends Channel {
   /**
    * Fetch items.
@@ -17,11 +25,11 @@ abstract class PollChannel extends Channel {
 
   private static DEFAULT_INTERVAL: number = 10000;
 
-  constructor(delay?) {
+  constructor(options: PollOptions = {}) {
     super();
 
-    this.delay = delay || 0;
-    this.interval = PollChannel.DEFAULT_INTERVAL;
+    this.delay = options.delay || 0;
+    this.interval = options.interval || PollChannel.DEFAULT_INTERVAL;
   }
 
   /**

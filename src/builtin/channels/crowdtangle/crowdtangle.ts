@@ -1,15 +1,12 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import SocialMediaPost from '../../post';
-import PageChannel from '../../../channels/page';
+import PageChannel, { PageOptions } from '../../../channels/page';
 
-export interface Options {
-  lastTimestamp?: Date;
-  delay?: number;
+export interface CrowdTangleOptions extends PageOptions {
   queryParams?: { [key: string]: any };
   dashboardToken: string;
   isCrossPlatform?: boolean;
   nextPageURL?: string;
-  interval?: number;
 }
 
 class CrowdTangleChannel extends PageChannel {
@@ -31,7 +28,7 @@ class CrowdTangleChannel extends PageChannel {
 
   protected queryParams: { [key: string]: any };
 
-  constructor(options:Options) {
+  constructor(options:CrowdTangleOptions) {
     super({
       lastTimestamp: options.lastTimestamp,
       delay: options.delay,
