@@ -6,7 +6,7 @@ export const enum Platform {
   Twitter = 'twitter',
 }
 
-interface Options {
+interface SocialMediaOptions {
   authoredAt: Date;
   fetchedAt: Date;
   author: string;
@@ -43,7 +43,7 @@ class SocialMediaPost implements TimestampedItem {
 
   tags?: string[];
 
-  constructor(options: Options) {
+  constructor(options: SocialMediaOptions) {
     this.authoredAt = options.authoredAt;
     this.fetchedAt = options.fetchedAt;
     this.author = options.author;

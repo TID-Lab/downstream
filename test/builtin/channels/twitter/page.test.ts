@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { env } from 'process';
 import Twitter from 'twitter-v2';
 import PageChannel from '../../../../src/channels/page';
-import TwitterPageChannel, { Options } from '../../../../src/builtin/channels/twitter/page';
+import TwitterPageChannel, { TwitterPageOptions } from '../../../../src/builtin/channels/twitter/page';
 import SocialMediaPost from '../../../../src/builtin/post';
 
 class TestTwitterPageChannel extends TwitterPageChannel {
@@ -23,7 +23,7 @@ if (!consumerKey || !consumerSecret) {
   throw new Error('You must set the `CONSUMER_KEY` and `CONSUMER_SECRET` environment variables.');
 }
 
-const options:Options = {
+const options:TwitterPageOptions = {
   credentials: { consumerKey, consumerSecret },
   queryParams: {
     query: 'from:jack',

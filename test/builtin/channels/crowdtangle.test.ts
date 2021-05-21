@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { env } from 'process';
 import PageChannel from '../../../src/channels/page';
-import CrowdTangleChannel, { Options } from '../../../src/builtin/channels/crowdtangle/crowdtangle';
+import CrowdTangleChannel, { CrowdTangleOptions } from '../../../src/builtin/channels/crowdtangle/crowdtangle';
 import SocialMediaPost from '../../../src/builtin/post';
 
 class TestCrowdTangleChannel extends CrowdTangleChannel {
@@ -19,7 +19,7 @@ if (!dashboardToken) {
   throw new Error('You must set the `DASHBOARD_TOKEN` environment variable.');
 }
 
-const options:Options = {
+const options:CrowdTangleOptions = {
   dashboardToken,
 };
 

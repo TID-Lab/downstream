@@ -3,7 +3,8 @@ import { env } from 'process';
 import Twitter from 'twitter-v2';
 import type TwitterStream from 'twitter-v2/build/TwitterStream';
 import Channel from '../../../../src/channels/channel';
-import TwitterStreamChannel, { Options } from '../../../../src/builtin/channels/twitter/stream';
+import TwitterOptions from '../../../../src/builtin/channels/twitter/shared/options';
+import TwitterStreamChannel from '../../../../src/builtin/channels/twitter/stream';
 import SocialMediaPost from '../../../../src/builtin/post';
 
 class TestTwitterStreamChannel extends TwitterStreamChannel {
@@ -24,7 +25,7 @@ if (!consumerKey || !consumerSecret) {
   throw new Error('You must set the `CONSUMER_KEY` and `CONSUMER_SECRET` environment variables.');
 }
 
-const options:Options = {
+const options:TwitterOptions = {
   credentials: { consumerKey, consumerSecret },
 };
 
