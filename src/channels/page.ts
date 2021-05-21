@@ -8,9 +8,14 @@ export interface TimestampedItem extends Item {
   getTimestamp(): Date;
 }
 
+export type FetchCallback = {
+  (lastTimestamp?: Date): Promise<any>
+};
+
 interface Options {
-  lastTimestamp?: Date;
   delay?: number;
+  lastTimestamp?: Date;
+  onFetch?: FetchCallback,
 }
 
 /**
@@ -24,10 +29,13 @@ abstract class PageChannel extends PollChannel {
 
   protected lastTimestamp?: Date;
 
+  protected onFetch?: FetchCallback;
+
   constructor(options: Options = {}) {
     super(options.delay);
 
     this.lastTimestamp = options.lastTimestamp;
+    this.onFetch = options.onFetch;
   }
 
   async fetch(): Promise<void> {
@@ -49,6 +57,10 @@ abstract class PageChannel extends PollChannel {
 
       // enqueue each item in the page
       this.enqueue(item);
+    }
+
+    if (typeof this.onFetch === 'function') {
+      await this.onFetch(this.lastTimestamp);
     }
   }
 }

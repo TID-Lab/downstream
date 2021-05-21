@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import Channel from '../../src/channels/channel';
-import PageChannel from '../../src/channels/page';
+import PageChannel, { FetchCallback } from '../../src/channels/page';
 import TestTimestampedItem from '../utils/timestamped_item';
 
 const now:Date = new Date();
@@ -14,6 +14,8 @@ const item2 = new TestTimestampedItem(date2);
 
 class TestPageChannel extends PageChannel {
   lastTimestamp?: Date;
+
+  onFetch?: FetchCallback;
 
   timeout!: ReturnType<typeof setTimeout>;
 
@@ -59,5 +61,13 @@ describe('PageChannel', () => {
       expect(pageChannel.lastTimestamp).to.equal(item1.timestamp);
       done();
     });
+  });
+
+  it('should call the onFetch callback after each fetch', (done) => {
+    pageChannel.onFetch = async (lastTimestamp) => {
+      expect(lastTimestamp).to.equal(item1.timestamp);
+      done();
+    };
+    pageChannel.fetch();
   });
 });
