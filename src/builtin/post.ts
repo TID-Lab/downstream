@@ -16,7 +16,6 @@ interface SocialMediaOptions {
   content?: string;
   raw: { [key: string]: any };
   from?: string;
-  tags?: string[];
 }
 
 /**
@@ -53,7 +52,6 @@ class SocialMediaPost implements TimestampedItem {
     this.content = options.content;
     this.raw = options.raw;
     this.from = options.from;
-    this.tags = options.tags;
   }
 
   getTimestamp(): Date {
