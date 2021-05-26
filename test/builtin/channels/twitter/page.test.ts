@@ -1,9 +1,11 @@
 import { expect } from 'chai';
-import { env } from 'process';
+import { config as loadEnv } from 'dotenv';
 import Twitter from 'twitter-v2';
 import PageChannel from '../../../../src/channels/page';
 import TwitterPageChannel, { TwitterPageOptions } from '../../../../src/builtin/channels/twitter/page';
 import SocialMediaPost from '../../../../src/builtin/post';
+
+loadEnv({ path: './test/.env' });
 
 class TestTwitterPageChannel extends TwitterPageChannel {
   twitter: Twitter;
@@ -15,12 +17,12 @@ class TestTwitterPageChannel extends TwitterPageChannel {
   interval: number;
 }
 
-const consumerKey = env['CONSUMER_KEY'];
-const consumerSecret = env['CONSUMER_SECRET'];
+const consumerKey = process.env.TWITTER_CONSUMER_KEY;
+const consumerSecret = process.env.TWITTER_CONSUMER_SECRET;
 
 // the CrowdTangle API dashboard token
 if (!consumerKey || !consumerSecret) {
-  throw new Error('You must set the `CONSUMER_KEY` and `CONSUMER_SECRET` environment variables.');
+  throw new Error('You must set the `TWITTER_CONSUMER_KEY` and `TWITTER_CONSUMER_SECRET` environment variables.');
 }
 
 const options:TwitterPageOptions = {

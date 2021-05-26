@@ -1,11 +1,13 @@
 import { expect } from 'chai';
-import { env } from 'process';
+import { config as loadEnv } from 'dotenv';
 import Twitter from 'twitter-v2';
 import type TwitterStream from 'twitter-v2/build/TwitterStream';
 import Channel from '../../../../src/channels/channel';
 import TwitterOptions from '../../../../src/builtin/channels/twitter/shared/options';
 import TwitterStreamChannel from '../../../../src/builtin/channels/twitter/stream';
 import SocialMediaPost from '../../../../src/builtin/post';
+
+loadEnv({ path: './test/.env' });
 
 class TestTwitterStreamChannel extends TwitterStreamChannel {
   twitter: Twitter;
@@ -17,12 +19,12 @@ class TestTwitterStreamChannel extends TwitterStreamChannel {
   consecutiveErrorCount: number;
 }
 
-const consumerKey = env['CONSUMER_KEY'];
-const consumerSecret = env['CONSUMER_SECRET'];
+const consumerKey = process.env.TWITTER_CONSUMER_KEY;
+const consumerSecret = process.env.TWITTER_CONSUMER_SECRET;
 
 // the CrowdTangle API dashboard token
 if (!consumerKey || !consumerSecret) {
-  throw new Error('You must set the `CONSUMER_KEY` and `CONSUMER_SECRET` environment variables.');
+  throw new Error('You must set the `TWITTER_CONSUMER_KEY` and `TWITTER_CONSUMER_SECRET` environment variables.');
 }
 
 const options:TwitterOptions = {

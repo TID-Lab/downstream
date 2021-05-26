@@ -1,8 +1,10 @@
 import { expect } from 'chai';
-import { env } from 'process';
+import { config as loadEnv } from 'dotenv';
 import PageChannel from '../../../src/channels/page';
 import CrowdTangleChannel, { CrowdTangleOptions } from '../../../src/builtin/channels/crowdtangle/crowdtangle';
 import SocialMediaPost from '../../../src/builtin/post';
+
+loadEnv({ path: './test/.env' });
 
 class TestCrowdTangleChannel extends CrowdTangleChannel {
   isCrossPlatform: boolean;
@@ -12,11 +14,10 @@ class TestCrowdTangleChannel extends CrowdTangleChannel {
   interval: number;
 }
 
-const dashboardToken = env['DASHBOARD_TOKEN'];
-
+const dashboardToken = process.env.CROWDTANGLE_DASHBOARD_TOKEN;
 // the CrowdTangle API dashboard token
 if (!dashboardToken) {
-  throw new Error('You must set the `DASHBOARD_TOKEN` environment variable.');
+  throw new Error('You must set the `CROWDTANGLE_DASHBOARD_TOKEN` environment variable.');
 }
 
 const options:CrowdTangleOptions = {
