@@ -33,7 +33,7 @@ const options:TwitterPageOptions = {
   },
 };
 
-describe('TwitterPageChannel', () => {
+describe.skip('TwitterPageChannel', () => {
   let twChannel:TestTwitterPageChannel;
 
   before((done) => {
