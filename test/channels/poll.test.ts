@@ -28,6 +28,10 @@ class TestPollChannel extends PollChannel {
     this.i += 1;
     this.enqueue({});
   }
+
+  async poll() {
+    await super.poll();
+  }
 }
 
 describe('PollChannel', () => {

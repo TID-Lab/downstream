@@ -24,7 +24,7 @@ abstract class PageChannel extends PollChannel {
   /**
    * Fetch the next page.
    */
-  abstract fetchPage(): Promise<TimestampedItem[]>;
+  protected abstract fetchPage(): Promise<TimestampedItem[]>;
 
   protected lastTimestamp?: Date;
 
@@ -37,7 +37,7 @@ abstract class PageChannel extends PollChannel {
     this.onFetch = options.onFetch;
   }
 
-  async fetch(): Promise<void> {
+  protected async fetch(): Promise<void> {
     // fetch the next page
     const page:TimestampedItem[] = [...await this.fetchPage()];
 

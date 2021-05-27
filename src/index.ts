@@ -1,4 +1,4 @@
-import Engine from './engine';
+import Downstream from './downstream';
 import Item from './item';
 import Channel from './channels/channel';
 import PageChannel from './channels/page';
@@ -21,5 +21,5 @@ const builtin = {
 };
 
 export {
-  Engine, Item, Channel, PageChannel, PollChannel, builtin,
+  Downstream, Item, Channel, PageChannel, PollChannel, builtin,
 };

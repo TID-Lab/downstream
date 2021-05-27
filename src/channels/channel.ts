@@ -3,13 +3,16 @@ import type Item from '../item';
 import CircularQueue from '../queue';
 
 /**
- * TODO documentation
+ * A Channel represents a stream of Items from some external data source, like a web API.
  */
 class Channel extends EventEmitter {
   started: boolean;
 
   private queue: CircularQueue<Item>;
 
+  /**
+   * Initializes a new Channel.
+   */
   constructor() {
     super();
 
@@ -18,21 +21,21 @@ class Channel extends EventEmitter {
   }
 
   /**
-   * Start the Channel.
+   * Starts this Channel so that it will stream Items from some external source.
    */
   async start(): Promise<void> {
     this.started = true;
   }
 
   /**
-   * Stop the Channel.
+   * Stops this Channel so that it will stop streaming Items from some external source.
    */
   async stop(): Promise<void> {
     this.started = false;
   }
 
   /**
-   * Enqueue the given item.
+   * Enqueues an Item from some external source onto the internal queue.
    */
   enqueue(item:Item): void {
     const wasEmpty:boolean = this.queue.isEmpty();
@@ -43,7 +46,7 @@ class Channel extends EventEmitter {
   }
 
   /**
-   * Dequeue the next item, if available
+   * Dequeues an Item from the internal queue, if available.
    */
   dequeue():Item|null {
     if (!this.queue.isEmpty()) {
@@ -57,7 +60,7 @@ class Channel extends EventEmitter {
   }
 
   /**
-   * Return whether the item queue is empty.
+   * Returns whether the internal queue is empty.
    */
   isEmpty(): boolean {
     return this.queue.isEmpty();

@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import Engine from '../src/engine';
+import Downstream from '../src/downstream';
 import Item from '../src/item';
 import TestChannel from './utils/channel';
 
@@ -7,7 +7,7 @@ function newItem(from?:string): Item {
   return { from };
 }
 
-class TestEngine extends Engine {
+class TestDownstream extends Downstream {
   channels;
 
   middlewareList;
@@ -61,42 +61,42 @@ class TestEngine extends Engine {
   }
 }
 
-describe('Engine', () => {
-  let engine:TestEngine;
+describe('Downstream', () => {
+  let downstream:TestDownstream;
   let channel1:TestChannel;
   let channel2:TestChannel;
   let id1:string;
   let id2:string;
 
   before((done) => {
-    engine = new TestEngine();
+    downstream = new TestDownstream();
     channel1 = new TestChannel();
     channel2 = new TestChannel();
     done();
   });
 
-  it('should instantiate a new Engine', (done) => {
-    expect(engine.channels).to.be.a('object');
-    expect(engine.channels).to.be.empty;
-    expect(engine.channelErrorListeners).to.be.a('object');
-    expect(Array.isArray(engine.middlewareList)).to.be.true;
-    expect(engine.middlewareList).to.be.empty;
-    expect(engine.started).to.be.false;
-    expect(engine.counter).to.equal(0);
-    expect(engine.empty).to.be.true;
-    expect(engine.pointer).to.equal(0);
+  it('should instantiate a new Downstream instance', (done) => {
+    expect(downstream.channels).to.be.a('object');
+    expect(downstream.channels).to.be.empty;
+    expect(downstream.channelErrorListeners).to.be.a('object');
+    expect(Array.isArray(downstream.middlewareList)).to.be.true;
+    expect(downstream.middlewareList).to.be.empty;
+    expect(downstream.started).to.be.false;
+    expect(downstream.counter).to.equal(0);
+    expect(downstream.empty).to.be.true;
+    expect(downstream.pointer).to.equal(0);
     done();
   });
 
   it('should register a Channel', (done) => {
-    id1 = engine.register(channel1);
-    expect(engine.counter).to.equal(1);
-    expect(engine.channels[id1]).to.equal(channel1);
-    expect(engine.channelErrorListeners[id1]).to.be.a('function');
-    expect(engine.channelEmptyListener).to.be.a('function');
-    expect(engine.channelNotEmptyListener).to.be.a('function');
+    id1 = downstream.register(channel1);
+    expect(downstream.counter).to.equal(1);
+    expect(downstream.channels[id1]).to.equal(channel1);
+    expect(downstream.channelErrorListeners[id1]).to.be.a('function');
+    expect(downstream.channelEmptyListener).to.be.a('function');
+    expect(downstream.channelNotEmptyListener).to.be.a('function');
 
-    engine.disableListeners = true;
+    downstream.disableListeners = true;
     channel1.emit('error');
     channel1.emit('empty');
     channel1.emit('notEmpty');
@@ -106,8 +106,8 @@ describe('Engine', () => {
       () => process.nextTick(
         () => process.nextTick(
           () => {
-            expect(engine.callbackCounter).to.equal(3);
-            engine.callbackCounter = 0;
+            expect(downstream.callbackCounter).to.equal(3);
+            downstream.callbackCounter = 0;
             done();
           },
         ),
@@ -116,23 +116,23 @@ describe('Engine', () => {
   });
 
   it('should not register a Channel twice', (done) => {
-    expect(engine.register.bind(engine, channel1)).to.throw();
-    expect(engine.counter).to.equal(1);
+    expect(downstream.register.bind(downstream, channel1)).to.throw();
+    expect(downstream.counter).to.equal(1);
     done();
   });
 
   it('should return registered Channels', (done) => {
-    expect(engine.channel(id1)).to.equal(channel1);
+    expect(downstream.channel(id1)).to.equal(channel1);
     done();
   });
 
   it('should unregister a Channel', (done) => {
-    engine.unregister(id1);
+    downstream.unregister(id1);
 
-    expect(engine.channels[id1]).to.be.undefined;
-    expect(engine.channelErrorListeners[id1]).to.be.undefined;
-    expect(engine.channelEmptyListener).to.be.a('function');
-    expect(engine.channelNotEmptyListener).to.be.a('function');
+    expect(downstream.channels[id1]).to.be.undefined;
+    expect(downstream.channelErrorListeners[id1]).to.be.undefined;
+    expect(downstream.channelEmptyListener).to.be.a('function');
+    expect(downstream.channelNotEmptyListener).to.be.a('function');
 
     // emitting the `error` throws an Error with no listeners.
     expect(channel1.emit.bind(channel1, 'error')).to.throw();
@@ -144,9 +144,9 @@ describe('Engine', () => {
       () => process.nextTick(
         () => process.nextTick(
           () => {
-            expect(engine.callbackCounter).to.equal(0);
-            engine.callbackCounter = 0;
-            engine.disableListeners = false;
+            expect(downstream.callbackCounter).to.equal(0);
+            downstream.callbackCounter = 0;
+            downstream.disableListeners = false;
             done();
           },
         ),
@@ -155,15 +155,15 @@ describe('Engine', () => {
   });
 
   it('should throw an error when unregistering fails', (done) => {
-    expect(engine.unregister.bind(engine, id1)).to.throw();
+    expect(downstream.unregister.bind(downstream, id1)).to.throw();
     done();
   });
 
   it('should start registered Channels on start', (done) => {
-    id1 = engine.register(channel1);
-    id2 = engine.register(channel2);
-    engine.start().then(() => {
-      expect(engine.started).to.be.true;
+    id1 = downstream.register(channel1);
+    id2 = downstream.register(channel2);
+    downstream.start().then(() => {
+      expect(downstream.started).to.be.true;
       expect(channel1.started).to.be.true;
       expect(channel2.started).to.be.true;
       done();
@@ -171,8 +171,8 @@ describe('Engine', () => {
   });
 
   it('should stop registered Channels on stop', (done) => {
-    engine.stop().then(() => {
-      expect(engine.started).to.be.false;
+    downstream.stop().then(() => {
+      expect(downstream.started).to.be.false;
       expect(channel1.started).to.be.false;
       expect(channel2.started).to.be.false;
       done();
@@ -180,52 +180,52 @@ describe('Engine', () => {
   });
 
   it('should reset itself on start', (done) => {
-    engine.pointer = 5;
-    engine.empty = false;
-    engine.start().then(() => {
-      expect(engine.started).to.be.true;
-      expect(engine.pointer).to.equal(0);
-      expect(engine.empty).to.be.true;
-      engine.stop().then(done);
+    downstream.pointer = 5;
+    downstream.empty = false;
+    downstream.start().then(() => {
+      expect(downstream.started).to.be.true;
+      expect(downstream.pointer).to.equal(0);
+      expect(downstream.empty).to.be.true;
+      downstream.stop().then(done);
     });
   });
 
   it('should handle Channel start errors gracefully', (done) => {
     channel2.throwError = true;
-    engine.once('error', (err, id) => {
+    downstream.once('error', (err, id) => {
       expect(err instanceof Error).to.be.true;
       expect(id.toString()).to.equal(id2.toString());
       channel2.throwError = false;
-      engine.stop().then(done);
+      downstream.stop().then(done);
     });
-    engine.start();
+    downstream.start();
   });
 
   it('should handle Channel stop errors gracefully', (done) => {
-    engine.start().then(() => {
+    downstream.start().then(() => {
       channel2.throwError = true;
-      engine.once('error', (err, id) => {
+      downstream.once('error', (err, id) => {
         expect(err instanceof Error).to.be.true;
         expect(id.toString()).to.equal(id2.toString());
         channel2.throwError = false;
         done();
       });
-      engine.stop();
+      downstream.stop();
     });
   });
 
   it('should use middleware', (done) => {
     const item = newItem();
     async function middleware(_, next) {
-      engine.middlewareList = [];
-      await engine.stop();
+      downstream.middlewareList = [];
+      await downstream.stop();
 
       done();
 
       await next();
     }
-    engine.use(middleware);
-    engine.start().then(() => {
+    downstream.use(middleware);
+    downstream.start().then(() => {
       channel1.enqueue(item);
     });
   });
@@ -241,13 +241,13 @@ describe('Engine', () => {
         return;
       }
       expect(i.from).to.equal(id2.toString());
-      engine.middlewareList = [];
-      await engine.stop();
+      downstream.middlewareList = [];
+      await downstream.stop();
       await next();
       done();
     }
-    engine.use(middleware);
-    engine.start().then(() => {
+    downstream.use(middleware);
+    downstream.start().then(() => {
       channel1.enqueue({ ...item });
       channel2.enqueue({ ...item });
     });
@@ -265,8 +265,8 @@ describe('Engine', () => {
         return;
       }
       expect(string).to.equal('1324');
-      engine.middlewareList = [];
-      await engine.stop();
+      downstream.middlewareList = [];
+      await downstream.stop();
       await next();
       done();
     }
@@ -276,8 +276,8 @@ describe('Engine', () => {
         content: (j + 1).toString(),
       });
     }
-    engine.use(middleware);
-    engine.start().then(() => {
+    downstream.use(middleware);
+    downstream.start().then(() => {
       channel1.enqueue(items.shift());
       channel1.enqueue(items.shift());
       channel2.enqueue(items.shift());
@@ -295,14 +295,14 @@ describe('Engine', () => {
     async function middleware2(r, next) {
       string += '2';
       expect(string).to.equal('12');
-      engine.middlewareList = [];
-      await engine.stop();
+      downstream.middlewareList = [];
+      await downstream.stop();
       await next();
       done();
     }
-    engine.use(middleware1);
-    engine.use(middleware2);
-    engine.start().then(() => {
+    downstream.use(middleware1);
+    downstream.use(middleware2);
+    downstream.start().then(() => {
       channel1.enqueue({ ...item });
     });
   });

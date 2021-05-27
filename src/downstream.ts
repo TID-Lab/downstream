@@ -4,30 +4,31 @@ import Channel from './channels/channel';
 import type Item from './item';
 
 /**
- * TODO documentation
+ * Calls the remaining middleware functions that come after this one.
  */
 export type NextFunction = {
   (): Promise<any>
 };
 
 /**
- * TODO documentation
+ * An asynchronous "middleware" function that gets called on each Item
+ * of a Downstream instance as they are streamed from the registered Channels.
  */
 export type MiddlewareFunction = {
   (item: Item, next: NextFunction): Promise<any>
 };
 
 /**
- * TODO documentation
+ * A composed middlware function generated with `koa-compose`.
  */
 export type ComposedMiddlewareFunction = {
   (item: Item): Promise<any>
 };
 
 /**
- * TODO documentation
+ * A Downstream instance.
  */
-class Engine extends EventEmitter {
+class Downstream extends EventEmitter {
   protected channels: { [key: string]: Channel };
 
   protected middlewareList: MiddlewareFunction[];
@@ -48,6 +49,9 @@ class Engine extends EventEmitter {
 
   protected channelNotEmptyListener?: any;
 
+  /**
+   * Initializes a new instance of Downstream.
+   */
   constructor() {
     super();
 
@@ -63,7 +67,9 @@ class Engine extends EventEmitter {
   }
 
   /**
-   * Start the Engine.
+   * Calls `channel.start()` on each of the registered Channels
+   * and waits for them to all start. Any errors thrown by a Channel
+   * are collected and emitted via the `error` event.
    */
   async start(): Promise<void> {
     const promises:Promise<any>[] = [];
@@ -101,7 +107,9 @@ class Engine extends EventEmitter {
   }
 
   /**
-   * Stop the Engine.
+   * Calls `channel.stop()` on each of the registered Channels
+   * and waits for them to all stop. Any errors thrown by a Channel
+   * are collected and emitted via the `error` event.
    */
   async stop(): Promise<void> {
     const promises:Promise<any>[] = [];
@@ -128,7 +136,8 @@ class Engine extends EventEmitter {
   }
 
   /**
-   * Register a Channel with the Engine.
+   * Registers a Channel so that Items will be streamed from the Channel
+   * to this Downstream instance once when the channel has been started with `channel.start()`.
    */
   register(channel:Channel): string {
     // throw an error if a duplicate is found
@@ -156,7 +165,8 @@ class Engine extends EventEmitter {
   }
 
   /**
-   * Unregister a Channel from the Engine.
+   * Unregisters a Channel so that Items will no longer be streamed from the Channel
+   * to this Downstream instance.
    */
   unregister(identifier): void {
     let id:any;
@@ -180,21 +190,22 @@ class Engine extends EventEmitter {
     channel.removeListener('notEmpty', this.channelNotEmptyListener);
     delete this.channelErrorListeners[id];
 
-    // delete the Channel from the Engine
+    // delete the Channel
     delete this.channels[id];
   }
 
   /**
-   * Find a Channel by its ID.
+   * Returns the Channel with the given ID returned before by `downstream.register()`.
    */
   channel(id:string): Channel {
     return this.channels[id];
   }
 
   /**
-   * Use an item middleware function.
+   * Adds another middleware function to an ordered set that get called
+   * on each Item streamed by this Downstream instance in the order of declaration.
    */
-  use(middleware:MiddlewareFunction): Engine {
+  use(middleware:MiddlewareFunction): Downstream {
     this.middlewareList.push(middleware);
     return this;
   }
@@ -237,7 +248,7 @@ class Engine extends EventEmitter {
   }
 
   /**
-   * Process the next item.
+   * Process the next Item.
    */
   protected async nextItem(): Promise<void> {
     const nonEmptyChannels:Channel[] = Object.values(this.channels).filter(
@@ -275,4 +286,4 @@ class Engine extends EventEmitter {
     process.nextTick(this.nextItem.bind(this));
   }
 }
-export default Engine;
+export default Downstream;

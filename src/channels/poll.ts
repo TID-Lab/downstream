@@ -15,7 +15,7 @@ abstract class PollChannel extends Channel {
   /**
    * Fetch items.
    */
-  abstract fetch(): Promise<void>;
+  protected abstract fetch(): Promise<void>;
 
   protected delay: number;
 
@@ -32,9 +32,6 @@ abstract class PollChannel extends Channel {
     this.interval = options.interval || PollChannel.DEFAULT_INTERVAL;
   }
 
-  /**
-   * Start the PollChannel.
-   */
   async start(): Promise<void> {
     // return if the PollChannel already started
     if (this.started) return;
@@ -58,7 +55,7 @@ abstract class PollChannel extends Channel {
   /**
    * Poll
    */
-  async poll(): Promise<void> {
+  protected async poll(): Promise<void> {
     // return if the PollChannel is not started
     if (!this.started) return;
 

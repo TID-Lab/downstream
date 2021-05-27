@@ -28,7 +28,11 @@ class TestPageChannel extends PageChannel {
     this.lastTimestamp = now;
   }
 
-  async fetchPage() {
+  async fetch() {
+    await super.fetch();
+  }
+
+  protected async fetchPage() {
     return [item1, item2];
   }
 }
