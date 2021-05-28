@@ -4,7 +4,7 @@ Downstream is a multi-platform and real-time social media aggregation framework.
 
 ## Installation
 
-Downstream built in TypeScript and is released as a [Node.js](nodejs.org/) package on the [npm registry](https://www.npmjs.com/).
+Downstream is released as a [Node.js](nodejs.org/) package on the [npm registry](https://www.npmjs.com/).
 
 **Node.js 12.9** or higher is required to use Downstream in your project.
 
@@ -15,6 +15,8 @@ npm install downstream
 ```
 
 ## Usage
+
+1\. Downstream aggregates data via **[Channels](TODO)**. Use our **[built-in Channels](TODO)** to pull in posts from Facebook, Instagram, and Twitter, or **[create your own Channels](TODO)** to easily pull in data from other sources.
 
 ```javascript
 // channel.js
@@ -30,26 +32,29 @@ const credentials = {
 module.exports = new TwitterStreamChannel({ credentials });
 ```
 
-```javascript
-// middleware.js
+2\. Access and mutate your aggregated data via **[hooks](TODO)**.
 
-module.exports = async function logMiddleware(post, next) {
+```javascript
+// hook.js
+
+module.exports = async function logHook(post, next) {
   console.log(post);
   await next();
 }
 ```
 
+3\. Initialize and start a **[new Downstream instance](TODO)** to begin aggregating data.
 ```javascript
 // main.js
 
 const { Downstream } = require('downstream');
 const twitterChannel = require('./channel');
-const logMiddleware = require('./middleware');
+const logHook = require('./hook');
 
 const downstream = new Downstream();
 
 downstream.register(twitterChannel);
-downstream.use(logMiddleware);
+downstream.use(logHook);
 
 downstream.start();
 ```
