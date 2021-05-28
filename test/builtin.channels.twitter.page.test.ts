@@ -23,11 +23,6 @@ describe.skip('builtin: TwitterPageChannel', () => {
   const consumerKey = process.env.TWITTER_CONSUMER_KEY;
   const consumerSecret = process.env.TWITTER_CONSUMER_SECRET;
 
-  // the CrowdTangle API dashboard token
-  if (!consumerKey || !consumerSecret) {
-    throw new Error('You must set the `TWITTER_CONSUMER_KEY` and `TWITTER_CONSUMER_SECRET` environment variables.');
-  }
-
   const options:TwitterPageOptions = {
     credentials: { consumerKey, consumerSecret },
     queryParams: {
@@ -38,6 +33,11 @@ describe.skip('builtin: TwitterPageChannel', () => {
 
   before((done) => {
     twChannel = new TestTwitterPageChannel(options);
+
+    if (!consumerKey || !consumerSecret) {
+      throw new Error('You must set the `TWITTER_CONSUMER_KEY` and `TWITTER_CONSUMER_SECRET` environment variables.');
+    }
+
     done();
   });
 

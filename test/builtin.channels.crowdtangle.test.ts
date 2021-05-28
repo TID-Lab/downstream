@@ -18,16 +18,17 @@ describe.skip('builtin: CrowdTangleChannel', () => {
   let ctChannel:TestCrowdTangleChannel;
 
   const dashboardToken = process.env.CROWDTANGLE_DASHBOARD_TOKEN;
-  // the CrowdTangle API dashboard token
-  if (!dashboardToken) {
-    throw new Error('You must set the `CROWDTANGLE_DASHBOARD_TOKEN` environment variable.');
-  }
   const options:CrowdTangleOptions = {
     dashboardToken,
   };
 
   before((done) => {
     ctChannel = new TestCrowdTangleChannel(options);
+
+    if (!dashboardToken) {
+      throw new Error('You must set the `CROWDTANGLE_DASHBOARD_TOKEN` environment variable.');
+    }
+
     done();
   });
 

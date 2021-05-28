@@ -25,17 +25,17 @@ describe.skip('builtin: TwitterStreamChannel', () => {
   const consumerKey = process.env.TWITTER_CONSUMER_KEY;
   const consumerSecret = process.env.TWITTER_CONSUMER_SECRET;
 
-  // the CrowdTangle API dashboard token
-  if (!consumerKey || !consumerSecret) {
-    throw new Error('You must set the `TWITTER_CONSUMER_KEY` and `TWITTER_CONSUMER_SECRET` environment variables.');
-  }
-
   const options:TwitterOptions = {
     credentials: { consumerKey, consumerSecret },
   };
 
   before((done) => {
     twChannel = new TestTwitterStreamChannel(options);
+
+    if (!consumerKey || !consumerSecret) {
+      throw new Error('You must set the `TWITTER_CONSUMER_KEY` and `TWITTER_CONSUMER_SECRET` environment variables.');
+    }
+
     done();
   });
 
