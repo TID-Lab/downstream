@@ -9,7 +9,7 @@
     "test": "ts-mocha --recursive test/*",
     "prepare": "npm run build",
     "preversion": "git checkout master && git merge develop",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags && git checkout develop && git rebase master"
   },
   "repository": {
     "type": "git",
