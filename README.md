@@ -1,6 +1,6 @@
 # Downstream &middot; [![npm version](https://img.shields.io/npm/v/downstream.svg?style=flat)](https://www.npmjs.com/package/downstream) [![GitHub license](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://github.com/TID-Lab/downstream/blob/master/LICENSE.txt) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https:/github.com/TID-Lab/downstream/blob/master/CONTRIBUTING.md)
 
-Downstream is a multi-platform and real-time social media aggregation framework developed and maintained by the [Technologies & International Development](http://tid.gatech.edu/) (T+ID) Lab at Georgia Tech.
+Downstream is a multi-platform and real-time social media aggregation framework.
 
 ## Installation
 
