@@ -31,7 +31,7 @@ const options:TwitterOptions = {
   credentials: { consumerKey, consumerSecret },
 };
 
-describe.skip('TwitterStreamChannel', () => {
+describe.skip('builtin: TwitterStreamChannel', () => {
   let twChannel:TestTwitterStreamChannel;
 
   before((done) => {

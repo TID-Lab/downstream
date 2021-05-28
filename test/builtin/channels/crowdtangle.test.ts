@@ -24,7 +24,7 @@ const options:CrowdTangleOptions = {
   dashboardToken,
 };
 
-describe.skip('CrowdTangleChannel', () => {
+describe.skip('builtin: CrowdTangleChannel', () => {
   let ctChannel:TestCrowdTangleChannel;
 
   before((done) => {
