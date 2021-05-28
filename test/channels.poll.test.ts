@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import Channel from '../../src/channels/channel';
-import PollChannel from '../../src/channels/poll';
+import Channel from '../src/channels/channel';
+import PollChannel from '../src/channels/poll';
 
 class TestPollChannel extends PollChannel {
   delay: number;

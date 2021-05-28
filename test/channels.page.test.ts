@@ -1,7 +1,7 @@
 import { expect } from 'chai';
-import Channel from '../../src/channels/channel';
-import PageChannel, { FetchCallback } from '../../src/channels/page';
-import TestTimestampedItem from '../utils/timestamped_item';
+import Channel from '../src/channels/channel';
+import PageChannel, { FetchCallback } from '../src/channels/page';
+import TestTimestampedItem from './utils/timestamped_item';
 
 const now:Date = new Date();
 

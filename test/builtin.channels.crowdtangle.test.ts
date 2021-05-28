@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 import { config as loadEnv } from 'dotenv';
-import PageChannel from '../../../src/channels/page';
-import CrowdTangleChannel, { CrowdTangleOptions } from '../../../src/builtin/channels/crowdtangle/crowdtangle';
-import SocialMediaPost from '../../../src/builtin/post';
+import PageChannel from '../src/channels/page';
+import CrowdTangleChannel, { CrowdTangleOptions } from '../src/builtin/channels/crowdtangle/crowdtangle';
+import SocialMediaPost from '../src/builtin/post';
 
 loadEnv({ path: './test/.env' });
 

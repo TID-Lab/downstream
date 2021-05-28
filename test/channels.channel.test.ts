@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import CircularQueue from '../../src/queue';
-import Channel from '../../src/channels/channel';
+import CircularQueue from '../src/queue';
+import Channel from '../src/channels/channel';
 
 describe('Channel', () => {
   let channel;

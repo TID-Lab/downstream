@@ -2,10 +2,10 @@ import { expect } from 'chai';
 import { config as loadEnv } from 'dotenv';
 import Twitter from 'twitter-v2';
 import type TwitterStream from 'twitter-v2/build/TwitterStream';
-import Channel from '../../../../src/channels/channel';
-import TwitterOptions from '../../../../src/builtin/channels/twitter/shared/options';
-import TwitterStreamChannel from '../../../../src/builtin/channels/twitter/stream';
-import SocialMediaPost from '../../../../src/builtin/post';
+import Channel from '../src/channels/channel';
+import TwitterOptions from '../src/builtin/channels/twitter/shared/options';
+import TwitterStreamChannel from '../src/builtin/channels/twitter/stream';
+import SocialMediaPost from '../src/builtin/post';
 
 loadEnv({ path: './test/.env' });
 

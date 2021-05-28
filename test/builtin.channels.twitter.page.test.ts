@@ -1,9 +1,9 @@
 import { expect } from 'chai';
 import { config as loadEnv } from 'dotenv';
 import Twitter from 'twitter-v2';
-import PageChannel from '../../../../src/channels/page';
-import TwitterPageChannel, { TwitterPageOptions } from '../../../../src/builtin/channels/twitter/page';
-import SocialMediaPost from '../../../../src/builtin/post';
+import PageChannel from '../src/channels/page';
+import TwitterPageChannel, { TwitterPageOptions } from '../src/builtin/channels/twitter/page';
+import SocialMediaPost from '../src/builtin/post';
 
 loadEnv({ path: './test/.env' });
 
