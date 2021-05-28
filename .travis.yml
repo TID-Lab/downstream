@@ -1,9 +1,10 @@
 language: node_js
+if: if: (tag =~ ^v) AND (branch = master)
 deploy:
   provider: npm
   email: maxkarpawich@gmail.com
   api_key:
     secure: Ppxt+q3tP2dbMqq/5qrOKJxYE88hZ4LZUX4UWpQ+f1ldnzsUJ6Ikxx8UCSjzK052GaXzr27peAQCJMR85aUigH6QwHNP+lFcOeZxqXUd0OedFaPHPeSAV7LpvSxCrAi8W8P4Uvo/1S27XuAaUoevBSj+3e9f1tg5QLdkQI+MF+mUHHgV3DY1D619v0FaZPfz8dQpAv3SwdbYw1r/VT9szBfXG8Of2Dzl5ozz9BLXEdairsdhMfULWJB32IZ1xphBtGMsYZkokd/UaVA8N6kStC6g9FkzJtncKgSLFC19pq5jPSuFgFDAYX8w62IobFklF/7uzr01NROuDG5eAMQXBnhuWZcQKWlOeyKrEsGZWDelBsRmE3hJmidwi36bKpu3I3YmfKeGIknZnWr3spRgh0q9xHREPFznVNfICWDd16aThDF+gevtRxStzeicszzp+S9IxHIBspG5AdNrzFHVikW7BtPi2XyDByS9UliJ/A1XrWhYgOqBV+L0VOgoOWwajmqA/Rw56lHA1Hi7yLJ38QwPoAnUwN7L0xGBjxZHQ/fE6RptW5/cunWsc3xYsAYqbPsTe0is9dcF1lGipS6CEwkvveuuxzi0y0bDEVXP2hr0kI75iTnwE5oXksvgI9dhK6wk8CHLSR3jatrQxKP3GKlcFO/f6D3PFWaxeAUxltk=
   on:
-    tags: true
     branch: master
+    tags: true
