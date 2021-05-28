@@ -10,9 +10,7 @@ function newItem(from?:string): Item {
 class TestDownstream extends Downstream {
   channels;
 
-  middlewareList;
-
-  middleware;
+  hookList;
 
   started;
 
@@ -79,8 +77,8 @@ describe('Downstream', () => {
     expect(downstream.channels).to.be.a('object');
     expect(downstream.channels).to.be.empty;
     expect(downstream.channelErrorListeners).to.be.a('object');
-    expect(Array.isArray(downstream.middlewareList)).to.be.true;
-    expect(downstream.middlewareList).to.be.empty;
+    expect(Array.isArray(downstream.hookList)).to.be.true;
+    expect(downstream.hookList).to.be.empty;
     expect(downstream.started).to.be.false;
     expect(downstream.counter).to.equal(0);
     expect(downstream.empty).to.be.true;
@@ -214,17 +212,17 @@ describe('Downstream', () => {
     });
   });
 
-  it('should use middleware', (done) => {
+  it('should use hooks', (done) => {
     const item = newItem();
-    async function middleware(_, next) {
-      downstream.middlewareList = [];
+    async function hook(_, next) {
+      downstream.hookList = [];
       await downstream.stop();
 
       done();
 
       await next();
     }
-    downstream.use(middleware);
+    downstream.use(hook);
     downstream.start().then(() => {
       channel1.enqueue(item);
     });
@@ -233,7 +231,7 @@ describe('Downstream', () => {
   it('should tag outgoing items with a Channel ID', (done) => {
     const item = newItem();
     let firstItem = true;
-    async function middleware(i, next) {
+    async function hook(i, next) {
       if (firstItem) {
         expect(i.from).to.equal(id1.toString());
         firstItem = false;
@@ -241,12 +239,12 @@ describe('Downstream', () => {
         return;
       }
       expect(i.from).to.equal(id2.toString());
-      downstream.middlewareList = [];
+      downstream.hookList = [];
       await downstream.stop();
       await next();
       done();
     }
-    downstream.use(middleware);
+    downstream.use(hook);
     downstream.start().then(() => {
       channel1.enqueue({ ...item });
       channel2.enqueue({ ...item });
@@ -257,7 +255,7 @@ describe('Downstream', () => {
     const items = [];
     let string = '';
     let i = 0;
-    async function middleware(r, next) {
+    async function hook(r, next) {
       string += r.content;
       i += 1;
       if (i < 4) {
@@ -265,7 +263,7 @@ describe('Downstream', () => {
         return;
       }
       expect(string).to.equal('1324');
-      downstream.middlewareList = [];
+      downstream.hookList = [];
       await downstream.stop();
       await next();
       done();
@@ -276,7 +274,7 @@ describe('Downstream', () => {
         content: (j + 1).toString(),
       });
     }
-    downstream.use(middleware);
+    downstream.use(hook);
     downstream.start().then(() => {
       channel1.enqueue(items.shift());
       channel1.enqueue(items.shift());
@@ -285,23 +283,23 @@ describe('Downstream', () => {
     });
   });
 
-  it('should run middleware in the order used', (done) => {
+  it('should run hooks in the order used', (done) => {
     const item = newItem();
     let string = '';
-    async function middleware1(r, next) {
+    async function hook1(r, next) {
       string += '1';
       await next();
     }
-    async function middleware2(r, next) {
+    async function hook2(r, next) {
       string += '2';
       expect(string).to.equal('12');
-      downstream.middlewareList = [];
+      downstream.hookList = [];
       await downstream.stop();
       await next();
       done();
     }
-    downstream.use(middleware1);
-    downstream.use(middleware2);
+    downstream.use(hook1);
+    downstream.use(hook2);
     downstream.start().then(() => {
       channel1.enqueue({ ...item });
     });

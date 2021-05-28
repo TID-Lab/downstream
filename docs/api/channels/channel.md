@@ -70,7 +70,7 @@ Enqueues an [Item](../item.md) from some external source onto the internal queue
 
 Dequeues an [Item](../item.md) from the internal queue, if available.
 
-This function is used by a [Downstream](../downstream.md) instance to feed [Items](../item.md) from this [Channel](#Class:-Channel) to a set of [middleware functions](../downstream.md#Function:-MiddlewareFunction(item)).
+This function is used by a [Downstream](../downstream.md) instance to feed [Items](../item.md) from this [Channel](#Class:-Channel) to a set of [hooks](../downstream.md#Function:-Hook(item)).
 
 ## `channel.isEmpty()`
 

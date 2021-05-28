@@ -17,7 +17,7 @@ const downstream = new Downstream();
 - `err`: an [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) object
 - `id?`: the ID of the [Channel](./channels/channel.md), if applicable
 
-Emitted when an error occurs. Errors can either be emitted by a [Channel](./channels/channel.md) (in which case the `id` argument is set) or thrown by a [middleware function](#Function:-MiddlewareFunction(item)).
+Emitted when an error occurs. Errors can either be emitted by a [Channel](./channels/channel.md) (in which case the `id` argument is set) or thrown by a [hook](#Function:-Hook(item)).
 
 ## `downstream.start()`
 - Returns: [Promise\<void\>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
@@ -69,30 +69,30 @@ const channel = downstream.channel(id);
 await channel.stop();
 ```
 
-## `downstream.use(middleware)`
+## `downstream.use(hook)`
 
-- `middleware`: [MiddlewareFunction()](#Function:-MiddlewareFunction(item))
+- `hook`: [Hook()](#Function:-Hook(item))
 
-Adds another [middleware function](#Function:-MiddlewareFunction(item)) to an ordered set that get called on each [Item](./item.md) streamed by this [Downstream](#Class:-Downstream) instance in the order of declaration.
+Adds another [hook](#Function:-Hook(item)) to an ordered set that get called on each [Item](./item.md) streamed by this [Downstream](#Class:-Downstream) instance in the order of declaration.
 
-# Function: `MiddlewareFunction(item)`
+# Function: `Hook(item)`
 - `item`: [Item](./item.md)
 - `next`: [NextFunction()](#Function-NextFunction())
 
-An asynchronous "middleware" function that gets called on each [Item](./item.md) of a [Downstream](#Class:-Downstream) instance as they are streamed from the registered [Channels](./channels/channel.md).
+An asynchronous "hook" that gets called on each [Item](./item.md) of a [Downstream](#Class:-Downstream) instance as they are streamed from the registered [Channels](./channels/channel.md).
 
 ```javascript
-async function myMiddleware(item, next) {
+async function myHook(item, next) {
 
   // do something with the Item
 
-  await next(); // call remaining middleware
+  await next(); // call remaining hooks
 }
 ```
 
-Call `next()` at the end of your middleware function as shown above to call the remaining middleware functions.
+Call `next()` at the end of your hook as shown above to call the remaining hooks.
 
 # Function: `NextFunction()`
 - Returns: [Promise\<void\>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
-Calls the remaining [middleware functions](#Function:-MiddlewareFunction(item)) that come after this one.
+Calls the remaining [hooks](#Function:-Hook(item)) that come after this one.

@@ -4,24 +4,24 @@ import Channel from './channels/channel';
 import type Item from './item';
 
 /**
- * Calls the remaining middleware functions that come after this one.
+ * Calls the remaining hooks that come after this one.
  */
 export type NextFunction = {
   (): Promise<any>
 };
 
 /**
- * An asynchronous "middleware" function that gets called on each Item
+ * An asynchronous "hook" function that gets called on each Item
  * of a Downstream instance as they are streamed from the registered Channels.
  */
-export type MiddlewareFunction = {
+export type Hook = {
   (item: Item, next: NextFunction): Promise<any>
 };
 
 /**
- * A composed middlware function generated with `koa-compose`.
+ * A composed hook function generated with `koa-compose`.
  */
-export type ComposedMiddlewareFunction = {
+export type ComposedHookFunction = {
   (item: Item): Promise<any>
 };
 
@@ -31,9 +31,9 @@ export type ComposedMiddlewareFunction = {
 class Downstream extends EventEmitter {
   protected channels: { [key: string]: Channel };
 
-  protected middlewareList: MiddlewareFunction[];
+  protected hookList: Hook[];
 
-  protected middleware?: ComposedMiddlewareFunction;
+  protected composedHook?: ComposedHookFunction;
 
   protected started: boolean;
 
@@ -59,7 +59,7 @@ class Downstream extends EventEmitter {
     this.channelErrorListeners = {};
     this.channelEmptyListener = this.onChannelEmpty.bind(this);
     this.channelNotEmptyListener = this.onChannelNotEmpty.bind(this);
-    this.middlewareList = [];
+    this.hookList = [];
     this.started = false;
     this.counter = 0;
     this.empty = true;
@@ -84,8 +84,8 @@ class Downstream extends EventEmitter {
     this.empty = Object.values(this.channels)
       .reduce<boolean>((empty, s) => (empty && s.isEmpty()), true);
 
-    // compose item middleware
-    this.middleware = compose(this.middlewareList);
+    // compose item hook
+    this.composedHook = compose(this.hookList);
 
     // wait until all Channels have tried to start
     const ids:string[] = Object.keys(this.channels);
@@ -202,11 +202,11 @@ class Downstream extends EventEmitter {
   }
 
   /**
-   * Adds another middleware function to an ordered set that get called
-   * on each Item streamed by this Downstream instance in the order of declaration.
+   * Adds another hook to an ordered set that get called
+   * on each Item streamed by this Downstream instance in the order they are declared.
    */
-  use(middleware:MiddlewareFunction): Downstream {
-    this.middlewareList.push(middleware);
+  use(hook:Hook): Downstream {
+    this.hookList.push(hook);
     return this;
   }
 
@@ -271,9 +271,9 @@ class Downstream extends EventEmitter {
       id = Object.keys(this.channels).find((key) => this.channels[key] === channel);
       if (id) item.from = id.toString();
 
-      // try to call item middleware on the new item
+      // try to call item hook on the new item
       try {
-        if (this.middleware) await this.middleware(item);
+        if (this.composedHook) await this.composedHook(item);
       } catch (err) {
         this.emit('error', err);
       }
