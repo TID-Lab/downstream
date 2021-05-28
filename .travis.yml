@@ -1,5 +1,5 @@
 language: node_js
-if: ((tag =~ ^v) AND (branch = master))
+if: branch = master
 deploy:
   provider: npm
   email: maxkarpawich@gmail.com
