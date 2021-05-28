@@ -8,7 +8,7 @@
     "build": "rimraf build/ && tsc --project .",
     "test": "ts-mocha --recursive test/*",
     "prepare": "npm run build",
-    "preversion": "git checkout master",
+    "preversion": "git checkout master && git merge develop",
     "postversion": "git push && git push --tags"
   },
   "repository": {
