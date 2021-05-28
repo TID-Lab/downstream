@@ -17,24 +17,24 @@ class TestTwitterPageChannel extends TwitterPageChannel {
   interval: number;
 }
 
-const consumerKey = process.env.TWITTER_CONSUMER_KEY;
-const consumerSecret = process.env.TWITTER_CONSUMER_SECRET;
-
-// the CrowdTangle API dashboard token
-if (!consumerKey || !consumerSecret) {
-  throw new Error('You must set the `TWITTER_CONSUMER_KEY` and `TWITTER_CONSUMER_SECRET` environment variables.');
-}
-
-const options:TwitterPageOptions = {
-  credentials: { consumerKey, consumerSecret },
-  queryParams: {
-    query: 'from:jack',
-    max_results: 10,
-  },
-};
-
 describe.skip('builtin: TwitterPageChannel', () => {
   let twChannel:TestTwitterPageChannel;
+
+  const consumerKey = process.env.TWITTER_CONSUMER_KEY;
+  const consumerSecret = process.env.TWITTER_CONSUMER_SECRET;
+
+  // the CrowdTangle API dashboard token
+  if (!consumerKey || !consumerSecret) {
+    throw new Error('You must set the `TWITTER_CONSUMER_KEY` and `TWITTER_CONSUMER_SECRET` environment variables.');
+  }
+
+  const options:TwitterPageOptions = {
+    credentials: { consumerKey, consumerSecret },
+    queryParams: {
+      query: 'from:jack',
+      max_results: 10,
+    },
+  };
 
   before((done) => {
     twChannel = new TestTwitterPageChannel(options);
