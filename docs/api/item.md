@@ -1,6 +1,6 @@
 # Interface: `Item`
 
-An item streamed from a [Channel](./channels/channel.md).
+An item received from a [Channel](./channels/channel.md). Items represent discrete objects of data from an external source, such as a user's post from a social media platform.
 
 ## `item.from?`
 
