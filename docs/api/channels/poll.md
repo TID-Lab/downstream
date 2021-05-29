@@ -34,8 +34,8 @@ class CustomPollChannel extends PollChannel {
 
   async fetch() {
 
-    // fetch data from an external source
-    this.enqueue(item);
+    const item = ... // fetch data from an external source
+    this.enqueue(item); // enqueue it as an Item
 
   }
 
@@ -51,13 +51,13 @@ const pollOptions = {
 };
 ```
 
-## `pollOptions.delay?`:
+## `pollOptions.delay?`
 - Type: `number`
 - Default: `0`
 
 The delay in milliseconds before the first poll.
 
-## `pollOptions.interval?`:
+## `pollOptions.interval?`
 - Type: `number`
 - Default: `10000`
 
