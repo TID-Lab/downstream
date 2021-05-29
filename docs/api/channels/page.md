@@ -25,12 +25,12 @@ const pageChannel = new PageChannel({
 
 - Type: [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)
 
-The most recent timestamp among the [TimestampedItems](#Interface:-TimestampedItem) returned in the last page from [`fetchPage()`](#abstract-pageChannel.fetchPage()). Use this field in your implementation of [`fetchPage()`](#abstract-pageChannel.fetchPage()) to fetch the next page.
+The most recent timestamp among the [TimestampedItems](#Interface-TimestampedItem) returned in the last page from [`fetchPage()`](#abstract-pageChannel.fetchPage()). Use this field in your implementation of [`fetchPage()`](#abstract-pageChannel.fetchPage()) to fetch the next page by starting from the end of the previous page of data.
 
 ## abstract `pageChannel.fetchPage()`
-- Returns: [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<[TimestampedItem](#Interface:-TimestampedItem)[]\>
+- Returns: [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<[TimestampedItem](#Interface-TimestampedItem)[]\>
 
-Fetches the next page of data from an external source and turns it into an array of [TimestampedItems](#Interface:-TimestampedItem).
+Fetches the next page of data from an external source and turns it into an array of [TimestampedItems](#Interface-TimestampedItem).
 
 ```javascript
 class CustomPageChannel extends PageChannel {
@@ -46,7 +46,7 @@ class CustomPageChannel extends PageChannel {
 }
 ```
 
-After `pageChannel.fetchPage()` is called, the [PageChannel](#Class:-PageChannel) sorts each [TimestampedItem](#Interface:-TimestampedItem) in ascending order by each of their timestamps, enqueues each, and calls the [`onFetch()`](#pageOptions.onFetch()?) callback with the updated value of [`pageChannel.lastTimestamp`](#pageChannel.lastTimestamp) (the most recent timestamp among each [TimestampedItem](#Interface:-TimestampedItem)) as an argument.
+After `pageChannel.fetchPage()` is called, the [PageChannel](#Class:-PageChannel) sorts each [TimestampedItem](#Interface-TimestampedItem) in ascending order by each of their timestamps, enqueues each, and calls the [`onFetch()`](#pageOptions.onFetch()?) callback with the updated value of [`pageChannel.lastTimestamp`](#pageChannel.lastTimestamp) (the most recent timestamp among each [TimestampedItem](#Interface-TimestampedItem)) as an argument.
 
 # Interface: `PageOptions`
 
@@ -84,7 +84,7 @@ Typically, this function is used to save the most recent value of [`pageChannel.
 ## `lastTimestamp`
 - Type: [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)
 
-The most recent timestamp of the [TimestampedItems](#Interface:-TimestampedItem) returned by a [`fetchPage()`](#abstract-pageChannel.fetchPage()) call.
+The most recent timestamp of the [TimestampedItems](#Interface-TimestampedItem) returned by a [`fetchPage()`](#abstract-pageChannel.fetchPage()) call.
 
 # Interface: `TimestampedItem`
 - extends [`Item`](../item.md)
@@ -94,5 +94,5 @@ A timestamped [Item](../item.md).
 ## `timestampedItem.getTimestamp()`
 - Returns: [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)
 
-Returns the timestamp of this [TimestampedItem](#Interface:-TimestampedItem).
+Returns the timestamp of this [TimestampedItem](#Interface-TimestampedItem).
 
