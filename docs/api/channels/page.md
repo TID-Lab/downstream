@@ -11,7 +11,11 @@ A [`PollChannel`](./channel.md) that pages through its external data source.
 Initializes a new PageChannel.
 
 ```javascript
+const { PageChannel } = require('downstream');
+
 const lastTimestamp = // retrieve from database
+
+// TODO TODO TODO explain the whole need to persist `lastTimestamp` better
 
 const pageChannel = new PageChannel({
   lastTimestamp,

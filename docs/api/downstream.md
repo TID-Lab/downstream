@@ -9,6 +9,8 @@ A Downstream instance.
 Initializes a new instance of Downstream.
 
 ```javascript
+const { Downstream } = require('downstream');
+
 const downstream = new Downstream();
 ```
 

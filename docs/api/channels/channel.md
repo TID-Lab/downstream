@@ -11,6 +11,8 @@ Internally, Channels work by maintaining a circular queue of some fixed capacity
 Initializes a new Channel.
 
 ```javascript
+const { Channel } = require('downstream');
+
 const channel = new Channel();
 ```
 

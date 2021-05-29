@@ -11,6 +11,8 @@ A [`Channel`](./channel.md) that polls an external data source on a regular inte
 Initializes a new PollChannel.
 
 ```javascript
+const { PollChannel } = require('downstream');
+
 const pollChannel = new PollChannel({ interval: 5000 });
 ```
 
