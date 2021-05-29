@@ -1,19 +1,17 @@
 import Channel from './channel';
 
-/**
- * TODO documentation
- */
 export interface PollOptions {
   delay?: number;
   interval?: number;
 }
 
 /**
- * TODO documentation
+ * A Channel that polls an external data source on a regular interval
+ * via the fetch() function.
  */
 abstract class PollChannel extends Channel {
   /**
-   * Fetch items.
+   * Fetches data from an external source and enqueues it as Items.
    */
   protected abstract fetch(): Promise<void>;
 
@@ -32,6 +30,9 @@ abstract class PollChannel extends Channel {
     this.interval = options.interval || PollChannel.DEFAULT_INTERVAL;
   }
 
+  /**
+   * Begins polling the external data source.
+   */
   async start(): Promise<void> {
     // return if the PollChannel already started
     if (this.started) return;
@@ -46,15 +47,15 @@ abstract class PollChannel extends Channel {
     }
   }
 
+  /**
+   * Stops polling the external data source.
+   */
   async stop(): Promise<void> {
     if (this.timeout) clearTimeout(this.timeout);
     delete this.timeout;
     await super.stop();
   }
 
-  /**
-   * Poll
-   */
   protected async poll(): Promise<void> {
     // return if the PollChannel is not started
     if (!this.started) return;

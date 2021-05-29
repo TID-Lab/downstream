@@ -2,14 +2,17 @@ import type Item from '../item';
 import PollChannel, { PollOptions } from './poll';
 
 /**
- * TODO documentation
+ * A timestamped Item.
  */
 export interface TimestampedItem extends Item {
   getTimestamp(): Date;
 }
 
+/**
+ * The function called after each pageChannel.fetchPage() call has completed.
+ */
 export type FetchCallback = {
-  (lastTimestamp?: Date): Promise<any>
+  (lastTimestamp?: Date): Promise<void>
 };
 
 export interface PageOptions extends PollOptions {
@@ -18,11 +21,12 @@ export interface PageOptions extends PollOptions {
 }
 
 /**
- * TODO documentation
+ * A PollChannel that pages through its external data source.
  */
 abstract class PageChannel extends PollChannel {
   /**
-   * Fetch the next page.
+   * Fetches the next page of data from an external source and
+   * turns it into an array of TimestampedItems.
    */
   protected abstract fetchPage(): Promise<TimestampedItem[]>;
 

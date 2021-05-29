@@ -11,8 +11,8 @@ export type NextFunction = {
 };
 
 /**
- * An asynchronous "hook" function that gets called on each Item
- * of a Downstream instance as they are streamed from the registered Channels.
+ * An asynchronous function that gets called on each Item
+ * of a Downstream instance as they are fed in from the registered Channels.
  */
 export type Hook = {
   (item: Item, next: NextFunction): Promise<any>
@@ -136,7 +136,7 @@ class Downstream extends EventEmitter {
   }
 
   /**
-   * Registers a Channel so that Items will be streamed from the Channel
+   * Registers a Channel so that Items will be fed from the Channel
    * to this Downstream instance once when the channel has been started with `channel.start()`.
    */
   register(channel:Channel): string {
@@ -165,7 +165,7 @@ class Downstream extends EventEmitter {
   }
 
   /**
-   * Unregisters a Channel so that Items will no longer be streamed from the Channel
+   * Unregisters a Channel so that Items will no longer be fed from the Channel
    * to this Downstream instance.
    */
   unregister(identifier): void {
@@ -202,8 +202,8 @@ class Downstream extends EventEmitter {
   }
 
   /**
-   * Adds another hook to an ordered set that get called
-   * on each Item streamed by this Downstream instance in the order they are declared.
+   * Adds another hook to an ordered set that will get called
+   * one after the other on each Item as they are fed in from the registered Channels.
    */
   use(hook:Hook): Downstream {
     this.hookList.push(hook);
