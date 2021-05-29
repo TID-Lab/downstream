@@ -6,7 +6,7 @@ A [`PollChannel`](./channel.md) that pages through its external data source.
 
 ## `PageChannel(options)`
 
-- `options`: [PageOptions](#Interface:-PageOptions)
+- `options`: [PageOptions](#Interface-PageOptions)
 
 Initializes a new PageChannel.
 
@@ -46,7 +46,7 @@ class CustomPageChannel extends PageChannel {
 }
 ```
 
-After `pageChannel.fetchPage()` is called, the [PageChannel](#Class:-PageChannel) sorts each [TimestampedItem](#Interface-TimestampedItem) in ascending order by each of their timestamps, enqueues each, and calls the [`onFetch()`](#pageOptions.onFetch()?) callback with the updated value of [`pageChannel.lastTimestamp`](#pageChannel.lastTimestamp) (the most recent timestamp among each [TimestampedItem](#Interface-TimestampedItem)) as an argument.
+After `pageChannel.fetchPage()` is called, the [PageChannel](#Class-PageChannel) sorts each [TimestampedItem](#Interface-TimestampedItem) in ascending order by each of their timestamps, enqueues each, and calls the [`onFetch()`](#pageOptions.onFetch()?) callback with the updated value of [`pageChannel.lastTimestamp`](#pageChannel.lastTimestamp) (the most recent timestamp among each [TimestampedItem](#Interface-TimestampedItem)) as an argument.
 
 # Interface: `PageOptions`
 

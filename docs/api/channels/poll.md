@@ -6,7 +6,7 @@ A [`Channel`](./channel.md) that polls an external data source on a regular inte
 
 ## `PollChannel(options)`
 
-- `options`: [PollOptions](#Interface:-PollOptions)
+- `options`: [PollOptions](#Interface-PollOptions)
 
 Initializes a new PollChannel.
 

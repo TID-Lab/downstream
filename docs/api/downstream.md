@@ -17,30 +17,30 @@ const downstream = new Downstream();
 - `err`: an [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) object
 - `id?`: the ID of the [Channel](./channels/channel.md), if applicable
 
-Emitted when an error occurs. Errors can either be emitted by a [Channel](./channels/channel.md) (in which case the `id` argument is set) or thrown by a [hook](#Function:-Hook(item,-next)).
+Emitted when an error occurs. Errors can either be emitted by a [Channel](./channels/channel.md) (in which case the `id` argument is set) or thrown by a [hook](#Function-Hook(item,-next)).
 
 ## `downstream.start()`
 - Returns: [Promise\<void\>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
-Calls [`channel.start()`](./channels/channel.md#channel.start()) on each of the registered [Channels](./channels/channel.md) and waits for them to all start. Any errors thrown by a [Channel](./channels/channel.md) are collected and emitted via the [`error` event](#event:-error).
+Calls [`channel.start()`](./channels/channel.md#channel.start()) on each of the registered [Channels](./channels/channel.md) and waits for them to all start. Any errors thrown by a [Channel](./channels/channel.md) are collected and emitted via the [`error` event](#event-error).
 
 ## `downstream.stop()`
 - Returns: [Promise\<void\>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
-Calls [`channel.stop()`](./channels/channel.md#channel.stop()) on each of the registered [Channels](./channels/channel.md) and waits for them to all stop. Any errors thrown by a [Channel](./channels/channel.md) are collected and emitted via the [`error` event](#event:-error).
+Calls [`channel.stop()`](./channels/channel.md#channel.stop()) on each of the registered [Channels](./channels/channel.md) and waits for them to all stop. Any errors thrown by a [Channel](./channels/channel.md) are collected and emitted via the [`error` event](#event-error).
 
 ## `downstream.register(channel)`
 - `channel`: [Channel](./channels/channel.md)
 - Returns: `number`
 
-Registers a [Channel](./channels/channel.md) so that [Items](./item.md) will be fed from the [Channel](./channels/channel.md) to this [Downstream](#Class:-Downstream) instance once when the channel has been started with [`channel.start()`](./channels/channel.md#channel.start()).
+Registers a [Channel](./channels/channel.md) so that [Items](./item.md) will be fed from the [Channel](./channels/channel.md) to this [Downstream](#Class-Downstream) instance once when the channel has been started with [`channel.start()`](./channels/channel.md#channel.start()).
 
 ## `downstream.unregister(identifier)`
 
 - `identifier`: [Channel](./channels/channel.md) | `number`
 - Returns: `number`
 
-Unregisters a [Channel](./channels/channel.md) either using the Channel itself or its numeric ID so that [Items](./item.md) will no longer be fed from the [Channel](./channels/channel.md) to this [Downstream](#Class:-Downstream) instance.
+Unregisters a [Channel](./channels/channel.md) either using the Channel itself or its numeric ID so that [Items](./item.md) will no longer be fed from the [Channel](./channels/channel.md) to this [Downstream](#Class-Downstream) instance.
 
 Note that unregistering a [Channel](./channels/channel.md) does not stop it.
 
@@ -71,13 +71,13 @@ await channel.stop();
 
 ## `downstream.use(hook)`
 
-- `hook`: [Hook()](#Function:-Hook(item,-next))
+- `hook`: [Hook()](#Function-Hook(item,-next))
 
-Adds another [hook](#Function:-Hook(item,-next)) to an ordered hook set that will get called one after the other on each [Item](./item.md) as they are received by this [Downstream](#Class:-Downstream) instance.
+Adds another [hook](#Function-Hook(item,-next)) to an ordered hook set that will get called one after the other on each [Item](./item.md) as they are received by this [Downstream](#Class-Downstream) instance.
 
 # Function: `Hook(item, next)`
 
-An asynchronous function that gets called on each [Item](./item.md) of a [Downstream](#Class:-Downstream) instance as they are fed in from registered [Channels](./channels/channel.md).
+An asynchronous function that gets called on each [Item](./item.md) of a [Downstream](#Class-Downstream) instance as they are fed in from registered [Channels](./channels/channel.md).
 
 ```javascript
 async function myHook(item, next) {
@@ -98,9 +98,9 @@ An [Item](./item.md) received from a registered [Channel](./channels/channel.md)
 ## `next`
 - Type: [NextFunction()](#Function-NextFunction())
 
-Calls the remaining [hooks]((#Function:-Hook(item,-next))) that come after this one.
+Calls the remaining [hooks]((#Function-Hook(item,-next))) that come after this one.
 
 # Function: `NextFunction()`
 - Returns: [Promise\<void\>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
-Calls the remaining [hooks](#Function:-Hook(item,-next)) that come after this one.
+Calls the remaining [hooks](#Function-Hook(item,-next)) that come after this one.
