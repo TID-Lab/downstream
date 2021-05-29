@@ -116,7 +116,7 @@ class CrowdTangleChannel extends PageChannel {
   /**
    * Parse the given raw post into a SocialMediaPost.
    */
-  parse(rawPost: { [key: string]: any }): SocialMediaPost {
+  protected parse(rawPost: { [key: string]: any }): SocialMediaPost {
     const now:Date = new Date();
     const author:string = rawPost.account ? rawPost.account.name || rawPost.account.handle : null;
     const authoredAt:Date = new Date(`${rawPost.date} UTC`) || now;
