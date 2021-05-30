@@ -1,6 +1,6 @@
 {
   "name": "downstream",
-  "version": "0.0.47",
+  "version": "0.0.48",
   "description": "",
   "main": "build/index.js",
   "types": "build/index.d.ts",
