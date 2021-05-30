@@ -21,7 +21,7 @@ Logs each item from a Channel to the console.
 - Registering your first Channel
 - Running Downstream for the first time
 
-## 2. [Dogs (Built-in Channels)](./dogs)
+## 2. [Built-in Channels](./dogs)
 
 Uses every built-in Channel available to aggregate social media posts about dogs across Facebook, Instagram, and Twitter.
 
@@ -38,7 +38,7 @@ To run this example, you'll need to set the following environment variables to s
 
 If you do not possess any of the secrets or keys listed above, you can simply comment out the corresponding channel, as well as the line that registers it with Downstream.
 
-## 3. [Fruits (Custom Channels)](./fruits)
+## 3. [Custom Channels](./fruits)
 
 Uses a custom Channel to aggregate data from a custom fruit API.
 
@@ -47,7 +47,7 @@ Uses a custom Channel to aggregate data from a custom fruit API.
 - Writing your own Channel
 - Aggregating data from your own Channel
 
-## 4. [Translator (Mutating data with hooks)](./translator)
+## 4. [Mutating data with hooks](./translator)
 
 Annotates the sentences of each item with their language.
 
@@ -57,7 +57,7 @@ Annotates the sentences of each item with their language.
 - Mutating items in your hook
 - Writing your own Channel
 
-## 5. [Cats (Saving data to a database)](./cats)
+## 5. [Saving data to a database](./cats)
 
 An example that saves tweets about cats to your local MongoDB database.
 
