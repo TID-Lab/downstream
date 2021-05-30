@@ -2,9 +2,10 @@
 
 ## Running an example
 
-1. Copy the contents of the example folder to an empty folder.
-2. Run `npm install` in the folder to install example dependencies.
-3. Run `node index.js` in the folder to run the example.
+1. Clone this repo with `git clone https://github.com/TID-Lab/downstream`
+2. `cd` into the example folder you want to run
+3. Run `npm install` in the folder to install example dependencies.
+4. Run `node index.js` in the folder to run the example.
 
 ## 1. [Basic](./basic)
 
@@ -20,9 +21,9 @@ Uses every built-in Channel available to aggregate social media posts about dogs
 
 - Using the built-in Channels for Facebook, Instagram, and Twitter
 
-## 3. [Fake](./fake)
+## 3. [Fruits](./fruits)
 
-Uses custom Channel to aggregate data from a fake data source. **This example demonstrates:**
+Uses a custom Channel to aggregate data from a fruit API. **This example demonstrates:**
 
 - Writing a custom Channel
 - Aggregating data from your custom Channel

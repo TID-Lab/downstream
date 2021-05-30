@@ -1,5 +1,5 @@
 /**
- * A simple web server to run our fake API
+ * A simple web server to run our fruit API
  */
 
  const express = require('express');
@@ -24,8 +24,8 @@
      'peach'
  ]
  
- // our fake API endpoint
- app.get('/api/posts', (req, res) => {
+ // our fruit API endpoint
+ app.get('/api/fruits', (req, res) => {
      const fruit = fruits.shift();
      fruits.push(fruit);
  
