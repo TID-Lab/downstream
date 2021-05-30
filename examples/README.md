@@ -57,7 +57,7 @@ Annotates the sentences of each item with their language.
 - Mutating items in your hook
 - Writing your own Channel
 
-## 5. [Saving data to a database](./cats)
+## 5. [Saving aggregated data to a database](./cats)
 
 An example that saves tweets about cats to your local MongoDB database.
 
