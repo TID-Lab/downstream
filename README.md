@@ -68,7 +68,7 @@ downstream.start();
 ```
 ## Documentation
 
-Our detailed [API documentation](/docs/) is available in the `docs/` folder.
+Our detailed [API documentation](/docs) is available in the `docs/` folder.
 
 ## Examples
 
