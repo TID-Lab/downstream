@@ -16,7 +16,7 @@ npm install downstream
 
 ## Usage
 
-1\. Downstream aggregates data via **[Channels](./docs/channels/channel.md)**. Use our **[built-in Channels](TODO)** to pull in posts from Facebook, Instagram, and Twitter, or **[create your own Channels](TODO)** to easily pull in data from other sources.
+1\. Downstream aggregates data via **[Channels](./docs/channels/channel.md)**. Use our **[built-in Channels](TODO)** to pull in posts from platforms like Facebook, Instagram, and Twitter, or **[create your own Channels](TODO)** to easily pull in data from other sources.
 
 ```javascript
 // channels.js
@@ -66,14 +66,13 @@ downstream.use(logHook);
 
 downstream.start();
 ```
+## Documentation
+
+Our detailed [API documentation](/docs/) is available in the `docs/` folder.
 
 ## Examples
 
 Several [examples](/examples) are available in the `examples/` folder.
-
-## Documentation
-
-Our detailed [API documentation](/docs/) is available in the `docs/` folder.
 
 ## Contributing
 
