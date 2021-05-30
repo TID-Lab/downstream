@@ -1,14 +1,14 @@
 # Class: `CrowdTangleChannel`
 
-- extends [`PageChannel`](../../channels/page.md)
+- extends [`PageChannel`](../../../channels/page.md)
 
-A built-in [Channel](../../channels/channel.md) for aggregating posts as [SocialMediaPosts](../post.md) from social media platforms supported by the CrowdTangle API.
+A built-in [Channel](../../../channels/channel.md) for aggregating posts as [SocialMediaPosts](../../post.md) from social media platforms supported by the CrowdTangle API.
 
-By default, this [Channel](../../channels/channel.md) works by paginating by timestamp through posts returned by the CrowdTangle API family of `/post` endpoints. Read below for specifics which endpoint are used when. If no initial timestamp is provided, then this [Channel](../../channels/channel.md) sets the timestamp to three hours ago and begins paginating posts authored from then on. As new posts are returned by the API, this Channel leverages its underlying [PageChannel](../../channels/page.md) architecture to catch up page-by-page to the posts being authored in the present.
+By default, this [Channel](../../../channels/channel.md) works by paginating by timestamp through posts returned by the CrowdTangle API family of `/post` endpoints. Read below for specifics which endpoint are used when. If no initial timestamp is provided, then this [Channel](../../../channels/channel.md) sets the timestamp to three hours ago and begins paginating posts authored from then on. As new posts are returned by the API, this Channel leverages its underlying [PageChannel](../../../channels/page.md) architecture to catch up page-by-page to the posts being authored in the present.
 
-Platform-specific CrowdTangle [Channels](../../channels/channel.md) are also available for [Facebook](./facebook.md) and [Instagram](./instagram.md). The difference between this [Channel](../../channels/channel.md) and the platform-specific ones is that the latter are locked to their specific platform by design. Meanwhile, the primary purpose of this [Channel](../../channels/channel.md) is to dynamically aggregate post data across multiple CrowdTangle-supported platforms.
+Platform-specific CrowdTangle [Channels](../../../channels/channel.md) are also available for [Facebook](./facebook.md) and [Instagram](./instagram.md). The difference between this [Channel](../../../channels/channel.md) and the platform-specific ones is that the latter are locked to their specific platform by design. Meanwhile, the primary purpose of this [Channel](../../../channels/channel.md) is to dynamically aggregate post data across multiple CrowdTangle-supported platforms.
 
-**Note: A built-in CrowdTangle [Channel](../../channels/channel.md) for Reddit is not implemented because the authors do not yet have CrowdTangle access to Reddit in order to test it for release.** If you do have Reddit access and would like to see a built-in [Channel](../../channels/channel.md) added, please open a Pull Request! See our **[Contributing Guidelines](../../../../CONTRIBUTING.md)** for more.
+**Note: A built-in CrowdTangle [Channel](../../../channels/channel.md) for Reddit is not implemented because the authors do not yet have CrowdTangle access to Reddit in order to test it for release.** If you do have Reddit access and would like to see a built-in [Channel](../../../channels/channel.md) added, please open a Pull Request! See our **[Contributing Guidelines](../../../../../CONTRIBUTING.md)** for more.
 
 ## `CrowdTangleChannel(options)`
 
@@ -30,7 +30,7 @@ const crowdtangleChannel = new CrowdTangleChannel({
 Visit the section on [CrowdTangleOptions](#Interface-CrowdTangleOptions) below to learn about configuration.
 
 # Interface: `CrowdTangleOptions`
-- extends [`PageOptions`](../../channels/page.md#Interface-PageOptions)
+- extends [`PageOptions`](../../../channels/page.md#Interface-PageOptions)
 
 ## `crowdtangleOptions.dashboardToken`
 - Type: `string`

@@ -2,9 +2,9 @@
 
 - extends [`CrowdTangleChannel`](./crowdtangle.md)
 
-A built-in [Channel](../../channels/channel.md) for aggregating Instagram posts as [SocialMediaPosts](../post.md).
+A built-in [Channel](../../../channels/channel.md) for aggregating Instagram posts as [SocialMediaPosts](../../post.md).
 
-This [Channel](../../channels/channel.md) is functionally equivalent to a [CrowdTangleChannel](./crowdtangle.md) with the exception that it just aggregates posts from Instagram and no other platform.
+This [Channel](../../../channels/channel.md) is functionally equivalent to a [CrowdTangleChannel](./crowdtangle.md) with the exception that it just aggregates posts from Instagram and no other platform.
 
 
 ## `InstagramCrowdTangleChannel(options)`

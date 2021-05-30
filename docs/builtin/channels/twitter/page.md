@@ -1,10 +1,10 @@
 # Class: `TwitterPageChannel`
 
-- extends [`PageChannel`](../../channels/page.md)
+- extends [`PageChannel`](../../../channels/page.md)
 
-A built-in [Channel](../../channels/channel.md) for aggregating tweets as [SocialMediaPosts](../post.md) from Twitter through pagination.
+A built-in [Channel](../../../channels/channel.md) for aggregating tweets as [SocialMediaPosts](../../post.md) from Twitter through pagination.
 
-By default, this [Channel](../../channels/channel.md) works by paginating by timestamp through tweets returned by the Twitter v2 API family of `/tweets/search` endpoints. Read below for specifics which endpoint are used when. If no initial timestamp is provided, then this [Channel](../../channels/channel.md) sets the timestamp to three hours ago and begins paginating posts authored from then on. As new posts are returned by the API, this Channel leverages its underlying [PageChannel](../../channels/page.md) architecture to catch up page-by-page to the posts being authored in the present.
+By default, this [Channel](../../../channels/channel.md) works by paginating by timestamp through tweets returned by the Twitter v2 API family of `/tweets/search` endpoints. Read below for specifics which endpoint are used when. If no initial timestamp is provided, then this [Channel](../../../channels/channel.md) sets the timestamp to three hours ago and begins paginating posts authored from then on. As new posts are returned by the API, this Channel leverages its underlying [PageChannel](../../../channels/page.md) architecture to catch up page-by-page to the posts being authored in the present.
 
 ## `TwitterPageChannel(options)`
 
@@ -29,7 +29,7 @@ const twitterPageChannel = new TwitterPageChannel({
 Visit the section on [TwitterPageOptions](#Interface-TwitterPageOptions) below to learn about configuration.
 
 # Interface: `TwitterPageOptions`
-- extends [`TwitterOptions`](./shared/options.md), [`PageOptions`](../../channels/page.md#Interface-PageOptions)
+- extends [`TwitterOptions`](./shared/options.md), [`PageOptions`](../../../channels/page.md#Interface-PageOptions)
 
 ## `crowdtangleOptions.isRecent?`
 - Type: `boolean`

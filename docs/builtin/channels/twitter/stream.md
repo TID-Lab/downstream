@@ -1,12 +1,12 @@
 # Class: `TwitterStreamChannel`
 
-- extends [`Channel`](../../channels/channel.md)
+- extends [`Channel`](../../../channels/channel.md)
 
-A built-in [Channel](../../channels/channel.md) for aggregating tweets as [SocialMediaPosts](../post.md) from Twitter through a live stream.
+A built-in [Channel](../../../channels/channel.md) for aggregating tweets as [SocialMediaPosts](../../post.md) from Twitter through a live stream.
 
-This [Channel](../../channels/channel.md) works by streaming tweets being authored in the present through the Twitter v2 "filtered stream" API.
+This [Channel](../../../channels/channel.md) works by streaming tweets being authored in the present through the Twitter v2 "filtered stream" API.
 
-**Note:** This [Channel](../../channels/channel.md) does not provide helper methods for configuring the [stream rules](https://developer.twitter.com/en/docs/twitter-api/tweets/filtered-stream/api-reference/post-tweets-search-stream-rules). **You must [configure those rules yourself](https://developer.twitter.com/en/docs/twitter-api/tweets/filtered-stream/integrate/build-a-rule)** using something like the [twitter-v2](https://github.com/HunterLarco/twitter-v2) package.
+**Note:** This [Channel](../../../channels/channel.md) does not provide helper methods for configuring the [stream rules](https://developer.twitter.com/en/docs/twitter-api/tweets/filtered-stream/api-reference/post-tweets-search-stream-rules). **You must [configure those rules yourself](https://developer.twitter.com/en/docs/twitter-api/tweets/filtered-stream/integrate/build-a-rule)** using something like the [twitter-v2](https://github.com/HunterLarco/twitter-v2) package.
 
 ## `TwitterStreamChannel(options)`
 
