@@ -2,7 +2,7 @@
 
 - extends [`PollChannel`](./poll.md)
 
-A [`PollChannel`](./channel.md) that pages through its external data source.
+A [`PollChannel`](./channel.md) that pages through its external data source by a timestamp.
 
 ## `PageChannel(options)`
 
@@ -13,14 +13,12 @@ Initializes a new PageChannel.
 ```javascript
 const { PageChannel } = require('downstream');
 
-const lastTimestamp = // retrieve from database
-
-// TODO TODO TODO explain the whole need to persist `lastTimestamp` better
+const lastTimestamp = // retrieve from persistent storage (ie. a database) on startup.
 
 const pageChannel = new PageChannel({
   lastTimestamp,
   onFetch: (lastTimestamp) => {
-    // save to database
+    // save to persistent storage
   }
 });
 ```
@@ -29,7 +27,7 @@ const pageChannel = new PageChannel({
 
 - Type: [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)
 
-The most recent timestamp among the [TimestampedItems](#interface-timestampeditem) returned in the last page from [`fetchPage()`](#abstract-pagechannelfetchpage). Use this field in your implementation of [`fetchPage()`](#abstract-pagechannelfetchpage) to fetch the next page by starting from the end of the previous page of data.
+The most recent timestamp among the [TimestampedItems](#interface-timestampeditem) returned in the last page from [`fetchPage()`](#abstract-pagechannelfetchpage). Use this field in your implementation of [`fetchPage()`](#abstract-pagechannelfetchpage) to fetch the next page of data by starting from the end of the previous page.
 
 ## abstract `pageChannel.fetchPage()`
 - Returns: [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<[TimestampedItem](#interface-timestampeditem)[]\>
@@ -50,15 +48,15 @@ class CustomPageChannel extends PageChannel {
 }
 ```
 
-After `pageChannel.fetchPage()` is called, the [PageChannel](#class-pagechannel) sorts each [TimestampedItem](#interface-timestampeditem) in ascending order by each of their timestamps, enqueues each, and calls the [`onFetch()`](#pageoptionsonfetch) callback with the updated value of [`pageChannel.lastTimestamp`](#pagechannellasttimestamp) (the most recent timestamp among each [TimestampedItem](#interface-timestampeditem)) as an argument.
+After `pageChannel.fetchPage()` is called, the [PageChannel](#class-pagechannel) sorts each [TimestampedItem](#interface-timestampeditem) in ascending order by each of their timestamps, enqueues each, and calls the [`onFetch()`](#pageoptionsonfetchlasttimestamp) callback with the updated value of [`pageChannel.lastTimestamp`](#pagechannellasttimestamp) (the most recent timestamp among each [TimestampedItem](#interface-timestampeditem)) as an argument.
 
 # Interface: `PageOptions`
 
 ```javascript
-const lastTimestamp = // retrieve from database
+const lastTimestamp = // retrieve from persistent storage (ie. a database) on startup
 
 const onFetch = (lastTimestamp) => {
-  // save to database
+  // save to persistent storage (ie. a database)
 }
 
 const pageOptions = {
@@ -72,8 +70,8 @@ const pageOptions = {
 
 The most recent timestamp to start from when paginating with the first [`pageChannel.fetchPage()`](#abstract-pageChannelfetchpage) call.
 
-## `pageOptions.onFetch()?`
-- Type: [FetchCallback()](#function-fetchcallbacklasttimestamp)
+## `pageOptions.onFetch(lastTimestamp)?`
+- Type: [FetchCallback(lastTimestamp)](#function-fetchcallbacklasttimestamp)
 
 The function called after each [`pageChannel.fetchPage()`](#abstract-pagechannelfetchpage) call has completed.
 
@@ -83,7 +81,7 @@ The function called after each [`pageChannel.fetchPage()`](#abstract-pagechannel
 
 The function called after each [`pageChannel.fetchPage()`](#abstract-pagechannelfetchpage) call has completed.
 
-Typically, this function is used to save the most recent value of [`pageChannel.lastTimestamp`](#pagechannellasttimestamp) to a database so that it can persist across runtimes by passing it in via the [`PageChannel(options)`](#pagechanneloptions) constructor.
+Typically, this function is used to save the most recent value of [`pageChannel.lastTimestamp`](#pagechannellasttimestamp) to a database so that it can persist in the event that your Node.js application restarts. To pick up from where you left off, simply pass `lastTimestamp` in via the [`PageChannel(options)`](#pagechanneloptions) constructor.
 
 ## `lastTimestamp`
 - Type: [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)
