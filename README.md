@@ -16,7 +16,7 @@ npm install downstream
 
 ## Usage
 
-1\. Downstream aggregates data via **[Channels](./docs/channels/channel.md)**. Use our **[built-in Channels](./examples#2-dogs-built-in-channels)** to pull in posts from platforms like Facebook, Instagram, and Twitter, or **[create your own Channels](./examples#3-fruits-customc-channels)** to easily pull in data from other sources.
+1\. Downstream aggregates data via **[Channels](./docs/channels/channel.md)**. Use our **[built-in Channels](./examples#2-dogs-built-in-channels)** to pull in posts from platforms like Facebook, Instagram, and Twitter, or **[create your own Channels](./examples#3-fruits-custom-channels)** to easily pull in data from other sources.
 
 ```javascript
 // channels.js
