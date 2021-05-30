@@ -4,7 +4,7 @@ Downstream is a multi-platform and real-time social media aggregation framework.
 
 ## Installation
 
-Downstream is released as a [Node.js](nodejs.org/) package on the [npm registry](https://www.npmjs.com/).
+Downstream is released as a [Node.js](https://nodejs.org/) package on the [npm registry](https://www.npmjs.com/).
 
 **Node.js 12.9** or higher is required to use Downstream in your project.
 
