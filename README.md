@@ -76,7 +76,7 @@ Several [examples](/examples) are available in the `examples/` folder.
 
 ## Contributing
 
-We welcome outside contributions! See our [Contributing Guidelines](/CONTRIBUTING.md) for details.
+We welcome outside contributions! Whether you're an outside contributor or a member of the T+ID Lab, see our [Contributing Guidelines](/CONTRIBUTING.md) for details.
 
 ## License
 

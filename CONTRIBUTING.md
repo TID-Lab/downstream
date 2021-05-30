@@ -1,6 +1,6 @@
 # Contributing Guidelines
 
-Downstream is actively built and maintained by the [Technologies & International Development](http://tid.gatech.edu/) (TID) Lab at Georgia Tech to support the [Aggie platform](https://github.com/tid-lab/aggie) and other research initiatives. Outside contributions are welcome!
+Downstream is actively built and maintained by the [Technologies & International Development](http://tid.gatech.edu/) (T+ID) Lab at Georgia Tech to support the [Aggie platform](https://github.com/tid-lab/aggie) and other research initiatives. Outside contributions are welcome!
 
 ## Contribution Workflow
 
