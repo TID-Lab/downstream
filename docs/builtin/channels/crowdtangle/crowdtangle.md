@@ -12,7 +12,7 @@ Platform-specific CrowdTangle [Channels](../../../channels/channel.md) are also 
 
 ## `CrowdTangleChannel(options)`
 
-- `options`: [CrowdTangleOptions](#Interface-CrowdTangleOptions)
+- `options`: [CrowdTangleOptions](#interface-crowdtangleoptions)
 
 Initializes a new CrowdTangleChannel.
 
@@ -27,10 +27,10 @@ const crowdtangleChannel = new CrowdTangleChannel({
 });
 ```
 
-Visit the section on [CrowdTangleOptions](#Interface-CrowdTangleOptions) below to learn about configuration.
+Visit the section on [CrowdTangleOptions](#interface-crowdtangleoptions) below to learn about configuration.
 
 # Interface: `CrowdTangleOptions`
-- extends [`PageOptions`](../../../channels/page.md#Interface-PageOptions)
+- extends [`PageOptions`](../../../channels/page.md#interface-pageoptions)
 
 ## `crowdtangleOptions.dashboardToken`
 - Type: `string`
@@ -66,6 +66,6 @@ The query parameters passed to the CrowdTangle API on each call to the endpoints
 
 - Type: `string`
 
-An optional most recent "next page" URL returned by the CrowdTangle API to start paginating from where this [CrowdTangleChannel](#Class-CrowdTangleChannel) might have last left off.
+An optional most recent "next page" URL returned by the CrowdTangle API to start paginating from where this [CrowdTangleChannel](#class-crowdtanglechannel) might have last left off.
 
 CrowdTangle API endpoints that support pagination return a helpful "next page" URL that indicates what URL to point to next in order to fetch the next page of data.

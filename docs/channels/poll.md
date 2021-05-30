@@ -2,11 +2,11 @@
 
 - extends [`Channel`](./channel.md)
 
-A [`Channel`](./channel.md) that polls an external data source on a regular interval via the [`fetch()`](#abstract-pollChannel.fetch()) function.
+A [`Channel`](./channel.md) that polls an external data source on a regular interval via the [`fetch()`](#abstract-pollchannelfetch) function.
 
 ## `PollChannel(options)`
 
-- `options`: [PollOptions](#Interface-PollOptions)
+- `options`: [PollOptions](#interface-polloptions)
 
 Initializes a new PollChannel.
 
@@ -29,7 +29,7 @@ Stops polling the external data source.
 ## abstract `pollChannel.fetch()`
 - Returns: [Promise\<void\>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
-Fetches data from an external source and [enqueues](./channel.md#channel.enqueue(item)) it as [Items](../item.md).
+Fetches data from an external source and [enqueues](./channel.md#channelenqueueitem) it as [Items](../item.md).
 
 ```javascript
 class CustomPollChannel extends PollChannel {

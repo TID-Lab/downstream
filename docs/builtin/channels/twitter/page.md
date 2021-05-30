@@ -8,7 +8,7 @@ By default, this [Channel](../../../channels/channel.md) works by paginating by 
 
 ## `TwitterPageChannel(options)`
 
-- `options`: [TwitterPageOptions](#Interface-TwitterPageOptions)
+- `options`: [TwitterPageOptions](#interface-twitterpageoptions)
 
 Initializes a new TwitterPageChannel.
 
@@ -26,10 +26,10 @@ const twitterPageChannel = new TwitterPageChannel({
 });
 ```
 
-Visit the section on [TwitterPageOptions](#Interface-TwitterPageOptions) below to learn about configuration.
+Visit the section on [TwitterPageOptions](#interface-twitterpageoptions) below to learn about configuration.
 
 # Interface: `TwitterPageOptions`
-- extends [`TwitterOptions`](./shared/options.md), [`PageOptions`](../../../channels/page.md#Interface-PageOptions)
+- extends [`TwitterOptions`](./shared/options.md), [`PageOptions`](../../../channels/page.md#interface-pageoptions)
 
 ## `crowdtangleOptions.isRecent?`
 - Type: `boolean`
@@ -50,6 +50,6 @@ For those familiar with the Twitter v2 API, the following values for this proper
 
 - Type: `string`
 
-An optional most recent "next page" token returned by the Twitter v2 API to start paginating from where this [TwitterPageChannel](#Class-TwitterPageChannel) might have last left off.
+An optional most recent "next page" token returned by the Twitter v2 API to start paginating from where this [TwitterPageChannel](#class-twitterpagechannel) might have last left off.
 
 Twitter v2 API endpoints that support pagination return a helpful "next page" token that can be used to fetch the next page of data.

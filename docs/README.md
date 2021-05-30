@@ -5,15 +5,15 @@ Welcome to the documentation for the Downstream API. See [`/examples`](/examples
 ## Core API
 
 - [Downstream](./downstream.md)
-  - [Hook](./downstream.md#Function-Hook(item,-next))
-  - [NextFunction](./downstream.md#Function-NextFunction())
+  - [Hook](./downstream.md#function-hookitem-next)
+  - [NextFunction](./downstream.md#function-nextfunction)
 - Channels
   - [Channel](./channels/channel.md)
   - [PollChannel](./channels/poll.md)
-    - [PollOptions](./channels/poll.md#Interface-PollOptions)
+    - [PollOptions](./channels/poll.md#interface-polloptions)
   - [PageChannel](./channels/page.md)
-    - [PageOptions](./channels/page.md#Interface-PageOptions)
-    - [TimestampedItem](./channels/page.md#Interface-TimestampedItem)
+    - [PageOptions](./channels/page.md#interface-pageoptions)
+    - [TimestampedItem](./channels/page.md#interface-timestampeditem)
 - [Item](./item.md)
 
 ## Built-in API
@@ -25,7 +25,7 @@ Welcome to the documentation for the Downstream API. See [`/examples`](/examples
     - [InstagramCrowdTangleChannel](./builtin/channels/crowdtangle/instagram.md)
   - Twitter
     - [TwitterPageChannel](./builtin/channels/twitter/page.md)
-      - [TwitterPageOptions](./builtin/channels/twitter/page.md#Interface-TwitterPageOptions)
+      - [TwitterPageOptions](./builtin/channels/twitter/page.md#interface-twitterpageoptions)
     - [TwitterStreamChannel](./builtin/channels/twitter/stream.md)
     - [TwitterOptions](./builtin/channels/twitter/shared/options.md)
 - [SocialMediaPost](./builtin/post.md)

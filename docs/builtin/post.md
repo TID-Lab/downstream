@@ -1,11 +1,11 @@
 # Class: `SocialMediaPost`
 
-- implements [TimestampedItem](../channels/page.md#Interface-TimestampedItem)
+- implements [TimestampedItem](../channels/page.md#interface-timestampeditem)
 
 Represents a post on a social media platform.
 
 ## `SocialMediaPost(options)`
-- `options`: [SocialMediaOptions](#Interface-SocialMediaOptions)
+- `options`: [SocialMediaOptions](#interface-socialmediaoptions)
 
 ```javascript
 const socialMediaPost = new SocialMediaPost({
@@ -34,7 +34,7 @@ The author of the post, typically a username.
 The URL of the post.
 
 ## `socialMediaPost.platform`
-- Type: [Platform](#Enum-Platform)
+- Type: [Platform](#enum-platform)
 
 The social media platform that the post was authored on.
 
@@ -61,33 +61,33 @@ The ID of the [Channel](../channels/channel.md) that the post came from.
 ## `socialMediaPost.getTimestamp()`
 - Returns: [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)
 
-Returns the value of the [`socialMediaPost.authoredAt`](#socialMediaPost.authoredAt) field.
+Returns the value of the [`socialMediaPost.authoredAt`](#socialmediapostauthoredat) field.
 
 # Interface: `SocialMediaOptions`
 
 ## `socialMediaOptions.authoredAt`
-See [`socialMediaPost.authoredAt`](#socialMediaPost.authoredAt).
+See [`socialMediaPost.authoredAt`](#socialmediapostauthoredat).
 
 ## `socialMediaOptions.fetchedAt`
-See [`socialMediaPost.fetchedAt`](#socialMediaPost.fetchedAt).
+See [`socialMediaPost.fetchedAt`](#socialmediapostfetchedat).
 
 ## `socialMediaOptions.author`
-See [`socialMediaPost.author`](#socialMediaPost.author).
+See [`socialMediaPost.author`](#socialmediapostauthor).
 
 ## `socialMediaOptions.url`
-See [`socialMediaPost.url`](#socialMediaPost.url).
+See [`socialMediaPost.url`](#socialmediaposturl).
 
 ## `socialMediaOptions.platform`
-See [`socialMediaPost.platform`](#socialMediaPost.platform).
+See [`socialMediaPost.platform`](#socialmediapostplatform).
 
 ## `socialMediaOptions.platformID`
-See [`socialMediaPost.platformID`](#socialMediaPost.platformID).
+See [`socialMediaPost.platformID`](#socialmediapostplatformid).
 
 ## `socialMediaOptions.content?`
-See [`socialMediaPost.content?`](#socialMediaPost.content?).
+See [`socialMediaPost.content?`](#socialmediapostcontent).
 
 ## `socialMediaOptions.raw`
-See [`socialMediaPost.raw`](#socialMediaPost.raw).
+See [`socialMediaPost.raw`](#socialmediapostraw).
 
 # Enum: `Platform`
 

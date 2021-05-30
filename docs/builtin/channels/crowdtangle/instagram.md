@@ -9,7 +9,7 @@ This [Channel](../../../channels/channel.md) is functionally equivalent to a [Cr
 
 ## `InstagramCrowdTangleChannel(options)`
 
-- `options`: [CrowdTangleOptions](./crowdtangle.md#Interface-CrowdTangleOptions)
+- `options`: [CrowdTangleOptions](./crowdtangle.md#interface-crowdtangleoptions)
 
 Initializes a new InstagramCrowdTangleChannel.
 
@@ -25,4 +25,4 @@ const instagramChannel = new InstagramCrowdTangleChannel({
 });
 ```
 
-Visit the section on [CrowdTangleOptions](./crowdtangle.md#Interface-CrowdTangleOptions) below to learn about configuration.
+Visit the section on [CrowdTangleOptions](./crowdtangle.md#interface-crowdtangleoptions) below to learn about configuration.

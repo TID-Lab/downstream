@@ -1,7 +1,7 @@
 # Interface: `TwitterOptions`
 
 ## `twitterOptions.credentials`
-- Type: [TwitterCredentials](#Interface-TwitterCredentials)
+- Type: [TwitterCredentials](#interface-twittercredentials)
 
 A collection of secrets and keys required for access to the Twitter v2 API.
 
