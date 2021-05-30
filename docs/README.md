@@ -1,6 +1,6 @@
 # Documentation
 
-Welcome to the documentation for the Downstream API. If you are looking for how to use Downstream, you can find several examples in the [`/examples`](/examples) folder.
+Welcome to the documentation for the Downstream API. See [`/examples`](/examples) for example code.
 
 ## Core API
 
