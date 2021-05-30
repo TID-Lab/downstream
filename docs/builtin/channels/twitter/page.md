@@ -33,7 +33,7 @@ Visit the section on [TwitterPageOptions](#Interface-TwitterPageOptions) below t
 
 ## `crowdtangleOptions.isRecent?`
 - Type: `boolean`
-- Default: `false`
+- Default: `true`
 
 Whether to aggregate tweets from the past seven days (recent) or from all of time.
 
@@ -41,8 +41,10 @@ For those familiar with the Twitter v2 API, the following values for this proper
 
 | `isRecent` | API Endpoint          |
 | -----------| --------------------- |
-| `false`    | /tweets/search/recent |
-| `true`     | /tweets/search/all    |
+| `true`     | /tweets/search/recent |
+| `false`*     | /tweets/search/all    |
+
+\* As of writing `isRecent` to `false` requires the Academic Research product track.
 
 ## `crowdtangleOptions.nextPageToken?`
 

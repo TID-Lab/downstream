@@ -52,7 +52,7 @@ class TwitterPageChannel extends PageChannel {
     });
 
     this.nextPageToken = options.nextPageToken;
-    this.isRecent = options.isRecent || false;
+    this.isRecent = options.isRecent || true;
     this.queryParams = {
       expansions: queryParams.expansions || EXPANSIONS.join(','),
       'tweet.fields': queryParams['tweet.fields'] || TWEET_FIELDS.join(','),
