@@ -1,12 +1,6 @@
 /**
  * An example that demonstrates how to build a custom
  * channel to aggregate data from your own sources.
- * 
- * NOTE: This example has the following dependencies:
- *  - axios
- *  - express
- * 
- * Install these dependencies with `npm install axios express`.
  */
 
  const { Downstream } = require('downstream');

@@ -3,15 +3,6 @@
  * social media posts about dogs across Facebook, Instagram, and Twitter.
  * Each dog post will be logged to the console so that you can go
  * "awwwwwwwwww" (or maybe not, that's cool too).
- * 
- * To run this example fully, you'll need:
- *
- *  - a CrowdTangle Facebook dashboard token
- *  - a Crowdtangle Instagram dashboard token
- *  - Twitter API credentials
- * 
- * Suggestion: comment out the channels for platforms you don't
- * have access to run the example using what platforms you can.
  */
 
  const { Downstream, builtin } = require('downstream');

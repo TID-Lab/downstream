@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+      "downstream": "latest",
+      "franc": "^5.0.0"
+  }
+}

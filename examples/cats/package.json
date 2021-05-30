@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+      "downstream": "latest",
+      "mongoose": "^5.12.12"
+  }
+}
