@@ -1,20 +1,19 @@
 /**
- * An example that demonstrates how to build a custom
- * channel to aggregate data from your own sources.
+ * An example that uses a custom Channel to aggregate data from a fruit API.
  */
 
  const { Downstream } = require('downstream');
- const FakeChannel = require('./fakeChannel');
- const startFakeServer = require('./fakeServer');
+ const FruitChannel = require('./fruitChannel');
+ const startFruitServer = require('./fruitServer');
  
- const fakeChannel = new FakeChannel({
+ const fruitChannel = new FruitChannel({
      interval: 1000, // poll every second
  });
  
  const downstream = new Downstream();
  
  // register channels
- downstream.register(fakeChannel);
+ downstream.register(fruitChannel);
  
  // use hooks
  downstream.use(async (post, next) => {
@@ -27,8 +26,8 @@
  // log any errors
  downstream.on('error', console.log);
  
- // start our fake server
- startFakeServer();
+ // start our fruit API
+ startFruitServer();
  
  // start Downstream
  downstream.start();
