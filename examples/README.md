@@ -1,7 +1,5 @@
 # Examples
 
-Several fun examples are included in this folder to demonstrate how to use different parts of Downstream in your project.
-
 ## Running an example
 
 1. Copy the contents of the example folder to an empty folder.
