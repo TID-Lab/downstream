@@ -16,10 +16,10 @@ npm install downstream
 
 ## Usage
 
-1\. Downstream aggregates data via **[Channels](TODO)**. Use our **[built-in Channels](TODO)** to pull in posts from Facebook, Instagram, and Twitter, or **[create your own Channels](TODO)** to easily pull in data from other sources.
+1\. Downstream aggregates data via **[Channels](./docs/channels/channel.md)**. Use our **[built-in Channels](TODO)** to pull in posts from Facebook, Instagram, and Twitter, or **[create your own Channels](TODO)** to easily pull in data from other sources.
 
 ```javascript
-// channel.js
+// channels.js
 
 const { builtin } = require('downstream');
 const { TwitterStreamChannel } = builtin;
@@ -29,31 +29,39 @@ const credentials = {
     consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
 }
 
-module.exports = new TwitterStreamChannel({ credentials });
+const twitterChannel = new TwitterStreamChannel({ credentials });
+
+module.exports = { twitterChannel };
 ```
 
-2\. Access and mutate your aggregated data via **[hooks](TODO)**.
+2\. Access and mutate your aggregated data via **[hooks](./docs/downstream.md#Function-Hook(item,-next))**.
 
 ```javascript
-// hook.js
+// hooks.js
 
-module.exports = async function logHook(post, next) {
+async function logHook(post, next) {
   console.log(post);
   await next();
 }
+
+module.exports = { logHook };
 ```
 
-3\. Initialize and start a **[new Downstream instance](TODO)** to begin aggregating data.
+3\. Initialize and start a **[new Downstream instance](./docs/downstream.md)**.
+
 ```javascript
 // main.js
 
 const { Downstream } = require('downstream');
-const twitterChannel = require('./channel');
-const logHook = require('./hook');
+const { twitterChannel } = require('./channels');
+const { logHook } = require('./hooks');
 
 const downstream = new Downstream();
 
+// register Channels
 downstream.register(twitterChannel);
+
+// use hooks
 downstream.use(logHook);
 
 downstream.start();
@@ -65,11 +73,11 @@ Several [examples](/examples) are available in the `examples/` folder.
 
 ## Documentation
 
-Our detailed [API documentation](/docs/API.md) is available in the `docs/` folder.
+Our detailed [API documentation](/docs/) is available in the `docs/` folder.
 
 ## Contributing
 
-We welcome outside contributions! See [CONTRIBUTING.md](/CONTRIBUTING.md) for details.
+We welcome outside contributions! See our [Contributing Guidelines](/CONTRIBUTING.md) for details.
 
 ## License
 
