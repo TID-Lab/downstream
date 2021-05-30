@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "axios": "^0.21.1",
+    "downstream": "latest",
+    "express": "^4.17.1"
+  }
+}
