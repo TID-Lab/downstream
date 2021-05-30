@@ -1,5 +1,5 @@
 /**
- * TODO documentation
+ * An efficient circular queue data structure.
  */
 class CircularQueue<T> {
   capacity: number;

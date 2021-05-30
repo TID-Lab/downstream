@@ -3,12 +3,16 @@ import SocialMediaPost from '../../post';
 import PageChannel, { PageOptions } from '../../../channels/page';
 
 export interface CrowdTangleOptions extends PageOptions {
-  queryParams?: { [key: string]: any };
   dashboardToken: string;
   isCrossPlatform?: boolean;
+  queryParams?: { [key: string]: any };
   nextPageURL?: string;
 }
 
+/**
+ * A built-in Channel for aggregating posts as SocialMediaPosts
+ * from social media platforms supported by the CrowdTangle API.
+ */
 class CrowdTangleChannel extends PageChannel {
   private static BASE_URL:string = 'https://api.crowdtangle.com/';
 
@@ -28,6 +32,9 @@ class CrowdTangleChannel extends PageChannel {
 
   protected queryParams: { [key: string]: any };
 
+  /**
+   * Initializes a new CrowdTangleChannel.
+   */
   constructor(options:CrowdTangleOptions) {
     super(options);
 

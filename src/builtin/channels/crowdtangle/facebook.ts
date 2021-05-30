@@ -1,7 +1,7 @@
 import CrowdTangleChannel, { CrowdTangleOptions } from './crowdtangle';
 
 /**
- * TODO documentation
+ * A built-in Channel for aggregating Facebook posts as SocialMediaPosts.
  */
 class CrowdTangleFacebookChannel extends CrowdTangleChannel {
   constructor(options: CrowdTangleOptions) {

@@ -5,14 +5,14 @@ import { TWEET_FIELDS, USER_FIELDS, EXPANSIONS } from './shared/params';
 import parse from './shared/parse';
 import TwitterOptions from './shared/options';
 
-/**
- * TODO documentation
- */
 export interface TwitterPageOptions extends TwitterOptions, PageOptions {
   isRecent?: boolean;
   nextPageToken?: string;
 }
 
+/**
+ * A built-in Channel for aggregating tweets as SocialMediaPosts from Twitter through pagination.
+ */
 class TwitterPageChannel extends PageChannel {
   private static RECENT_INTERVAL:number = 2000;
 
@@ -30,6 +30,9 @@ class TwitterPageChannel extends PageChannel {
 
   protected cachedQueryParams?: { [key: string]: any };
 
+  /**
+   * Initializes a new TwitterPageChannel.
+   */
   constructor(options: TwitterPageOptions) {
     super(options);
 

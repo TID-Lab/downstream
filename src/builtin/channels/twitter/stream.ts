@@ -8,7 +8,7 @@ import parse from './shared/parse';
 import TwitterOptions from './shared/options';
 
 /**
- * TODO documentation
+ * A built-in Channel for aggregating tweets as SocialMediaPosts from Twitter through a live stream.
  */
 class TwitterStreamChannel extends Channel {
   private static TIMEOUT_MULTIPLIER:number = 1000;
@@ -23,6 +23,9 @@ class TwitterStreamChannel extends Channel {
 
   protected consecutiveErrorCount: number;
 
+  /**
+   * Initializes a new TwitterStreamChannel.
+   */
   constructor(options:TwitterOptions) {
     super();
 
@@ -51,6 +54,9 @@ class TwitterStreamChannel extends Channel {
     this.consecutiveErrorCount = 0;
   }
 
+  /**
+   * Starts the Twitter v2 API filtered stream.
+   */
   async start() {
     await super.start();
 
@@ -58,6 +64,9 @@ class TwitterStreamChannel extends Channel {
     this.listenToStream();
   }
 
+  /**
+   * Stops the Twitter v2 API filtered stream.
+   */
   async stop() {
     // close the Twitter stream
     if (this.stream) this.stream.close();

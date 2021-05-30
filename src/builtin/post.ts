@@ -1,5 +1,8 @@
 import { TimestampedItem } from '../channels/page';
 
+/**
+ * A social media platform.
+ */
 export const enum Platform {
   Facebook = 'facebook',
   Instagram = 'instagram',
@@ -19,7 +22,7 @@ interface SocialMediaOptions {
 }
 
 /**
- * TODO documentation
+ * Represents a post on a social media platform.
  */
 class SocialMediaPost implements TimestampedItem {
   authoredAt: Date;

@@ -1,5 +1,5 @@
 /**
- * TODO documentation
+ * Default values for some Twitter v2 API query parameters.
  */
 const TWEET_FIELDS:string[] = [
   'author_id',
