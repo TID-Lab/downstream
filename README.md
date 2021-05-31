@@ -77,6 +77,13 @@ Several [examples](/examples) are available in the `examples/` folder.
 ## Contributing
 
 See our [Contributing Guidelines](/CONTRIBUTING.md) for details. We welcome outside contributions!
+
+## People
+
+Downstream is actively built and maintained by the [Technologies & International Development](http://tid.gatech.edu/) (T+ID) Lab at Georgia Tech to support the [Aggie platform](https://github.com/tid-lab/aggie) and other research initiatives.
+
+Thank you to the original authors to the [Aggie platform](https://github.com/tid-lab/aggie) whose work on the backend of Aggie inspired the idea and architecture for Downstream. This project would not be possible without them!
+
 ## License
 
 [GNU GPLv3](/LICENSE.txt)
