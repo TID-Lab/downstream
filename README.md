@@ -20,7 +20,7 @@ npm install downstream
 
 - **[Built-in Channels](./examples#2-built-in-channels)** aggregate posts from platforms like Facebook, Instagram, or Twitter.
 - **[Create your own Channels](./examples#3-custom-channels)** to easily aggregate data from other platforms and sources.
-- **[Use a WebChannel](./examples#6-connecting-two-downstream-instances-via-a-webchannel)** to expose Downstream on your local network or string multiple Downstream instances together via a simple HTTP interface.
+- **[Use a WebChannel](./examples#6-using-a-webchannel)** to expose Downstream on your local network or string multiple Downstream instances together via a simple HTTP interface.
 
 ```javascript
 // channels.js
