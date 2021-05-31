@@ -61,6 +61,10 @@ Annotates the sentences of each item with their language.
 
 An example that saves tweets about cats to your local MongoDB database.
 
+## 6. [Connecting two Downstream instances via a WebChannel](./web)
+
+An example that demonstrates how a WebChannel might be used to connect two Downstream instances together.
+
 **This example demonstrates:**
 
 - Saving aggregated data to a database

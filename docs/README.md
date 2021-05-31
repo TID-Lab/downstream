@@ -14,6 +14,7 @@ Welcome to the documentation for the Downstream API. See [`/examples`](/examples
   - [PageChannel](./channels/page.md)
     - [PageOptions](./channels/page.md#interface-pageoptions)
     - [TimestampedItem](./channels/page.md#interface-timestampeditem)
+  - [WebChannel](./channels/web.md)
 - [Item](./item.md)
 
 ## Built-in API

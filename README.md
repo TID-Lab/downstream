@@ -16,7 +16,11 @@ npm install downstream
 
 ## Usage
 
-1\. Downstream aggregates data via **[Channels](./docs/channels/channel.md)**. Use our **[built-in Channels](./examples#2-built-in-channels)** to pull in posts from platforms like Facebook, Instagram, and Twitter, or **[create your own Channels](./examples#3-custom-channels)** to easily pull in data from other sources.
+1\. Downstream aggregates data via **[Channels](./docs/channels/channel.md)**.
+
+- **[Built-in Channels](./examples#2-built-in-channels)** aggregate posts from platforms like Facebook, Instagram, or Twitter.
+- **[Create your own Channels](./examples#3-custom-channels)** to easily aggregate data from other platforms and sources.
+- **[Use a WebChannel](./examples#6-connecting-two-downstream-instances-via-a-webchannel)** to expose Downstream on your local network or string multiple Downstream instances together via a simple HTTP interface.
 
 ```javascript
 // channels.js
@@ -82,7 +86,7 @@ See our [Contributing Guidelines](/CONTRIBUTING.md) for details. We welcome outs
 
 Downstream is actively built and maintained by the [Technologies & International Development](http://tid.gatech.edu/) (T+ID) Lab at Georgia Tech to support the [Aggie platform](https://github.com/tid-lab/aggie) and other research initiatives.
 
-Thank you to the original authors to the [Aggie platform](https://github.com/tid-lab/aggie) whose work on the backend of Aggie inspired the idea and architecture for Downstream. This project would not be possible without them!
+This project would not be possible without the amazing work done by the original contributors to the [Aggie platform](https://github.com/tid-lab/aggie) whose work on the original backend for Aggie inspired the idea and architecture behind Downstream. Thank you.
 
 ## License
 
