@@ -11,7 +11,7 @@ class FruitChannel extends PollChannel {
         const res = await axios({
             method: 'GET',
             baseURL: 'http://localhost:3000',
-            url: '/api/=fruits'
+            url: '/api/fruits'
         });
         const fruit = res.data;
 
