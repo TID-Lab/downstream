@@ -233,12 +233,12 @@ describe('Downstream', () => {
     let firstItem = true;
     async function hook(i, next) {
       if (firstItem) {
-        expect(i.from).to.equal(id1.toString());
+        expect(i.channel).to.equal(id1.toString());
         firstItem = false;
         await next();
         return;
       }
-      expect(i.from).to.equal(id2.toString());
+      expect(i.channel).to.equal(id2.toString());
       downstream.hookList = [];
       await downstream.stop();
       await next();

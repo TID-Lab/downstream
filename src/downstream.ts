@@ -269,7 +269,7 @@ class Downstream extends EventEmitter {
     if (item) {
       // tag the outgoing item with a Channel ID
       id = Object.keys(this.channels).find((key) => this.channels[key] === channel);
-      if (id) item.from = id.toString();
+      if (id) item.channel = id.toString();
 
       // try to call item hook on the new item
       try {

@@ -53,11 +53,6 @@ The textual content of the post.
 
 Additional raw data about the post returned by an external data source like a web API.
 
-## `socialMediaPost.from?`
-- Type: `string`
-
-The ID of the [Channel](../channels/channel.md) that the post came from.
-
 ## `socialMediaPost.getTimestamp()`
 - Returns: [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)
 
