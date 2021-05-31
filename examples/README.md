@@ -57,13 +57,9 @@ Annotates the sentences of each item with their language.
 - Mutating items in your hook
 - Writing your own Channel
 
-## 5. [Saving aggregated data to a database](./cats)
+## 5. [Saving aggregated data](./cats)
 
 An example that saves tweets about cats to your local MongoDB database.
-
-## 6. [Connecting two Downstream instances via a WebChannel](./web)
-
-An example that demonstrates how a WebChannel might be used to connect two Downstream instances together.
 
 **This example demonstrates:**
 
@@ -73,3 +69,12 @@ To run this example, you'll need to set the following environment variables to s
 
 - `TWITTER_CONSUMER_KEY` - a Twitter v2 API consumer key
 - `TWITTER_CONSUMER_SECRET`- a Twitter v2 API consumer secret
+
+## 6. [Using a WebChannel](./web)
+
+An example that demonstrates how a WebChannel might be used to connect two Downstream instances together.
+
+**This example demonstrates:**
+
+- Using a WebChannel
+- Linking two Downstream instances together
