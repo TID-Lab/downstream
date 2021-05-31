@@ -26,7 +26,7 @@ const webChannel = new WebChannel('items');
 - Type: `number`
 - Default: `3000`
 
-The port that the backround HTTP server runs on. Change this field before starting any [WebChannel](#class-webchannel) to change the port to a value other than the default.
+The port that the background HTTP server runs on.
 
 ## `webChannel.start()`
 - Returns: [Promise\<void\>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
