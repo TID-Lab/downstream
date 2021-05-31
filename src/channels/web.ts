@@ -107,7 +107,7 @@ function stopWebServer(): Promise<void> {
 }
 
 /**
- * TODO documentation
+ * A Channel that receives Items via its mounted path on a background HTTP server.
  */
 class WebChannel extends Channel {
   protected path: string;
@@ -120,6 +120,10 @@ class WebChannel extends Channel {
     this.path = path;
   }
 
+  /**
+   * Mounts this WebChannel on the background HTTP server using its path.
+   * Starts the HTTP server in the background if no other WebChannels have started yet.
+   */
   async start(): Promise<void> {
     // return if the WebChannel already started
     if (this.started) return;
@@ -135,6 +139,10 @@ class WebChannel extends Channel {
     if (!webServerStarted) await startWebServer(this, WebChannel.PORT);
   }
 
+  /**
+   * Unmounts this WebChannel from the background HTTP server.
+   * Stops the HTTP server running in the background if no other WebChannels are still active.
+   */
   async stop(): Promise<void> {
     delete webChannels[this.path];
     if (Object.keys(webChannels).length === 0) {
