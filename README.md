@@ -68,6 +68,9 @@ downstream.register(twitterChannel);
 // use hooks
 downstream.use(logHook);
 
+// log any errors
+downstream.on('error', console.log);
+
 downstream.start();
 ```
 ## Documentation
