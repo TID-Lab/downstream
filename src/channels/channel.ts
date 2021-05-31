@@ -1,6 +1,6 @@
 import EventEmitter from 'events';
 import type Item from '../item';
-import CircularQueue from '../queue';
+import CircularQueue from '../util/circularQueue';
 
 /**
  * A Channel represents a stream of Items from some external data source, like a web API.
