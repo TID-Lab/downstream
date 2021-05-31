@@ -3,4 +3,5 @@
  */
 export default interface Item {
   from?: string;
+  [x: string]: any;
 }
