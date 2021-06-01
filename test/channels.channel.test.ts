@@ -6,13 +6,14 @@ describe('Channel', () => {
   let channel;
 
   before((done) => {
-    channel = new Channel();
+    channel = new Channel({ capacity: 67 });
     done();
   });
 
   it('should instantiate a new Channel', (done) => {
     expect(channel.started).to.be.false;
     expect(channel.queue instanceof CircularQueue).to.be.true;
+    expect(channel.queue.capacity).to.equal(67);
     done();
   });
 

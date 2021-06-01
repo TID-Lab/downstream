@@ -1,7 +1,7 @@
 import http from 'http';
 import type { Socket } from 'net';
 import { URL } from 'url';
-import Channel from './channel';
+import Channel, { ChannelOptions } from './channel';
 
 let webServerStarted = false;
 
@@ -106,6 +106,10 @@ function stopWebServer(): Promise<void> {
   });
 }
 
+export interface WebOptions extends ChannelOptions {
+  path: string;
+}
+
 /**
  * A Channel that receives Items via its mounted path on a background HTTP server.
  */
@@ -114,10 +118,10 @@ class WebChannel extends Channel {
 
   public static PORT: number = 3000;
 
-  constructor(path: string) {
-    super();
+  constructor(options: WebOptions) {
+    super(options);
 
-    this.path = path;
+    this.path = options.path;
   }
 
   /**

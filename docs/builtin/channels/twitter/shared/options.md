@@ -1,4 +1,5 @@
 # Interface: `TwitterOptions`
+- extends [`ChannelOptions`](../../.././../channels/channel.md#interface-channeloptions)
 
 ## `twitterOptions.credentials`
 - Type: [TwitterCredentials](#interface-twittercredentials)

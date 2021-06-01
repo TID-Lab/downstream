@@ -51,6 +51,7 @@ class CustomPageChannel extends PageChannel {
 After `pageChannel.fetchPage()` is called, the [PageChannel](#class-pagechannel) sorts each [TimestampedItem](#interface-timestampeditem) in ascending order by each of their timestamps, enqueues each, and calls the [`onFetch()`](#pageoptionsonfetchlasttimestamp) callback with the updated value of [`pageChannel.lastTimestamp`](#pagechannellasttimestamp) (the most recent timestamp among each [TimestampedItem](#interface-timestampeditem)) as an argument.
 
 # Interface: `PageOptions`
+- extends [`PollOptions`](./poll.md#interface-polloptions)
 
 ```javascript
 const lastTimestamp = // retrieve from persistent storage (ie. a database) on startup

@@ -2,6 +2,10 @@ import EventEmitter from 'events';
 import type Item from '../item';
 import CircularQueue from '../util/circularQueue';
 
+export interface ChannelOptions {
+  capacity?: number;
+}
+
 /**
  * A Channel represents a stream of Items from some external data source, like a web API.
  */
@@ -13,11 +17,11 @@ class Channel extends EventEmitter {
   /**
    * Initializes a new Channel.
    */
-  constructor() {
+  constructor(options: ChannelOptions = {}) {
     super();
 
     this.started = false;
-    this.queue = new CircularQueue<Item>();
+    this.queue = new CircularQueue<Item>(options.capacity);
   }
 
   /**

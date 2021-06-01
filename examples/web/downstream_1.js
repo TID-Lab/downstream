@@ -11,7 +11,7 @@ async function logHook(item, next) {
   await next();
 }
 
-const webChannel = new WebChannel('demo');
+const webChannel = new WebChannel({ path: 'demo' });
 
 // register channels
 downstream.register(webChannel);

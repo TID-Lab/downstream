@@ -1,6 +1,6 @@
-import Channel from './channel';
+import Channel, { ChannelOptions } from './channel';
 
-export interface PollOptions {
+export interface PollOptions extends ChannelOptions {
   delay?: number;
   interval?: number;
 }
@@ -24,7 +24,7 @@ abstract class PollChannel extends Channel {
   private static DEFAULT_INTERVAL: number = 10000;
 
   constructor(options: PollOptions = {}) {
-    super();
+    super(options);
 
     this.delay = options.delay || 0;
     this.interval = options.interval || PollChannel.DEFAULT_INTERVAL;

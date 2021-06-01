@@ -6,14 +6,14 @@ class TestWebChannel extends WebChannel {
   path;
 }
 
-describe('builtin: WebChannel', () => {
+describe('WebChannel', () => {
   let webChannel: TestWebChannel;
   let otherWebChannel: TestWebChannel;
 
   before(() => {
     WebChannel.PORT = 4000;
 
-    webChannel = new TestWebChannel('test');
+    webChannel = new TestWebChannel({ path: 'test' });
   });
 
   it('should extend WebChannel', (done) => {
@@ -108,7 +108,7 @@ describe('builtin: WebChannel', () => {
   });
 
   it('should throw an error when a path already exists', (done) => {
-    const badWebChannel = new WebChannel('test');
+    const badWebChannel = new WebChannel({ path: 'test' });
 
     badWebChannel.start().catch((err) => {
       expect(err instanceof Error).to.be.true;
@@ -117,7 +117,7 @@ describe('builtin: WebChannel', () => {
   });
 
   it('should mount multiple WebChannels', async () => {
-    otherWebChannel = new TestWebChannel('foo');
+    otherWebChannel = new TestWebChannel({ path: 'foo' });
     await otherWebChannel.start();
     const response = await axios({
       method: 'POST',

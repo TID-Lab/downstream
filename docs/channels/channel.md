@@ -6,14 +6,16 @@ A Channel represents a stream of [Items](../item.md) from some external data sou
 
 Internally, Channels work by maintaining a circular queue of some fixed capacity that temporarily stores as many [Items](../item.md) as possible until they can be dequeued and fed into the [Downstream](../downstream.md) instance to which this [Channel](#class-channel) is registered.
 
-## `Channel()`
+## `Channel(options?)`
+
+- `options?`: [ChannelOptions](#interface-channeloptions)
 
 Initializes a new Channel.
 
 ```javascript
 const { Channel } = require('downstream');
 
-const channel = new Channel();
+const channel = new Channel({ capacity: 100 });
 ```
 
 ## Event: `error`
@@ -79,3 +81,11 @@ This function is used by a [Downstream](../downstream.md) instance to feed [Item
 - Returns: `boolean`
 
 Returns whether the internal queue is empty.
+
+# Interface: ChannelOptions
+
+## `channelOptions.capacity?`
+- Type: `number`
+- Default: `200`
+
+The capacity of the internal [Channel](#class-channel) queue.

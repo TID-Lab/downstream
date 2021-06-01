@@ -4,9 +4,9 @@
 
 A [`Channel`](./channel.md) that polls an external data source on a regular interval via the [`fetch()`](#abstract-pollchannelfetch) function.
 
-## `PollChannel(options)`
+## `PollChannel(options?)`
 
-- `options`: [PollOptions](#interface-polloptions)
+- `options?`: [PollOptions](#interface-polloptions)
 
 Initializes a new PollChannel.
 
@@ -45,6 +45,7 @@ class CustomPollChannel extends PollChannel {
 ```
 
 # Interface: `PollOptions`
+- extends [`ChannelOptions`](./channel.md#interface-channeloptions)
 
 ```javascript
 const pollOptions = {
