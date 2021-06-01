@@ -39,7 +39,7 @@ Both members of the T+ID Lab and outside contributors should follow the workflow
     - Run `npm version minor` for `MINOR`-level changes.
     - Run `npm version major` for `MAJOR`-level changes.
 
-The `npm version` script will check out `master`; merge the latest changes from `develop` into `master`; commit and tag the bumped version; push the tagged commit to the Downstream repo; check out `develop` once again; and finally rebase `develop` to `master`.
+The `npm version` script will check out `master`; merge the latest changes from `develop` into `master`; commit and tag the bumped version; push the tagged commit to the Downstream repo; check out `develop` once again; rebase `develop` to `master`; and finally push rebased `develop` to the new Downstream repo.
 
 Meanwhile, Travis CI will pick up the new tag pushed to `master` and publish the latest version of Downstream to NPM for you automatically. Voila! The PR has been successfully merged.
 
