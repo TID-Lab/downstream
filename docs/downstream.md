@@ -71,6 +71,12 @@ const channel = downstream.channel(id);
 await channel.stop();
 ```
 
+## `downstream.getChannels()`
+- Returns: [Channel](./channels/channel.md)[]
+
+Returns the Channels registered on this Downstream instance.
+
+
 ## `downstream.use(hook)`
 
 - `hook`: [Hook()](#function-hookitem-next)

@@ -119,8 +119,15 @@ describe('Downstream', () => {
     done();
   });
 
-  it('should return registered Channels', (done) => {
+  it('should return a registered Channel by ID', (done) => {
     expect(downstream.channel(id1)).to.equal(channel1);
+    done();
+  });
+
+  it('should return a registered Channels', (done) => {
+    const channels = downstream.getChannels();
+    expect(channels.length).to.equal(1);
+    expect(channels[0]).to.equal(channel1);
     done();
   });
 

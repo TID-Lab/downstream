@@ -202,6 +202,13 @@ class Downstream extends EventEmitter {
   }
 
   /**
+   * Returns the Channels registered on this Downstream instance.
+   */
+  getChannels(): Channel[] {
+    return Object.values(this.channels);
+  }
+
+  /**
    * Adds another hook to an ordered set that will get called
    * one after the other on each Item as they are fed in from the registered Channels.
    */
