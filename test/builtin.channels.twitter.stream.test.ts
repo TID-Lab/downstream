@@ -51,20 +51,37 @@ describe.skip('builtin: TwitterStreamChannel', () => {
     done();
   });
 
-  // Skip this test if the stream rules are such that posts rarely come in
-  it.skip('should stream posts from the Twitter API', function (done) {
-  // it('should stream posts from the Twitter API', function (done) {
+  it('should stream posts from the Twitter API', function (done) {
     // increase timeout as needed with a poor Internet connection
     this.timeout(10000);
 
-    twChannel.once('notEmpty', async () => {
-      const post = twChannel.dequeue();
-      expect(post instanceof SocialMediaPost).to.be.true;
+    async function configureRules() {
+      // get the old rules
+      const ruleIds = (
+        await twChannel.getStreamRules()
+      ).map(({ id }) => id);
 
-      await twChannel.stop();
-      done();
+      // delete old rules
+      await twChannel.updateStreamRules({ delete: { ids: ruleIds } });
+
+      // add a rule that'll stream posts like crazy
+      await twChannel.updateStreamRules({
+        add: [
+          { value: 'dogs', tag: 'doggos' },
+        ],
+      });
+    }
+
+    configureRules().then(() => {
+      twChannel.once('notEmpty', async () => {
+        const post = twChannel.dequeue();
+        expect(post instanceof SocialMediaPost).to.be.true;
+
+        await twChannel.stop();
+        done();
+      });
+
+      twChannel.start();
     });
-
-    twChannel.start();
   });
 });

@@ -79,17 +79,31 @@
  });
  
  /**
-  * Aggregates... whatever tweets you've configured your Twitter filtered stream to send your way ¯\_(ツ)_/¯
-  * 
-  * Downstream intentionally does not provide helper methods for configuring your Twitter stream rules.
-  * For this channel to aggregate tweets about dogs, you'll have to configure a rule yourself!
-  * 
+  * Aggregates tweets about dogs being authored right now.
+  *
   * Requires:
   * - Twitter v2 API credentials
   */
-  const twitterStreamChannel = new TwitterStreamChannel({
+const twitterStreamChannel = new TwitterStreamChannel({
      credentials: twitterCredentials,
- });
+});
+
+async function setDogRule() {
+  // get the old rules
+  const ruleIds = (
+    await twitterStreamChannel.getStreamRules()
+  ).map(({ id }) => id);
+
+  // delete old rules
+  await twitterStreamChannel.updateStreamRules({ delete: { ids: ruleIds } });
+
+  // set our doggo rule
+  await twitterStreamChannel.updateStreamRules({
+    add: [
+      { value: 'dogs', tag: 'doggos' },
+    ],
+  });
+
  
  const downstream = new Downstream();
  
@@ -111,4 +125,8 @@
  // log any errors
  downstream.on('error', console.log);
  
- downstream.start();
+(async () => {
+  await setDogRule(); // configure the rules for our Twitter stream
+
+  await downstream.start();
+})();

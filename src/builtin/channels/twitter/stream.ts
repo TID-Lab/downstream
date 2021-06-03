@@ -74,6 +74,29 @@ class TwitterStreamChannel extends Channel {
   }
 
   /**
+   * Returns the rules for the Twitter v2 API filtered stream.
+   */
+  async getStreamRules(): Promise<any[]> {
+    const body = await this.twitter.get('tweets/search/stream/rules', {});
+    if (!body || typeof body !== 'object') {
+      return [];
+    }
+    const responseBody:any = body;
+    const { data: rules } = responseBody;
+    if (!Array.isArray(rules)) {
+      return [];
+    }
+    return rules;
+  }
+
+  /**
+   * Updates the rules for the Twitter v2 API filtered stream using given request body.
+   */
+  async updateStreamRules(body: { [key: string]: any }): Promise<any> {
+    return this.twitter.post('tweets/search/stream/rules', body);
+  }
+
+  /**
    * Listen to the Twitter stream.
    */
   protected async listenToStream() {
