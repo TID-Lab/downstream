@@ -36,7 +36,10 @@ class CrowdTangleChannel extends PageChannel {
    * Initializes a new CrowdTangleChannel.
    */
   constructor(options:CrowdTangleOptions) {
-    super(options);
+    super({
+      ...options,
+      namespace: options.namespace || 'crowdtangle',
+    });
 
     const queryParams:{ [key: string]: any } = options.queryParams || {};
 

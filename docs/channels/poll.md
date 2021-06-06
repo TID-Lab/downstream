@@ -4,6 +4,8 @@
 
 A [`Channel`](./channel.md) that polls an external data source on a regular interval via the [`fetch()`](#abstract-pollchannelfetch) function.
 
+**Use the same [namespace](#polloptionsnamespace)** (and interval) for [PollChannels](#class-pollchannel) sharing the same external data source (e.g. a single web API endpoint) to stay under rate limits. [PollChannels](#class-pollchannel) using the same [namespace](#polloptionsnamespace) are pooled together so that their [`fetch()`](#abstract-pollchannelfetch) functions are each called one-by-one at their shared interval.
+
 ## `PollChannel(options?)`
 
 - `options?`: [PollOptions](#interface-polloptions)
@@ -13,7 +15,7 @@ Initializes a new PollChannel.
 ```javascript
 const { PollChannel } = require('downstream');
 
-const pollChannel = new PollChannel({ interval: 5000 });
+const pollChannel = new PollChannel({ namespace: 'foo', interval: 5000 });
 ```
 
 ## `pollChannel.start()`
@@ -49,16 +51,15 @@ class CustomPollChannel extends PollChannel {
 
 ```javascript
 const pollOptions = {
-  delay: 2000,
+  namespace: 'foo',
   interval: 5000
 };
 ```
 
-## `pollOptions.delay?`
-- Type: `number`
-- Default: `0`
+## `pollOptions.namespace`
+- Type: `string`
 
-The delay in milliseconds before the first poll.
+The namespace of the [PollChannel](#class-pollchannel).
 
 ## `pollOptions.interval?`
 - Type: `number`

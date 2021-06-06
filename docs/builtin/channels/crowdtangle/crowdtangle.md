@@ -69,3 +69,7 @@ The query parameters passed to the CrowdTangle API on each call to the endpoints
 An optional most recent "next page" URL returned by the CrowdTangle API to start paginating from where this [CrowdTangleChannel](#class-crowdtanglechannel) might have last left off.
 
 CrowdTangle API endpoints that support pagination return a helpful "next page" URL that indicates what URL to point to next in order to fetch the next page of data.
+
+## `crowdtangleOptions.namespace?`
+- Type: `string`
+- Default: `crowdtangle`

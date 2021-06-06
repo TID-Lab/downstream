@@ -21,6 +21,10 @@ The query parameters passed to the Twitter v2 API. Several of these parameters h
 
 \* Included only in [TwitterPageChannel](../page.md) query parameters.
 
+## `twitterOptions.namespace?`
+- Type: `string`
+- Default: `twitter`
+
 # Interface: `TwitterCredentials`
 
 A collection of secrets and keys required for access to the Twitter v2 API.

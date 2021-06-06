@@ -34,7 +34,10 @@ class TwitterPageChannel extends PageChannel {
    * Initializes a new TwitterPageChannel.
    */
   constructor(options: TwitterPageOptions) {
-    super(options);
+    super({
+      ...options,
+      namespace: options.namespace || 'twitter',
+    });
 
     const {
       credentials,

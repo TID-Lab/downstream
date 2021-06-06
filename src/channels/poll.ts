@@ -1,7 +1,10 @@
 import Channel, { ChannelOptions } from './channel';
+import RateLimitPool from '../util/rateLimitPool';
+
+const rateLimitPools: { [key: string]: RateLimitPool } = {};
 
 export interface PollOptions extends ChannelOptions {
-  delay?: number;
+  namespace?: string;
   interval?: number;
 }
 
@@ -13,20 +16,22 @@ abstract class PollChannel extends Channel {
   /**
    * Fetches data from an external source and enqueues it as Items.
    */
-  protected abstract fetch(): Promise<void>;
+  abstract fetch(): Promise<void>;
 
-  protected delay: number;
+  protected namespace: string;
 
   protected interval: number;
 
-  protected timeout?:ReturnType<typeof setTimeout>;
-
   private static DEFAULT_INTERVAL: number = 10000;
 
-  constructor(options: PollOptions = {}) {
+  constructor(options: PollOptions) {
     super(options);
 
-    this.delay = options.delay || 0;
+    if (!options.namespace) {
+      throw new Error('A PollChannel must use a namespace.');
+    }
+
+    this.namespace = options.namespace;
     this.interval = options.interval || PollChannel.DEFAULT_INTERVAL;
   }
 
@@ -39,39 +44,29 @@ abstract class PollChannel extends Channel {
 
     await super.start();
 
-    // run the first poll
-    if (this.delay) {
-      setTimeout(this.poll.bind(this), this.delay);
-    } else {
-      this.poll();
+    if (!rateLimitPools[this.namespace]) {
+      rateLimitPools[this.namespace] = new RateLimitPool({
+        interval: this.interval,
+      });
     }
+    const rateLimitPool = rateLimitPools[this.namespace];
+    rateLimitPool.add(this);
   }
 
   /**
    * Stops polling the external data source.
    */
   async stop(): Promise<void> {
-    if (this.timeout) clearTimeout(this.timeout);
-    delete this.timeout;
-    await super.stop();
-  }
-
-  protected async poll(): Promise<void> {
-    // return if the PollChannel is not started
-    if (!this.started) return;
-
-    // try to call `fetch`
-    try {
-      await this.fetch();
-    } catch (err) {
-      this.emit('error', err);
+    if (!rateLimitPools[this.namespace]) {
+      throw new Error('No rate limit pool found.');
+    }
+    const rateLimitPool = rateLimitPools[this.namespace];
+    rateLimitPool.remove(this);
+    if (rateLimitPool.isEmpty()) {
+      delete rateLimitPools[this.namespace];
     }
 
-    // schedule the next poll
-    this.timeout = setTimeout(
-      this.poll.bind(this),
-      this.interval,
-    );
+    await super.stop();
   }
 }
 
