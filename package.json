@@ -1,27 +1,24 @@
 {
   "name": "downstream",
   "version": "0.0.62",
-  "description": "",
-  "main": "build/index.js",
-  "types": "build/index.d.ts",
-  "scripts": {
-    "build": "rimraf build/ && tsc --project .",
-    "test": "ts-mocha --recursive test/*",
-    "prepare": "npm run build",
-    "preversion": "git checkout master && git merge develop",
-    "postversion": "git push && git push --tags && git checkout develop && git rebase master && git push origin HEAD"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/TID-Lab/downstream"
-  },
-  "keywords": [],
-  "author": "",
+  "description": "A multi-platform and real-time social media aggregation framework.",
+  "author": "Max Karpawich <maxkarpawich@gmail.com>",
   "license": "GPL-3.0-or-later",
-  "bugs": {
-    "url": "https://github.com/TID-Lab/downstream/issues"
-  },
+  "repository": "TID-Lab/downstream",
   "homepage": "https://github.com/TID-Lab/downstream",
+  "keywords": [
+    "social",
+    "media",
+    "social-media",
+    "platform",
+    "typescript",
+    "aggregator",
+    "aggregate",
+    "facebook",
+    "twitter",
+    "instagram",
+    "framework"
+  ],
   "devDependencies": {
     "@tsconfig/node10": "^1.0.7",
     "@types/mocha": "^8.2.2",
@@ -49,5 +46,14 @@
   },
   "engines": {
     "node": ">= 12.9.0"
-  }
+  },
+  "scripts": {
+    "build": "rimraf build/ && tsc --project .",
+    "test": "ts-mocha --recursive test/*",
+    "prepare": "npm run build",
+    "preversion": "git checkout master && git merge develop",
+    "postversion": "git push && git push --tags && git checkout develop && git rebase master && git push origin HEAD"
+  },
+  "main": "build/index.js",
+  "types": "build/index.d.ts"
 }
