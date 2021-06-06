@@ -2,9 +2,12 @@
 
 - extends [`Channel`](./channel.md)
 
-A [`Channel`](./channel.md) that polls an external data source on a regular interval via the [`fetch()`](#abstract-pollchannelfetch) function.
+A [`Channel`](./channel.md) that polls an external data source on a regular [interval](#polloptionsinterval) via a [`fetch()`](#abstract-pollchannelfetch) function.
 
-**Use the same [namespace](#polloptionsnamespace)** (and interval) for [PollChannels](#class-pollchannel) sharing the same external data source (e.g. a single web API endpoint) to stay under rate limits. [PollChannels](#class-pollchannel) using the same [namespace](#polloptionsnamespace) are pooled together so that their [`fetch()`](#abstract-pollchannelfetch) functions are each called one-by-one at their shared interval.
+
+
+[PollChannels](#class-pollchannel) in the same [namespace](#polloptionsnamespace) will take turns fetching data on their shared [interval](#polloptionsinterval). This means that you can 
+pool together [PollChannels](#class-pollchannels) that share a rate-limited external data source like an API endpoint in the same [namespace](#polloptionsnamespace) to guarantee that those rate limits will not be exceeded.
 
 ## `PollChannel(options?)`
 
