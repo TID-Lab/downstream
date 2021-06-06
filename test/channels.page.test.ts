@@ -22,7 +22,7 @@ class TestPageChannel extends PageChannel {
   i: number;
 
   constructor() {
-    super();
+    super({ namespace: 'test' });
 
     this.i = 0;
     this.lastTimestamp = now;
