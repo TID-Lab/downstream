@@ -7,6 +7,7 @@ const TWEET_FIELDS:string[] = [
   'geo',
   'id',
   'referenced_tweets',
+  'public_metrics',
 ];
 
 const USER_FIELDS:string[] = [
