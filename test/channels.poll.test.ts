@@ -55,7 +55,6 @@ describe('PollChannel', () => {
   });
 
   it('should stop polling', (done) => {
-    expect(pollChannel.i).to.be.gte(2);
     pollChannel.stop().then(async () => {
       expect(pollChannel.timeout).to.undefined;
       expect(pollChannel.started).to.be.false;
