@@ -15,7 +15,7 @@ The query parameters passed to the Twitter v2 API. Several of these parameters h
 | Query parameter   | Default value   |
 | ----------------- | ------------- |
 | `expansions`      | [ `'author_id'` ]      |
-| `tweet.fields`    | [ `'author_id'`, `'created_at'`, `'geo'`, `'id'`, `'referenced_tweets'` ]        |
+| `tweet.fields`    | [ `'author_id'`, `'created_at'`, `'geo'`, `'id'`, `'referenced_tweets'`, `'public_metrics'` ]        |
 | `user.fields`     | [`'id'`, `'location'`, `'public_metrics'`, `'username'`, `'verified'` ]         |
 | `max_results`* | `100` |
 
