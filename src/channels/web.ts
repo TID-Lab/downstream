@@ -1,6 +1,7 @@
 import http from 'http';
 import type { Socket } from 'net';
 import { URL } from 'url';
+import Item from '../item';
 import Channel, { ChannelOptions } from './channel';
 
 let webServerStarted = false;
@@ -51,7 +52,7 @@ function onRequest(req, res) {
 
   req.on('end', () => {
     try {
-      const item = JSON.parse(Buffer.concat(chunks).toString());
+      const item = webChannel.parse(Buffer.concat(chunks));
       webChannel.enqueue(item);
       res.statusCode = 200;
       res.end();
@@ -153,6 +154,13 @@ class WebChannel extends Channel {
       await stopWebServer();
     }
     await super.stop();
+  }
+
+  /**
+   * Parses an Item from a HTTP request body buffer.
+   */
+  parse(body: Buffer): Item {
+    return JSON.parse(body.toString());
   }
 }
 

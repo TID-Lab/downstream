@@ -42,6 +42,14 @@ Unmounts this [WebChannel](#class-webchannel) from the background HTTP server.
 
 Stops the HTTP server running in the background if no other [WebChannels](#class-webchannel) are still active.
 
+## `webChannel.parse(body)`
+- `body`: [Buffer](https://nodejs.org/docs/latest-v12.x/api/buffer.html#buffer_buffer)
+- Returns: [Item](../item.md)
+
+Parses an Item from a HTTP request body buffer.
+
+By default, this function parses the buffer directly as a JSON object. Override this function to support a custom request body format.
+
 # Interface: `WebOptions`
 - extends [`ChannelOptions`](./channel.md#interface-channeloptions)
 
