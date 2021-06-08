@@ -28,7 +28,7 @@ abstract class PollChannel extends Channel {
     super(options);
 
     if (!options.namespace) {
-      throw new Error('A PollChannel must use a namespace.');
+      throw new Error('All PollChannels must be in a namespace.');
     }
 
     this.namespace = options.namespace;
