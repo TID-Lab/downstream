@@ -72,4 +72,6 @@ CrowdTangle API endpoints that support pagination return a helpful "next page" U
 
 ## `crowdtangleOptions.namespace?`
 - Type: `string`
-- Default: `crowdtangle`
+- Default: `crowdtangle-<hash>`
+
+Where `<hash>` is a SHA-256 hash of the [`crowdtangleOptions.dashboardToken`](#crowdtangleoptionsdashboardtoken) string.

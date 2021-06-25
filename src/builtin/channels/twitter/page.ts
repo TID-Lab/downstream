@@ -4,6 +4,7 @@ import PageChannel, { PageOptions } from '../../../channels/page';
 import { TWEET_FIELDS, USER_FIELDS, EXPANSIONS } from './shared/params';
 import parse from './shared/parse';
 import TwitterOptions from './shared/options';
+import hash from '../../../util/hash';
 
 export interface TwitterPageOptions extends TwitterOptions, PageOptions {
   isRecent?: boolean;
@@ -36,7 +37,7 @@ class TwitterPageChannel extends PageChannel {
   constructor(options: TwitterPageOptions) {
     super({
       ...options,
-      namespace: options.namespace || 'twitter',
+      namespace: options.namespace || `twitter-${hash(JSON.stringify(options.credentials))}`,
     });
 
     const {

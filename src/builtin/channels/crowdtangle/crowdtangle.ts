@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import SocialMediaPost from '../../post';
 import PageChannel, { PageOptions } from '../../../channels/page';
+import hash from '../../../util/hash';
 
 export interface CrowdTangleOptions extends PageOptions {
   dashboardToken: string;
@@ -38,7 +39,7 @@ class CrowdTangleChannel extends PageChannel {
   constructor(options:CrowdTangleOptions) {
     super({
       ...options,
-      namespace: options.namespace || 'crowdtangle',
+      namespace: options.namespace || `crowdtangle-${hash(options.dashboardToken)}`,
     });
 
     const queryParams:{ [key: string]: any } = options.queryParams || {};
