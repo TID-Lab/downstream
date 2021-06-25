@@ -35,7 +35,10 @@ class TwitterPageChannel extends PageChannel {
    * Initializes a new TwitterPageChannel.
    */
   constructor(options: TwitterPageOptions) {
-    super(options);
+    super({
+      ...options,
+      namespace: options.namespace || `twitter-${hash(JSON.stringify(options.credentials))}`,
+    });
 
     const {
       credentials,
@@ -69,7 +72,6 @@ class TwitterPageChannel extends PageChannel {
       interval = TwitterPageChannel.ALL_INTERVAL;
     }
     this.interval = options.interval || interval;
-    this.namespace = options.namespace || `twitter-${hash(JSON.stringify(options.credentials))}`;
   }
 
   /**

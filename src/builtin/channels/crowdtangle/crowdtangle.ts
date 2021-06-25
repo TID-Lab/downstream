@@ -37,7 +37,10 @@ class CrowdTangleChannel extends PageChannel {
    * Initializes a new CrowdTangleChannel.
    */
   constructor(options:CrowdTangleOptions) {
-    super(options);
+    super({
+      ...options,
+      namespace: options.namespace || `crowdtangle-${hash(options.dashboardToken)}`,
+    });
 
     const queryParams:{ [key: string]: any } = options.queryParams || {};
 
@@ -56,7 +59,6 @@ class CrowdTangleChannel extends PageChannel {
       language: queryParams.language || CrowdTangleChannel.LANGUAGE,
     };
     this.interval = options.interval || CrowdTangleChannel.INTERVAL;
-    this.namespace = options.namespace || `crowdtangle-${hash(options.dashboardToken)}`;
   }
 
   async fetchPage(): Promise<SocialMediaPost[]> {
