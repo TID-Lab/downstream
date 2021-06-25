@@ -15,6 +15,8 @@ class TestTwitterPageChannel extends TwitterPageChannel {
   queryParams: { [key: string]: any };
 
   interval: number;
+
+  namespace: string;
 }
 
 describe.skip('builtin: TwitterPageChannel', () => {
@@ -51,6 +53,7 @@ describe.skip('builtin: TwitterPageChannel', () => {
     expect(twChannel.isRecent).to.be.false;
     expect(twChannel.queryParams).to.be.a('object');
     expect(twChannel.interval).to.be.a('number');
+    expect(twChannel.namespace.startsWith('twitter-')).to.be.true;
     done();
   });
 

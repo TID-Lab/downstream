@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import SocialMediaPost from '../../post';
 import PageChannel, { PageOptions } from '../../../channels/page';
+import hash from '../../../util/hash';
 
 export interface CrowdTangleOptions extends PageOptions {
   dashboardToken: string;
@@ -36,10 +37,7 @@ class CrowdTangleChannel extends PageChannel {
    * Initializes a new CrowdTangleChannel.
    */
   constructor(options:CrowdTangleOptions) {
-    super({
-      ...options,
-      namespace: options.namespace || 'crowdtangle',
-    });
+    super(options);
 
     const queryParams:{ [key: string]: any } = options.queryParams || {};
 
@@ -58,6 +56,7 @@ class CrowdTangleChannel extends PageChannel {
       language: queryParams.language || CrowdTangleChannel.LANGUAGE,
     };
     this.interval = options.interval || CrowdTangleChannel.INTERVAL;
+    this.namespace = options.namespace || `crowdtangle-${hash(options.dashboardToken)}`;
   }
 
   async fetchPage(): Promise<SocialMediaPost[]> {

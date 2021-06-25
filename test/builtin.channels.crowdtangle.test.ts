@@ -12,6 +12,8 @@ class TestCrowdTangleChannel extends CrowdTangleChannel {
   queryParams: { [key: string]: any };
 
   interval: number;
+
+  namespace: string;
 }
 
 describe.skip('builtin: CrowdTangleChannel', () => {
@@ -41,6 +43,7 @@ describe.skip('builtin: CrowdTangleChannel', () => {
     expect(ctChannel.isCrossPlatform).to.be.false;
     expect(ctChannel.queryParams).to.be.a('object');
     expect(ctChannel.interval).to.be.a('number');
+    expect(ctChannel.namespace.startsWith('crowdtangle-')).to.be.true;
     done();
   });
 

@@ -31,7 +31,7 @@ Visit the section on [TwitterPageOptions](#interface-twitterpageoptions) below t
 # Interface: `TwitterPageOptions`
 - extends [`TwitterOptions`](./shared/options.md), [`PageOptions`](../../../channels/page.md#interface-pageoptions)
 
-## `crowdtangleOptions.isRecent?`
+## `twitterPageOptions.isRecent?`
 - Type: `boolean`
 - Default: `true`
 
@@ -46,10 +46,16 @@ For those familiar with the Twitter v2 API, the following values for this proper
 
 \* As of writing `isRecent` to `false` requires the Academic Research product track.
 
-## `crowdtangleOptions.nextPageToken?`
+## `twitterPageOptions.nextPageToken?`
 
 - Type: `string`
 
 An optional most recent "next page" token returned by the Twitter v2 API to start paginating from where this [TwitterPageChannel](#class-twitterpagechannel) might have last left off.
 
 Twitter v2 API endpoints that support pagination return a helpful "next page" token that can be used to fetch the next page of data.
+
+## `twitterPageOptions.namespace?`
+- Type: `string`
+- Default: `twitter-<hash>`
+
+Where `<hash>` is a SHA-256 hash of the [`twitterOptions.credentials`](shared/options.md#twitteroptionscredentials) object serialized with [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify).
