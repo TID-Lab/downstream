@@ -1,6 +1,6 @@
 {
   "name": "downstream",
-  "version": "0.0.71",
+  "version": "0.0.72",
   "description": "A multi-platform and real-time social media aggregation framework.",
   "author": "Max Karpawich <maxkarpawich@gmail.com>",
   "license": "GPL-3.0-or-later",
