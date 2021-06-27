@@ -21,12 +21,14 @@ const downstream = new Downstream();
 
 Emitted when an error occurs. Errors can either be emitted by a [Channel](./channels/channel.md) (in which case the `id` argument is set) or thrown by a [hook](#function-hookitem-next).
 
-## `downstream.start()`
+## `downstream.start(filter?)`
+- `filter?`: [FilterFunction()](#function-filterfunctionid-channel)
 - Returns: [Promise\<void\>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
 Calls [`channel.start()`](./channels/channel.md#channelstart) on each of the registered [Channels](./channels/channel.md) and waits for them to all start. Any errors thrown by a [Channel](./channels/channel.md) are collected and emitted via the [`error` event](#event-error).
 
-## `downstream.stop()`
+## `downstream.stop(filter?)`
+- `filter?`: [FilterFunction()](#function-filterfunctionid-channel)
 - Returns: [Promise\<void\>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
 Calls [`channel.stop()`](./channels/channel.md#channelstop) on each of the registered [Channels](./channels/channel.md) and waits for them to all stop. Any errors thrown by a [Channel](./channels/channel.md) are collected and emitted via the [`error` event](#event-error).
@@ -112,3 +114,12 @@ Calls the remaining [hooks](#function-hookitem-next) that come after this one.
 - Returns: [Promise\<void\>](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
 Calls the remaining [hooks](#function-hookitem-next) that come after this one.
+
+# Function: `FilterFunction(id, channel)`
+- `id`: `string`
+- `channel`: [Channel](./channels/channel.md)
+- Returns: `boolean`
+
+Called on each registered Channel of a Downstream instance when it starts/stops.
+ 
+ Returning `true` starts/stops the given Channel; returning `false` ignores it.
