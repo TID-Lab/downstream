@@ -195,6 +195,34 @@ describe('Downstream', () => {
     });
   });
 
+  it('should filter Channels on start', (done) => {
+    const filter = (id, channel) => id === id1 && channel === channel1;
+
+    downstream.pointer = 5;
+    downstream.empty = false;
+    downstream.start(filter).then(() => {
+      expect(downstream.started).to.be.true;
+      expect(channel1.started).to.be.true;
+      expect(channel2.started).to.be.false;
+      downstream.stop().then(done);
+    });
+  });
+
+  it('should filter Channels on stop', (done) => {
+    const filter = (id, channel) => id === id1 && channel === channel1;
+
+    downstream.pointer = 5;
+    downstream.empty = false;
+    downstream.start().then(() => {
+      downstream.stop(filter).then(async () => {
+        expect(downstream.started).to.be.false;
+        expect(channel1.started).to.be.false;
+        expect(channel2.started).to.be.true;
+        await channel2.stop().then(done);
+      });
+    });
+  });
+
   it('should handle Channel start errors gracefully', (done) => {
     channel2.throwError = true;
     downstream.once('error', (err, id) => {

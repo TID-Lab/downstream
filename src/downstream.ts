@@ -11,6 +11,15 @@ export type NextFunction = {
 };
 
 /**
+ * Called on each registered Channel of a Downstream instance when it starts/stops.
+ *
+ * Returning `true` starts/stops the given Channel; returning `false` ignores it.
+ */
+export type FilterFunction = {
+  (id: string, channel: Channel): boolean;
+};
+
+/**
  * An asynchronous function that gets called on each Item
  * of a Downstream instance as they are fed in from the registered Channels.
  */
@@ -71,8 +80,10 @@ class Downstream extends EventEmitter {
    * and waits for them to all start. Any errors thrown by a Channel
    * are collected and emitted via the `error` event.
    */
-  async start(): Promise<void> {
+  async start(filter?: FilterFunction): Promise<void> {
     const promises:Promise<any>[] = [];
+
+    const shouldStart = filter || (() => true);
 
     // set the `started` flag to true
     this.started = true;
@@ -93,15 +104,17 @@ class Downstream extends EventEmitter {
       const id:string = ids[i];
       const channel:Channel = this.channels[id];
 
-      promises.push(
-        channel.start()
-          .catch(
-            (err) => {
-              // emit Channel startup errors
-              this.emit('error', err, id);
-            },
-          ),
-      );
+      if (shouldStart(id, channel)) {
+        promises.push(
+          channel.start()
+            .catch(
+              (err) => {
+                // emit Channel startup errors
+                this.emit('error', err, id);
+              },
+            ),
+        );
+      }
     }
     await Promise.allSettled(promises);
   }
@@ -111,23 +124,28 @@ class Downstream extends EventEmitter {
    * and waits for them to all stop. Any errors thrown by a Channel
    * are collected and emitted via the `error` event.
    */
-  async stop(): Promise<void> {
+  async stop(filter?: FilterFunction): Promise<void> {
     const promises:Promise<any>[] = [];
+
+    const shouldStop = filter || (() => true);
 
     // wait until all Channels have tried to stop
     const ids:string[] = Object.keys(this.channels);
     for (let i:number = 0; i < ids.length; i += 1) {
       const id:string = ids[i];
       const channel:Channel = this.channels[id];
-      promises.push(
-        channel.stop()
-          .catch(
-            (err) => {
-              // emit Channel startup errors
-              this.emit('error', err, id);
-            },
-          ),
-      );
+
+      if (shouldStop(id, channel)) {
+        promises.push(
+          channel.stop()
+            .catch(
+              (err) => {
+                // emit Channel startup errors
+                this.emit('error', err, id);
+              },
+            ),
+        );
+      }
     }
     await Promise.allSettled(promises);
 
