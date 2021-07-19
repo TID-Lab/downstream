@@ -27,7 +27,7 @@ class TwitterStreamChannel extends Channel {
    * Initializes a new TwitterStreamChannel.
    */
   constructor(options:TwitterOptions) {
-    super();
+    super(options);
 
     const {
       credentials,
