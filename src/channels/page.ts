@@ -38,7 +38,7 @@ abstract class PageChannel extends PollChannel {
     super(options);
 
     this.lastTimestamp = options.lastTimestamp;
-    this.onFetch = options.onFetch;
+    this.onFetch = options.onFetch?.bind(this);
   }
 
   async fetch(): Promise<void> {
