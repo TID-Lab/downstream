@@ -55,13 +55,12 @@ class CrowdTangleChannel extends PageChannel {
     this.queryParams = {
       ...(queryParams || {}),
       sortBy: queryParams.sortBy || CrowdTangleChannel.SORT_BY,
+      language: queryParams.language || CrowdTangleChannel.LANGUAGE,
       count: queryParams.count || CrowdTangleChannel.COUNT
     };
     this.interval = options.interval || CrowdTangleChannel.INTERVAL;
   }
-  
-//   2022-02-18: removing language specification since we want Spanish language stuff too!
-//   language: queryParams.language || CrowdTangleChannel.LANGUAGE,
+
 
   async fetchPage(): Promise<SocialMediaPost[]> {
     // compute the startDate for pagination
