@@ -23,7 +23,7 @@ class CrowdTangleChannel extends PageChannel {
 
   private static COUNT:number = 100;
 
-  private static LANGUAGE:string = 'en';
+//   private static LANGUAGE:string = 'en';
 
   protected dashboardToken: string;
 
@@ -55,7 +55,7 @@ class CrowdTangleChannel extends PageChannel {
     this.queryParams = {
       ...(queryParams || {}),
       sortBy: queryParams.sortBy || CrowdTangleChannel.SORT_BY,
-      language: queryParams.language || CrowdTangleChannel.LANGUAGE,
+//       language: queryParams.language || CrowdTangleChannel.LANGUAGE,
       count: queryParams.count || CrowdTangleChannel.COUNT
     };
     this.interval = options.interval || CrowdTangleChannel.INTERVAL;
