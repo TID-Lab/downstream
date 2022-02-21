@@ -59,8 +59,8 @@ The query parameters passed to the CrowdTangle API on each call to the endpoints
 | Query parameter | Default value  |
 | ----------------- | ------------- |
 | `sortBy`           | `'date'`       |
-| `language`            | `'en'` |
 | `count`            | `100` |
+<!-- | `language`            | `'en'` | -->
 
 ## `crowdtangleOptions.nextPageURL?`
 
