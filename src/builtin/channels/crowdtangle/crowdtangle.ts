@@ -24,6 +24,7 @@ class CrowdTangleChannel extends PageChannel {
   private static COUNT:number = 100;
 
 //   private static LANGUAGE:string = 'en';
+//   removing language default to EN, to default to no specification which for CT is all languages
 
   protected dashboardToken: string;
 
