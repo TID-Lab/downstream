@@ -11,7 +11,8 @@ export interface JunkipediaOptions extends PageOptions {
 
 /**
  * A built-in Channel for aggregating posts as SocialMediaPosts
- * from a Junkipedia list.
+ * from social media platforms supported by the Junkipedia API.
+
  */
 class JunkipediaChannel extends PageChannel {
   private static BASE_URL:string = 'https://www.junkipedia.org';
