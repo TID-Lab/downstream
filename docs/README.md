@@ -29,4 +29,6 @@ Welcome to the documentation for the Downstream API. See [`/examples`](/examples
       - [TwitterPageOptions](./builtin/channels/twitter/page.md#interface-twitterpageoptions)
     - [TwitterStreamChannel](./builtin/channels/twitter/stream.md)
     - [TwitterOptions](./builtin/channels/twitter/shared/options.md)
+  - Junkipedia
+    - [JunkipediaChannel](./builtin/channels/junkipedia/junkipedia.md)
 - [SocialMediaPost](./builtin/post.md)
