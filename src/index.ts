@@ -10,6 +10,7 @@ import {
   CrowdTangleInstagramChannel,
   TwitterPageChannel,
   TwitterStreamChannel,
+  JunkipediaChannel,
 } from './builtin/channels';
 
 const builtin = {
@@ -18,6 +19,7 @@ const builtin = {
   CrowdTangleInstagramChannel,
   TwitterPageChannel,
   TwitterStreamChannel,
+  JunkipediaChannel,
 };
 
 export {
